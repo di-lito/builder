@@ -12,6 +12,10 @@ defined ('_JEXEC') or die ('restricted aceess');
 class SppagebuilderAddonImage_content extends SppagebuilderAddons{
 
 	public function render() {
+		
+		// Include template's params
+		$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+		$has_lazyload = $tpl_params->get('lazyload', 1);
 
 		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? $this->addon->settings->class : '';
 		$title = (isset($this->addon->settings->title) && $this->addon->settings->title) ? $this->addon->settings->title : '';
@@ -64,7 +68,7 @@ class SppagebuilderAddonImage_content extends SppagebuilderAddons{
 		}
 
 		if($image_alignment=='left') {
-			$content_class = ' col-sm-offset-6';
+			$content_class = ' col-xs-offset-0 col-sm-offset-6';
 		} else {
 			$content_class = '';
 		}
@@ -72,12 +76,22 @@ class SppagebuilderAddonImage_content extends SppagebuilderAddons{
 		if($image && $text) {
 
 			$output = '<div class="sppb-addon sppb-addon-image-content aligment-'. $image_alignment .' clearfix ' . $class . '">';
-
+			
 			// Image
 			if(strpos($image, 'http://') !== false || strpos($image, 'https://') !== false){
-				$output .= '<div style="background-image: url(' . $image . ');background-size:'.$image_background_size.';background-repeat:no-repeat;" class="sppb-image-holder">';
+				/* Lazyload for images with absolute URL */
+				if($has_lazyload) {
+					$output .= '<div style="background-image: url(data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==);background-size:'.$image_background_size.';background-repeat:no-repeat;" class="lazyload sppb-image-holder" data-bg="'. $image .'" data-expand="-5">';
+				} else {
+					$output .= '<div style="background-image: url(' . $image . ');background-size:'.$image_background_size.';background-repeat:no-repeat;" class="sppb-image-holder">';
+				}
 			} else {
-				$output .= '<div style="background-image: url(' . JURI::base(true) . '/' . $image . ');background-size:'.$image_background_size.';background-repeat:no-repeat;" class="sppb-image-holder">';
+				/* Lazyload for images for relative URL (local image) */
+				if($has_lazyload) {
+					$output .= '<div style="background-image: url(data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==);background-size:'.$image_background_size.';background-repeat:no-repeat;" class="lazyload sppb-image-holder" data-bg="'. JUri::root() . $image .'" data-expand="-5">';
+				} else {
+					$output .= '<div style="background-image: url(' . JURI::base(true) . '/' . $image . ');background-size:'.$image_background_size.';background-repeat:no-repeat;" class="sppb-image-holder">';
+				}
 			}
 			$output .= '</div>';
 
@@ -87,7 +101,7 @@ class SppagebuilderAddonImage_content extends SppagebuilderAddons{
 
 			// Important to have Bootstrap's col-sm- instead of SPPB's sppb-col-sm-, to fix issues with SPPB 3.x
 
-			$output .= '<div class="col-sm-6'. $content_class .'">';
+			$output .= '<div class="col-xs-12 col-sm-6'. $content_class .'">';
 			$output .= '<div class="sppb-content-holder">';
 			$output .= ($title) ? '<'.$heading_selector.' class="sppb-image-content-title sppb-addon-title">' . $title . '</'.$heading_selector.'>' : '';
 			$output .= ($text) ? '<p class="sppb-image-content-text">' . $text . '</p>' : '';
@@ -318,8 +332,8 @@ public static function getTemplate() {
 					
 					<div class="col-sm-6 {{ content_class }}">
 						<div class="sppb-content-holder">
-                            <# if( !_.isEmpty( data.title ) ){ #><{{ data.heading_selector }} class="sppb-image-content-title sppb-addon-title">{{ data.title }}</{{ data.heading_selector }}><# } #>
-                            <# if(data.text){ #><p class="sppb-image-content-text">{{{ data.text }}}</p><# } #>
+                            <# if( !_.isEmpty( data.title ) ){ #><{{ data.heading_selector }} class="sppb-image-content-title sppb-addon-title sp-inline-editable-element" data-id={{data.id}} data-fieldName="title" contenteditable="true">{{ data.title }}</{{ data.heading_selector }}><# } #>
+                            <# if(data.text){ #><p id="addon-text-{{data.id}}" class="sppb-image-content-text sp-editable-content" data-id={{data.id}} data-fieldName="text">{{{ data.text }}}</p><# } #>
 						    <# if(button_text){ #>
                                 <a href=\'{{ data.button_url }}\' target="{{ data.button_target }}" id="btn-{{ data.id }}" class="sppb-btn {{ button_classes }}">{{{ button_text }}}</a>
                             <# } #>

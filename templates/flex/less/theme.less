@@ -454,24 +454,13 @@ input {
 *======= 	Start  Top Bar	   ============
 *=======================================*/
 #sp-top-bar {
-	#sp-top1 {
-		.sp-column {
-			float:left;
-		}
-	}
-	#sp-top2 {
-		.sp-column {
-			float:right;
-		}
-		
-	}
+	
 	.sp-module {
-
-		float:none;
 		display:inline-block;
-		
+		margin-top:0;
+		margin-bottom:0;
+
 		.modal-login-wrapper {
-			float:none;
 			display: inline-block;
 		}
 	}
@@ -482,11 +471,11 @@ input {
 ul.social-icons {
 	list-style: none;
 	padding: 0;
-	margin: -5px;
+	margin: 0;
 	display: inline-block;
 	>li {
 		display: inline-block;
-		margin: 5px 7px;
+		margin: 0 7px;
 		a {
 			color: #999999;
 		}
@@ -738,19 +727,24 @@ ol.breadcrumb  {
 	background-size: cover;
 	background-attachment: fixed;
 	box-shadow: inset 0 -10px 40px -10px rgba(0,0,0,.1), inset 0 10px 10px -8px rgba(0,0,0,.2);
+	backface-visibility: hidden;
 	
 	.container {
 	
 		
-		h2,h3 {
+		h1 {
+			font-weight:300;
+		}
+		
+		h1,h2,h3 {
 			margin: 0;
 			padding: 0;
 			color: #fff;
 			text-shadow:1px 2px 5px rgba(0,0,0,0.2);
 		}
 	
-		h2 {
-			font-size: 28px;
+		h1, h2 {
+			font-size: 32px;
 			line-height: 1;
 		}
 	
@@ -837,6 +831,8 @@ ol.breadcrumb  {
 		padding:0;
 		
 		.sppb-section {
+			
+			backface-visibility: hidden;
 			 
 			 > .sppb-row {
 				 padding:0;
@@ -866,14 +862,22 @@ ol.breadcrumb  {
 /*=========================================
 *======= 	Start  Module	   ============
 *=======================================*/
+
+.sp-column .sp-lr { /* Only for left and right modules (.sp-lr) */
+	.sp-module {
+		margin-top: 40px;
+		
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}
 .sp-module, .sppb-addon-module {
-	margin-top: 50px;
 		
 	&:first-child {
 		margin-top: 0;
 	}
 	.sp-module-title {
-		
 		margin: 0 0 20px;
 		font-size:140%;
 		line-height: 1.2;
@@ -1780,8 +1784,13 @@ article {
 		}
 	}
 
-	h2 {
-		margin: 0;
+	h1 {
+		font-size:225%;
+		font-weight:300;
+	}
+
+	h1, h2 {
+		margin:0;
 		line-height: 1.2;
 		width:auto;
 		padding-right:30px;
@@ -2625,7 +2634,7 @@ a#scroll-top {
 /*=========================================
 *======= 	Start  Login Form	 =========
 *=======================================*/
-.login, .registration, .registration-wrapper {
+.login, .registration, .registration-wrapper, .form-validate {
 	
 	.login-description {
 		margin-bottom: 30px;
@@ -2636,14 +2645,9 @@ a#scroll-top {
 		
 		.group-control {
 			input {
-				min-height:45px;
+				min-height:40px;
 			}
 		}
-	}
-
-	.checkbox {
-		margin-top: 0;
-		margin-bottom: 20px;
 	}
 
 	.form-links {
@@ -2666,12 +2670,6 @@ a#scroll-top {
 		display: inline-block;
 		margin: 20px 0;
 	}
-
-	.checkbox {
-	  input[type="checkbox"] {
-	  	margin-top: 6px;
-	  }
-	}
 	
 	.title{
 		
@@ -2684,12 +2682,38 @@ a#scroll-top {
 			margin:-1px 8px 0 0;
 		}
 	}
+	fieldset {
+		
+		margin:35px auto 15px;
+		
+		&:first-child {
+			margin:10px auto;
+		}
+			
+		.field-calendar {
+
+			button.btn {
+				margin-top:1px;
+				box-shadow: 0 0 0 1px #ccc;
+				background:#f8f8f8;
+				
+				&:hover {
+					box-shadow: 0 0 0 1px #bbb;
+					background:#f5f5f5;
+				}
+			}
+			
+			.calendar-container table {
+				max-width: 300px;
+			}
+		}
+	}
 	
 	
 	/* Fix for TOS ("Terms of Service") in Registration */
-	label#jform_profile_tos-lbl {
+	label#jform_profile_tos-lbl, #jform_terms_terms-lbl, #jform_consentbox-lbl {
 		position:relative;
-		margin:0 20px 0 0;
+		margin:4px 20px 0 0;
 		float:left;
 		display:inline-block;
 	
@@ -2713,7 +2737,7 @@ a#scroll-top {
 			}
 		}
 		span.star {
-			color:red;
+			//color:red;
 		}
 		
 		& ~ div {
@@ -2721,12 +2745,45 @@ a#scroll-top {
 		}
 	
 	}
+	
+	/* Privacy Consent (from Joomla 3.9) */
+		label#jform_privacyconsent_privacy-lbl {
+			position:relative;
+			margin:4px 20px 0 0;
+			float:left;
+			display:inline-block;
+
+		
+			a {
+				display:inline-table;
+				position:relative;
+				color:@text_color;
+				padding:2px 1px;
+				
+				&:before {
+					content: "\f0f6";
+					font-family: 'FontAwesome';
+					line-height:18px;
+					margin:-4px 6px 0 0;
+					color:#888;
+				}
+				
+				&:hover, &:hover:before {
+					color:@major_color;
+				}
+			}
+			span.star {
+				position:relative;
+			}
+			
+		}
 	/* TOS Fieldset */
-	#jform_profile_tos {
+	#jform_profile_tos, #jform_privacyconsent_privacy, #jform_terms_terms {
 	
 		input[type="radio"] {
 			opacity: 0;
 			visibilty:hidden;
+			margin:8px 0 0 3px;
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			-ms-user-select: none;
@@ -2794,23 +2851,60 @@ a#scroll-top {
 	}
 }
 
+/* Some fixes for SqueezeBox (iframe popup) */
+#sbox-window {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding:0;
+}
+.sbox-content-iframe#sbox-content, .sbox-content-iframe{
+	overflow-y:hidden;
+	padding:3%;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#sbox-content iframe {
+	width:100%;
+}
+
+/* Fix for Joomla 3.9.0 - hidding Joomla's rating/voting */
+.content_rating, .unseen.element-invisible, span.content_vote {
+	visibility:hidden;
+	display:none;
+	
+	~ img {
+		visibility:hidden;
+		display:none;
+	}
+}
+img[src$="rating_star.png"],
+img[src$="rating_star_blank.png"] {
+	visibility:hidden;
+	display:none;
+}
 
 /* Checkbox (custom) */
-#login, .checkbox {
+#login, #login-form, .login {
 
 	input[type="checkbox"] {
 		opacity: 0;
-		visibilty:hidden;
+		visibility:hidden;
 		position:absolute;
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		width:1px;
+		height:1px;
 	}
 	
 	label {
 		position: relative;
 		display: inline-block;
+		vertical-align:middle;
 		padding: 2px 8px;
 		text-indent:18px;
 		cursor: pointer;
@@ -2819,21 +2913,19 @@ a#scroll-top {
 		&::after {
 			position: absolute;
 			content: "";
-			display: inline-block;
+			//display: inline-block;
 			.transition(all .3s ease);
 		}
-		
-		/* Outer box of the fake checkbox*/
+
 		&::before{
 			height: 18px;
 			width: 18px;
 			border: 1px solid #aaa;
 			border-radius: 3px;
-			left: 0px;
-			top: 6px;
+			left: 0;
+			top: 5px;
 		}
 		
-		/* fake checkbox */
 		&::after{
 			height: 6px;
 			width: 11px;
@@ -2843,7 +2935,7 @@ a#scroll-top {
 			box-shadow:0 1px 0 0 rgba(0,0,0,0.25);
 			transform: rotate(-45deg);
 			left: 4px;
-			top: 11px;	
+			top: 10px;	
 		}
 		&:hover {
 			&::before{
@@ -2852,22 +2944,95 @@ a#scroll-top {
 		}
 	}
 	
-	/*Hide the checkmark by default*/
 	input[type="checkbox"] + label::after {
 		content: none;
 	}
 	
-	/*Unhide on the checked state*/
 	input[type="checkbox"]:checked + label::after {
 		content: "";
 	}
 	
-	/*Adding focus styles on the outer-box of the fake checkbox*/
 	input[type="checkbox"]:checked + label::before {
 		background:lighten(@major_color, 10%);
 		border: 1px solid darken(@major_color, 10%);
-	}	
-										
+	}										
+}
+
+/* Bootstrap's Checkbox */
+.checkbox {
+
+	label {
+
+		cursor: pointer;
+		
+		input[type="checkbox"] {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			visibility:hidden;
+			width: 22px;
+			height: 18px;
+			line-height:1;
+			top:3px;
+			background:transparent;
+			border:none;
+			outline:none;
+			cursor: pointer;
+			position:relative;
+			  
+		  
+		  	&::before,
+			&::after {
+				position: absolute;
+				content: "";
+				//display: inline-block;
+				.transition(all .3s ease);
+			}
+			&::before{
+				visibility: visible;
+				opacity:1;
+				height: 18px;
+				width: 18px;
+				border: 1px solid #aaa;
+				border-radius: 3px;
+				left: 0;
+				top: 0;
+			}
+			
+			&::after{
+				visibility: hidden;
+				opacity:0;
+				height: 6px;
+				width: 11px;
+				border:0;
+				border-left: 2px solid white;
+				border-bottom: 2px solid white;
+				box-shadow:0 1px 0 0 rgba(0,0,0,0.25);
+				transform: rotate(-45deg);
+				left: 4px;
+				top: 5px;	
+			}
+			
+			&:hover {
+				&::before{
+					border: 1px solid @major_color;
+				}
+			}
+			
+			&:checked {
+				&::before {
+					background:lighten(@major_color, 10%);
+					border: 1px solid darken(@major_color, 10%);
+					visibility: visible;
+					opacity:1;
+				}
+				&::after{
+					visibility: visible;
+					opacity:1;
+				}
+			}
+		}
+	}									
 }
 
 .form-links{
@@ -2880,8 +3045,24 @@ a#scroll-top {
 /* End  Login Form
 *=======================================*/
 /* ************** 	 START POPUP (MODAL) LOGIN 	  *************** */
-.modal {
+.modal-login {
 	text-align: center;
+	
+	.modal-content {
+		border:1px solid rgba(0,0,0,.1);
+		-webkit-box-shadow:0 4px 20px rgba(0,0,0,.35);
+		box-shadow:0 4px 20px rgba(0,0,0,.35);
+	}
+}
+
+.modal-backdrop {
+	background:rgba(0,0,0,0.45);
+	
+	&.in {
+		z-index:110; /* Fix for Sticky Header to avoid Bootstrap modal window to be grayed out [closed] */
+	}
+	
+	
 }
 
 @media screen and (min-width: 768px) { 
@@ -2893,7 +3074,7 @@ a#scroll-top {
 	}
 }
 
-.modal-dialog {
+.modal-login .modal-dialog {
 	display: inline-block;
 	text-align: left;
 	vertical-align: middle;
@@ -3023,7 +3204,7 @@ a#scroll-top {
 				min-height: 70px;
 				text-align: left;
 				label{
-					margin: 10px;
+					margin: 20px 0 0;
 					vertical-align: middle;
 				}
 			}
@@ -3565,15 +3746,18 @@ a#scroll-top {
         top: 0;
         left: 0;
         width: 100%;
-        height: 105px;
+        height: 110px;
         right: 0;
         bottom: 0;
         margin: auto;
         text-align: center;
         position: absolute;
-        .logo{
+        .logo {
             display: inline-block;
             width: auto;
+			> img {
+				max-height:100%;
+			}
         }
         .line{
             bottom: 0;
@@ -3938,6 +4122,7 @@ a#scroll-top {
 		background:transparent;
 		color:#777;
 		padding:6px 10px; 
+		margin-top:4px;
 		
 		&:before {
 			font-family: 'peIcon7';
@@ -3996,4 +4181,14 @@ a#scroll-top {
 			}
 		}
 	}
+}
+
+/* Lazy Loading for images. From Flex 3.5 */
+.lazyload,.lazyloading {
+	opacity: 0;
+	height:100%;
+}
+.lazyloaded {
+	opacity: 1;
+	.transition(opacity 650ms ease);
 }

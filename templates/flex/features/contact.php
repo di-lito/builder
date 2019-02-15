@@ -1,12 +1,13 @@
 <?php
 /**
- * @package Helix3 Framework
- * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2014 JoomShaper
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
+ * Flex @package Helix3 Framework
+ * Template Name - Flex
+ * @author Aplikko http://www.aplikko.com
+ * @copyright Copyright (c) 2018 Aplikko
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct access
-defined ('_JEXEC') or die('resticted aceess');
+defined ('_JEXEC') or die ('restricted access');
 
 class Helix3FeatureContact {
 
@@ -19,10 +20,10 @@ class Helix3FeatureContact {
 	
 	public function renderFeature() {
 		
-		$this->helix3->getParam('contact_phone_icon') != '' ? $contact_phone_icon = '<i class="'.$this->helix3->getParam('contact_phone_icon').'"></i> ' : $contact_phone_icon = '<i class="pe pe-7s-headphones"></i> ';
-		$this->helix3->getParam('contact_mobile_icon') != '' ? $contact_mobile_icon = '<i class="'.$this->helix3->getParam('contact_mobile_icon').'"></i> ' : $contact_mobile_icon = '<i class="pe pe-7s-phone"></i> ';
-		$this->helix3->getParam('contact_email_icon') != '' ? $contact_email_icon = '<i class="'.$this->helix3->getParam('contact_email_icon').'"></i> ' : $contact_email_icon = '<i class="pe pe-7s-mail"></i> ';
-		$this->helix3->getParam('contact_time_icon') != '' ? $contact_time_icon = '<i class="'.$this->helix3->getParam('contact_time_icon').'"></i> ' : $contact_time_icon = '<i class="pe pe-7s-timer"></i> ';
+		$this->helix3->getParam('contact_phone_icon') != '' ? $contact_phone_icon = '<i class="'.$this->helix3->getParam('contact_phone_icon').'" aria-hidden="true"></i> ' : $contact_phone_icon = '<i class="pe pe-7s-headphones" aria-hidden="true"></i> ';
+		$this->helix3->getParam('contact_mobile_icon') != '' ? $contact_mobile_icon = '<i class="'.$this->helix3->getParam('contact_mobile_icon').'" aria-hidden="true"></i> ' : $contact_mobile_icon = '<i class="pe pe-7s-phone" aria-hidden="true"></i> ';
+		$this->helix3->getParam('contact_email_icon') != '' ? $contact_email_icon = '<i class="'.$this->helix3->getParam('contact_email_icon').'" aria-hidden="true"></i> ' : $contact_email_icon = '<i class="pe pe-7s-mail" aria-hidden="true"></i> ';
+		$this->helix3->getParam('contact_time_icon') != '' ? $contact_time_icon = '<i class="'.$this->helix3->getParam('contact_time_icon').'" aria-hidden="true"></i> ' : $contact_time_icon = '<i class="pe pe-7s-timer" aria-hidden="true"></i> ';
 	   
 
 		if($this->helix3->getParam('enable_contactinfo')) {

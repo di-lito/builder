@@ -9,6 +9,10 @@
 
 defined('_JEXEC') or die;
 
+// Include template's params
+$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+$has_lazyload = $tpl_params->get('lazyload', 1);
+
 // Note that there are certain parts of this layout used only when there is exactly one tag.
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 $isSingleTag = (count($this->item) == 1);
@@ -29,7 +33,20 @@ $isSingleTag = (count($this->item) == 1);
 		<div class="category-desc">
 			<?php $images = json_decode($this->item[0]->images); ?>
 			<?php if ($this->params->get('tag_list_show_tag_image', 1) == 1 && !empty($images->image_fulltext)) : ?>
-				<img src="<?php echo htmlspecialchars($images->image_fulltext); ?>">
+            	<?php 
+				if(strpos($images->image_fulltext, 'http://') !== false || strpos($images->image_fulltext, 'https://') !== false){
+					if($has_lazyload) { ?>
+						<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $images->image_fulltext; ?>" alt="<?php echo JHtml::_('content.prepare', $this->tags_title, '', 'com_tag.tag'); ?>" data-expand="-10">
+					<?php } else { ?>
+						<img src="<?php echo htmlspecialchars($images->image_fulltext); ?>">
+					<?php } 
+					} else { 
+					if($has_lazyload) { ?>
+						<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo JUri::root() . $images->image_fulltext; ?>" alt="<?php echo JHtml::_('content.prepare', $this->tags_title, '', 'com_tag.tag'); ?>" data-expand="-10">
+					<?php } else { ?>
+						<img src="<?php echo htmlspecialchars($images->image_fulltext); ?>" alt="<?php echo JHtml::_('content.prepare', $this->tags_title, '', 'com_tag.tag'); ?>">
+					<?php }
+				} ?>
 			<?php endif; ?>
 			<?php if ($this->params->get('tag_list_show_tag_description') == 1 && $this->item[0]->description) : ?>
 				<?php echo JHtml::_('content.prepare', $this->item[0]->description, '', 'com_tags.tag'); ?>

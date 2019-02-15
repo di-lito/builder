@@ -58,6 +58,16 @@ JHtml::_('jquery.framework');
         ->addLess('presets',  'presets/'.$this->helix3->Preset())
     	->addJS('bootstrap.min.js, main.js, jquery.countdown.min.js');
 		
+		//Custom CSS
+		if ($custom_css = $this->helix3->getParam('custom_css')) {
+			$doc->addStyledeclaration($custom_css);
+		}
+		
+		//Custom JS
+		if ($custom_js = $this->helix3->getParam('custom_js')) {
+			$doc->addScriptdeclaration($custom_js);
+		}
+		
 //Custom background image
 if($comingsoon_bg_image = $this->helix3->getParam('comingsoon_bg_image')) {
 	

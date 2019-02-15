@@ -14,6 +14,10 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 JHtml::_('behavior.core');
 JHtml::_('formbehavior.chosen', 'select');
 
+// Include template's params
+$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+$has_lazyload = $tpl_params->get('lazyload', 1);
+
 // Get the user object.
 $user = JFactory::getUser();
 
@@ -79,12 +83,23 @@ $n = count($this->items);
 			<?php if ($this->params->get('tag_list_show_item_image', 1) == 1 && !empty($images->image_intro)) :?>
 				<a class="tag-img pull-left" href="<?php echo JRoute::_(TagsHelperRoute::getItemRoute($item->content_item_id, $item->core_alias, $item->core_catid, $item->core_language, $item->type_alias, $item->router)); ?>">
 				<div class="overlay">
-				<img src="<?php echo htmlspecialchars($images->image_intro);?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>">
-                  <i class="fa fa-link"></i>
+                <?php 
+				if(strpos($images->image_intro, 'http://') !== false || strpos($images->image_intro, 'https://') !== false){
+					if($has_lazyload) { ?>
+						<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $images->image_intro; ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>" data-expand="-10">
+					<?php } else { ?>
+						<img src="<?php echo htmlspecialchars($images->image_intro);?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>">
+					<?php } 
+					} else { 
+					if($has_lazyload) { ?>
+						<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo JUri::root() . $images->image_intro; ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>" data-expand="-10">
+					<?php } else { ?>
+						<img src="<?php echo htmlspecialchars($images->image_intro);?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>">
+					<?php }
+				} ?>
+                	<i class="fa fa-link"></i>
                 </div>
-                </a>
-                
-                
+                </a>   
 			<?php endif; ?>
 			<?php if ($this->params->get('tag_list_show_item_description', 1)) : ?>
 				<?php echo $item->event->beforeDisplayContent; ?>

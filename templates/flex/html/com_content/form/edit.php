@@ -9,13 +9,26 @@
 
 defined('_JEXEC') or die;
 
+//Load Helix
+$helix3_path = JPATH_PLUGINS . '/system/helix3/core/helix3.php';
+
+if (file_exists($helix3_path)) {
+    require_once($helix3_path);
+    $this->helix3 = helix3::getInstance();
+} else {
+    die('Please install and activate helix plugin');
+}
+
+JHtml::_('stylesheet', 'system/frontediting.css', array(), true);
+JHtml::_('script', 'system/frontediting.js', false, true);
+helix3::addCSS('templates/flex/css/frontend-edit.css');
+helix3::addJS('templates/flex/js/frontend-edit.js');
+
 JHtml::_('behavior.tabstate');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
-
 JHtml::_('behavior.calendar');
 JHtml::_('behavior.modal', 'a.modal_jform_contenthistory');
-
 JHtml::_('formbehavior.chosen', '#jform_catid', null, array('disable_search_threshold' => 0));
 JHtml::_('formbehavior.chosen', 'select');
 $this->tab_name = 'com-content-form';
@@ -143,6 +156,7 @@ JFactory::getDocument()->addScriptDeclaration("
 			<div class="tab-pane" id="sppostformats">
 				<?php $attribs = json_decode($this->item->attribs); ?>
 				<?php echo $this->form->renderField('spfeatured_image','attribs', (isset($attribs->spfeatured_image)? $attribs->spfeatured_image: '')); ?>
+                <?php echo $this->form->renderField('spfeatured_image_alt','attribs', (isset($attribs->spfeatured_image_alt)? $attribs->spfeatured_image_alt: '')); ?>
 				<?php echo $this->form->renderField('post_format','attribs', (isset($attribs->post_format)? $attribs->post_format: '')); ?>
 				<?php echo $this->form->renderField('gallery','attribs', (isset($attribs->gallery)? $attribs->gallery: '')); ?>
 				<?php echo $this->form->renderField('audio','attribs', (isset($attribs->audio)? $attribs->audio: '')); ?>

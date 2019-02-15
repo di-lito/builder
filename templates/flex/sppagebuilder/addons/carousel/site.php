@@ -1,16 +1,21 @@
 <?php
 /**
- * @package SP Page Builder
- * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2016 JoomShaper
+ * Flex @package SP Page Builder
+ * Template Name - Flex
+ * @author Aplikko http://www.aplikko.com
+ * @copyright Copyright (c) 2018 Aplikko
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
-//no direct accees
-defined ('_JEXEC') or die ('restricted aceess');
+// no direct access
+defined ('_JEXEC') or die ('restricted access');
 
 class SppagebuilderAddonCarousel extends SppagebuilderAddons {
 
 	public function render() {
+		
+		// Include template's params
+		$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+		$has_lazyload = $tpl_params->get('lazyload', 1);
 
 		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? ' ' . $this->addon->settings->class : '';
 
@@ -65,9 +70,25 @@ class SppagebuilderAddonCarousel extends SppagebuilderAddons {
 
 			$output   .= '<div style="' . $background_color . $item_padding .'" class="sppb-item'. (($value->bg) ? ' sppb-item-has-bg' : '') . (($key == 0) ? ' active' : '') .'">';
 			
-			$output  .= ($value->bg) ? '<img src="' . $value->bg . '" alt="' . $value->title . '">' : '';
-	
-
+			// Image
+			if($value->bg) {
+				if(strpos($value->bg, 'http://') !== false || strpos($value->bg, 'https://') !== false){
+					/* Lazyload for images with absolute URL */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. $value->bg .'" alt="'. $value->title .'">';
+					} else {
+						$output  .= '<img src="' . $value->bg . '" alt="'. $value->title .'" title="'.$value->title.'">';	
+					}
+				} else {
+					/* Lazyload for images for relative URL (local image) */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. JUri::root() . $value->bg .'" alt="'. $value->title .'">';
+					} else {
+						$output  .= '<img src="' . $value->bg . '" alt="'. $value->title .'" title="'.$alt_text.'">';	
+					}
+				}
+			}
+			
 			$output  .= '<div class="sppb-carousel-item-inner">';
 			$output  .= '<div class="sppb-carousel-caption">';
 			$output  .= '<div'.$content_color.' class="sppb-carousel-pro-text">';

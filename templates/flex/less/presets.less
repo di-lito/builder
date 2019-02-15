@@ -1363,7 +1363,7 @@ blockquote {
 
 // Entry header
 .entry-header {
-	h2 {
+	h1, h2 {
 		a {
 			color:@text_color;
 				&:hover,
@@ -1576,6 +1576,18 @@ ul.site-list {
 					color:@major_color;
 				}
 			}
+		}
+	}
+}
+
+// Testimonial 
+.sppb-addon-testimonial {
+	.sppb-addon-testimonial-rating {
+		i.fa-star {
+			color:lighten(@major_color, 10%);
+		}
+		i.fa-star-o {
+			color:lighten(gray, 25%);
 		}
 	}
 }

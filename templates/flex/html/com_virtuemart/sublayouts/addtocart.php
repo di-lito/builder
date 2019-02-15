@@ -7,7 +7,7 @@
  * @subpackage
  * @author Max Milbers, Valerie Isaksen
  * @todo handle child products
- * @link http://www.virtuemart.net
+ * @link https://virtuemart.net
  * @copyright Copyright (c) 2004 - 2010 VirtueMart Team. All rights reserved.
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  * VirtueMart is free software. This version may have been modified pursuant
@@ -33,32 +33,22 @@ if(isset($viewData['position'])){
 }
 if(!is_array($positions)) $positions = array($positions);
 
-$addtoCartButton = '';
-if(!VmConfig::get('use_as_catalog', 0)){
-	if($product->addToCartButton){
-		$addtoCartButton = $product->addToCartButton;
-	} else {
-		$addtoCartButton = shopFunctionsF::getAddToCartButton ($product->orderable);
-	}
-
-}
 
 
 ?>
 	<div class="addtocart-area">
-		<form method="post" class="product js-recalculate" action="<?php echo JRoute::_ ('index.php?option=com_virtuemart',false); ?>">
+		<form method="post" class="product js-recalculate" action="<?php echo JRoute::_ ('index.php?option=com_virtuemart',false); ?>" autocomplete="off" >
+			<div class="vm-customfields-wrap">
 				<?php
 				if(!empty($rowHeights['customfields'])) {
-					echo '<div class="vm-customfields-wrap">'; 
 					foreach($positions as $pos){
 						echo shopFunctionsF::renderVmSubLayout('customfields',array('product'=>$product,'position'=>$pos));
 					}
-					echo '</div>'; 
-				}
-				?>		
+				} ?>
+			</div>			
 				<?php
 				if (!VmConfig::get('use_as_catalog', 0)  ) {
-					echo '<hr />' . shopFunctionsF::renderVmSubLayout('addtocartbar',array('product'=>$product));
+					echo shopFunctionsF::renderVmSubLayout('addtocartbar',array('product'=>$product));
 				} ?>
 			<input type="hidden" name="option" value="com_virtuemart"/>
 			<input type="hidden" name="view" value="cart"/>

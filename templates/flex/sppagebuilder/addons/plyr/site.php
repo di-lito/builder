@@ -3,66 +3,50 @@
  * Flex @package SP Page Builder
  * Template Name - Flex
  * @author Aplikko http://www.aplikko.com
- * @copyright Copyright (c) 2016 Aplikko
+ * @copyright Copyright (c) 2018 Aplikko
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 // no direct access
-defined ('_JEXEC') or die ('restricted access');
+defined ('_JEXEC') or die ('restricted aceess');
 
-AddonParser::addAddon('sp_plyr','sp_plyr_addon');
+class SppagebuilderAddonPlyr extends SppagebuilderAddons{
 
-function sp_plyr_addon($atts){
-	
-	$doc = JFactory::getDocument();
-	$app = JFactory::getApplication();
-	$doc->addStylesheet( JURI::base(true) . '/templates/'.$app->getTemplate().'/sppagebuilder/addons/plyr/assets/css/plyr.css');
-	$doc->addScript( JURI::base(true) . '/templates/'.$app->getTemplate().'/sppagebuilder/addons/plyr/assets/js/plyr.js');
-	
-	extract(spAddonAtts(array(
-		"title" 				=> '',
-		"heading_selector" 		=> 'h3',
-		"title_fontsize" 		=> '',
-		"title_fontweight" 		=> '',
-		"title_text_color" 		=> '',
-		"title_margin_top" 		=> '',
-		"title_margin_bottom" 	=> '',
-		"media"	 				=> '',
-		"video"	 				=> '',	
-		"video_poster"	 		=> '',
-		"captions"	 			=> '',
-		"captions_lang_label" 	=> '',
-		"captions_srclang" 		=> '',
-		"audio"	 				=> '',
-		"youtube_vimeo_url"		=> '',
-		"autoplay"				=> '',
-		"captions_toggle"		=> '',
-		"tooltips"				=> '',
-		"class"					=> '',
-		), $atts));
-
-	$randomid = rand(1,1000);//random ID number to avoid conflict if there is more then one Plyr media player on the same page
-	
-	//$class != '' ? $class = ' ' . $class : $class = '';
-	$autoplay == '1' ? $autoplay = 'autoplay:true,' : $autoplay = '';
-	$captions_toggle == '1' ? $captions_toggle = 'captions:{defaultActive:true},' : $captions_toggle = '';
-	$tooltips == '1' ? $tooltips = 'tooltips:{controls:true,seek:true},' : $tooltips = '';
-	
-	$show_captions = '';
-	$src_captions = '';
-	$show_minimal = '';
-	$src_video = '';
-	$src_video_poster = '';
-	$src_audio = '';
-	$data_type = '';
-	
-	//if ($captions != '') { 
-		//$show_captions = '\'captions\', ';
-	//}
-	
-	//if ($class != 'minimal') { 
-		//$show_minimal = '\'play-large\', ';
-	//}
+	public function render() {
 		
+		$app = JFactory::getApplication();
+
+		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? $this->addon->settings->class : '';
+		$title = (isset($this->addon->settings->title) && $this->addon->settings->title) ? $this->addon->settings->title : '';
+		$heading_selector = (isset($this->addon->settings->heading_selector) && $this->addon->settings->heading_selector) ? $this->addon->settings->heading_selector : 'h3';
+		
+		$media = (isset($this->addon->settings->media) && $this->addon->settings->media) ? $this->addon->settings->media : '';
+		$video = (isset($this->addon->settings->video) && $this->addon->settings->video) ? $this->addon->settings->video : '';
+		$video_poster = (isset($this->addon->settings->video_poster) && $this->addon->settings->video_poster) ? $this->addon->settings->video_poster : '';
+		$captions = (isset($this->addon->settings->captions) && $this->addon->settings->captions) ? $this->addon->settings->captions : '';
+		$captions_lang_label = (isset($this->addon->settings->captions_lang_label) && $this->addon->settings->captions_lang_label) ? $this->addon->settings->captions_lang_label : '';
+		$captions_srclang = (isset($this->addon->settings->captions_srclang) && $this->addon->settings->captions_srclang) ? $this->addon->settings->captions_srclang : '';
+		$audio = (isset($this->addon->settings->audio) && $this->addon->settings->audio) ? $this->addon->settings->audio : '';
+		$youtube_vimeo_url = (isset($this->addon->settings->youtube_vimeo_url) && $this->addon->settings->youtube_vimeo_url) ? $this->addon->settings->youtube_vimeo_url : '';
+		$autoplay = (isset($this->addon->settings->autoplay) && $this->addon->settings->autoplay) ? $this->addon->settings->autoplay : '';
+		
+		$captions_toggle = (isset($this->addon->settings->captions_toggle) && $this->addon->settings->captions_toggle) ? $this->addon->settings->captions_toggle : '';
+		$tooltips = (isset($this->addon->settings->tooltips) && $this->addon->settings->tooltips) ? $this->addon->settings->tooltips : '';
+		
+		$randomid = rand(1,1000); //random ID number to avoid conflict if there is more then one Plyr media player on the same page
+		
+		$autoplay == '1' ? $autoplay = 'autoplay:true,' : $autoplay = '';
+		$captions_toggle == '1' ? $captions_toggle = 'captions:{defaultActive:true},' : $captions_toggle = '';
+		$tooltips == '1' ? $tooltips = 'tooltips:{controls:true,seek:true},' : $tooltips = '';
+		
+		$show_captions = '';
+		$src_captions = '';
+		$show_minimal = '';
+		$src_video = '';
+		$src_video_poster = '';
+		$src_audio = '';
+		$data_type = '';
+
+
 	$class != '' ? $class = ' ' . $class : $class = '';
 	
 	if($video) {
@@ -177,7 +161,7 @@ function sp_plyr_addon($atts){
 		
 		$output .= '</div>';
 		
-		// Add script at the end!
+		// Add JS at the end
 	    $output .= '<script type="text/javascript">
 		var player = plyr.setup(\'#plyr-media-player-'.$randomid.'\', {
 		'.$autoplay.'
@@ -195,7 +179,24 @@ function sp_plyr_addon($atts){
 		volume: 7,
 		iconUrl:"'.JURI::base(true) . '/templates/'.$app->getTemplate().'/sppagebuilder/addons/plyr/assets/css/plyr.svg"
 		});</script>';
+		
 		$output = preg_replace('/[\n\t]+/m', '', $output); // Remove whitespace
+		
 		return $output;
+	}
+	
+	
+	public function stylesheets() {
+		$app = JFactory::getApplication();
+		$tmplPath = JURI::base(true) . '/templates/'.$app->getTemplate();	
+		return array( $tmplPath.'/sppagebuilder/addons/plyr/assets/css/plyr.css');
+	}
+	
+
+	public function scripts() {
+		$app = JFactory::getApplication();
+		$tmplPath = JURI::base(true) . '/templates/'.$app->getTemplate();	
+		return array( $tmplPath.'/sppagebuilder/addons/plyr/assets/js/plyr.js');
+	}
 
 }

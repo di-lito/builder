@@ -576,16 +576,25 @@ Product Customization
 				margin:0 7px;
 			}
 		}
+		
+		
 		.spacer-buy-area{
 			padding: 0;
 			display:block;
 			width:100%;
 			clear:both;
 			
+			.availability {
+				> img {
+					padding:8px 20px 0;
+					max-width:160px;
+				}
 				
+			}
 			.addtocart-bar{
 				padding:0;
 				margin:0;
+				
 
 	
 				.calculate {
@@ -593,6 +602,7 @@ Product Customization
 					display:inline-table;
 					float:left;
 					margin:4px 20px 0 0;
+					
 					>label.quantity_box {
 						color:#aaa;
 						margin-right:5px;
@@ -701,13 +711,15 @@ Product Customization
 			margin:30px auto 0;
 			position:relative;
 			display:block;
+			clear:both;
 			width:182px;
 			text-align:center;
 			
 			a.previous-page,
 			a.next-page{
 				overflow:hidden;
-				display:inline-table;
+				display:inline-block;
+				width:90px;
 				height: 40px;
 				line-height: 40px;
 				margin:0 auto;
@@ -1242,6 +1254,38 @@ Product Customization
 				.spacer {
 					padding: 0;
 					margin:0;
+					
+					.spacer-inner {
+						.product-in-stock {
+							margin:0 auto 12px;
+							color:#777;
+							
+							span.stock {
+								font-size:90%;
+							}
+							
+							i.pe {
+								color:green;
+								font-size:110%;
+								font-weight:600;
+								vertical-align:top;
+								line-height:1.623;
+								&.pe-7s-less {
+									color:red;
+								}
+							}
+						}
+						.availability {
+							> img {
+								max-width:160px;
+								-webkit-transform:scale(1);
+								transform:scale(1);
+							}
+							
+						}
+						
+					}
+	
 				}
 				
 			}
@@ -1315,7 +1359,7 @@ Product Customization
 					
 				h2 {
 					margin: 5px auto;
-					font-size: 145%;
+					font-size: 170%;
 					line-height:1.5;
 					display:block;
 					width:100%;
@@ -1418,6 +1462,7 @@ Product Customization
 						 }
 					}
 				}
+				
 			}
 		
 			.addtocart-bar{
@@ -1525,11 +1570,11 @@ Product Customization
 			max-width: 65px!important;
 		}
 		
-		.vm-product-rating-container,
+		//.vm-product-rating-container .ratingbox,
+		//.vm-product-rating-container .vmicon,
 		.vm-details-button{
 			display: none;
 		}
-		
 		
 	}
 	.horizontal-separator {
@@ -2120,8 +2165,6 @@ form.vm-form-login {
 }
 #com-form-login {
 	.width30 {
-		//border:3px solid red;
-		//float:left;
 		display:inline-block;
 		margin:4px 6px 4px 0!important;
 	}
@@ -2138,20 +2181,13 @@ form.vm-form-login {
 	}
 }
 #com-form-login-remember{
-	//border:3px solid red;
-	//margin-top:5px!important;
 	width:auto;
 	input.default{
 		color: #fff;
 		padding: 5px 20px;
-		//margin-right:12px;
 		border: 0;
 		border-radius:4px;
 		min-width:130px;
-		//min-width:30%;
-	}
-	input.inputbox {
-		//float:right;
 	}
 }
 /* *** END:: CART PAGE *** */
@@ -2581,7 +2617,7 @@ table.user-details{
 					.open-icon {
 					
 						&:before {
-							-webkit-transform: rotate(0dg);
+							-webkit-transform: rotate(0deg);
 							transform: rotate(0deg);
 						}
 					}

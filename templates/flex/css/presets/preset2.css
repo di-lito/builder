@@ -1148,13 +1148,17 @@ blockquote {
   border: 2px solid rgba(0,0,0,0.2);
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
+.entry-header h1 a,
 .entry-header h2 a {
   color: #000000;
 }
+.entry-header h1 a:hover,
+.entry-header h1 a:focus,
 .entry-header h2 a:hover,
 .entry-header h2 a:focus {
   color: #fca224;
 }
+.entry-header h1:after,
 .entry-header h2:after {
   background: #fdb756;
 }
@@ -1273,6 +1277,12 @@ ul.site-list li i {
 }
 .sppb-nav-pills >li.active >a >i {
   color: #fca224;
+}
+.sppb-addon-testimonial .sppb-addon-testimonial-rating i.fa-star {
+  color: #fdb756;
+}
+.sppb-addon-testimonial .sppb-addon-testimonial-rating i.fa-star-o {
+  color: #c0c0c0;
 }
 .pro-client-url {
   color: #fca224;

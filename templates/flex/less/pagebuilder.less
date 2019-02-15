@@ -18,7 +18,6 @@
 	}
 }
 
-
 /* Fixing Container */
 .sppb-row-container {
   margin-right: auto;
@@ -26,6 +25,7 @@
   padding-left: 15px;
   padding-right: 15px;
 }
+
 @media (min-width: 768px) {
   .sppb-row-container {
     width: 750px;
@@ -166,6 +166,7 @@
 	}
 
 	&.aligment-left {
+
 		.sppb-image-holder {
 			left: 0;
 		}
@@ -272,6 +273,10 @@
 		margin:0 auto;
 		display:inline-block;
 		width:auto;
+		text-align:center;
+	}
+	&.centered {
+		display:table;
 		text-align:center;
 	}
 }
@@ -1258,8 +1263,8 @@ div.sppb_prettyphoto {
 				display:inline-block;
 			}
 		    &.fa-quote-right {
-				margin-left:10px;
-
+				margin:1px 0 0 10px;
+				display:inline-block;
 			}
 		}
 	
@@ -1435,14 +1440,12 @@ div.sppb_prettyphoto {
 	.sppb-carousel-inner {
 		
 		>.sppb-item{
-		 /*padding: 60px;*/
 		 width:100%;
 		 height:100%;
 		 margin:0;
          .transition(.7s cubic-bezier(0.65,0,0.35,1));
 		 &.sppb-item-has-bg {
-			 /*padding:0;*/
-
+			
 			 img {
 				margin:0 auto;
 				padding:0;
@@ -1484,9 +1487,13 @@ div.sppb_prettyphoto {
 		i.fa {
 			text-shadow:none;
 			color: #fff;
+			
 			&.fa-angle-left{
+				margin: -15px 0 0 -6px;
 			}
 			&.fa-angle-right{
+				margin: -15px -6px 0 0;
+				
 				text-indent:2px;
 				text-align:center;
 			}
@@ -1932,6 +1939,11 @@ div.sppb_prettyphoto {
 	}
 }
 
+// Divider Addon (fixed height at start, after SPPB 3.3.3 error)
+.sppb-divider{
+	display:block;
+}
+
 // Gallery Addon
 .sppb-addon-gallery {
 	li {
@@ -2028,7 +2040,7 @@ a[href*="//maps.google.com/maps"],
 		
 		}
 		a:before {
-			background: rgba(0,0,0,0.26);
+			background: rgba(100,100,100,0.2);
 		}
 		a:after {
 			font-family: "peIcon7";
@@ -2167,9 +2179,9 @@ a[href*="//maps.google.com/maps"],
 }
 
 
-// Animated Headlines Addon
+// Animated Headlines (custom) Addon
 
-.cd-headline {
+.animated_headlines {
 	
 	.before-text {
 		margin-right:.1em;
@@ -2179,7 +2191,7 @@ a[href*="//maps.google.com/maps"],
 		margin-left:.1em;
 
 	}
-	.cd-words-wrapper {
+	.ah-words-wrapper {
 		display: inline-block;
 		//.inline-flexbox();
 		position: relative;
@@ -2221,7 +2233,7 @@ a[href*="//maps.google.com/maps"],
 
 	/* Rotate-1 Effect */
 	&.rotate-1 {
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			.perspective(300px);
 		}
 		b {
@@ -2253,7 +2265,7 @@ a[href*="//maps.google.com/maps"],
 			margin-left:.15em;
 		}
 		
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			overflow: hidden;
 			width: auto;
 			padding:0 2px;
@@ -2321,7 +2333,7 @@ a[href*="//maps.google.com/maps"],
 		
 	/* Rotate-2 Effect */
 	&.rotate-2 {
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			.perspective(300px);
 		}
 		
@@ -2369,7 +2381,7 @@ a[href*="//maps.google.com/maps"],
 		span {
 			display: inline-block;
 		}
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			overflow: hidden;
 			
 			&::after {
@@ -2384,7 +2396,7 @@ a[href*="//maps.google.com/maps"],
 				.transition(width 0.3s -0.2s ease);
 			}
 		}
-		.cd-words-wrapper.is-loading {
+		.ah-words-wrapper.is-loading {
 			&::after {
 				width: 100%;
 				.transition(width 3s ease);
@@ -2412,7 +2424,7 @@ a[href*="//maps.google.com/maps"],
 		span {
 			display: inline-block;
 		}
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			overflow: hidden;
 			vertical-align: top;
 			
@@ -2438,7 +2450,7 @@ a[href*="//maps.google.com/maps"],
 		span {
 			display: inline-block;
 		}
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			overflow: hidden;
 			margin:0 1px;
 			
@@ -2468,7 +2480,7 @@ a[href*="//maps.google.com/maps"],
 		span {
 			display: inline-block;
 		}
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			overflow: hidden;
 			margin: 0;		
 			top: 0;
@@ -2478,7 +2490,7 @@ a[href*="//maps.google.com/maps"],
 	/* Zoom */
 	&.zoom {
 		
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			.perspective(400px);
 		}
 		
@@ -2497,7 +2509,7 @@ a[href*="//maps.google.com/maps"],
 	
 	/* Rotate-3 */
 	&.rotate-3 {
-		.cd-words-wrapper {
+		.ah-words-wrapper {
 			.perspective(300px);
 		}
 		b {
@@ -2551,11 +2563,11 @@ a[href*="//maps.google.com/maps"],
 }
 
 /* No CSS transitions */
-.no-csstransitions .cd-headline.rotate-2 i {
+.no-csstransitions .animated_headlines.rotate-2 i {
   .rotateX(0deg);
   opacity: 0;
 }
-.no-csstransitions .cd-headline.rotate-2 i em {
+.no-csstransitions .animated_headlines.rotate-2 i em {
   .scale(1);
 }
 

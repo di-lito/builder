@@ -35,7 +35,7 @@ SpAddonsConfig::addonConfig(
 						'flex'=>JText::_('Flex'),
 						'flip'=>JText::_('Flip'),
 						),
-					'std'=>'Default',
+					'std'=>'default',
 				),
 
 				'image'=>array(
@@ -45,6 +45,14 @@ SpAddonsConfig::addonConfig(
 					'std'=>'https://sppagebuilder.com/addons/person/person1.jpg',
 					'format'=>'image'
 				),
+				
+				'image_border_radius'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_IMAGE_BORDER_RADIUS'),
+					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_IMAGE_BORDER_RADIUS_DESC'),
+					'std'=>0,
+					'max'=>400
+				),
 
 				'name'=>array(
 					'type'=>'text',
@@ -53,6 +61,24 @@ SpAddonsConfig::addonConfig(
 					'placeholder'=>'John Doe',
 					'std'=>'John Doe',
 					),
+					
+				'name_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_NAME_FONT_FAMILY'),
+					'depends'=>array(array('name', '!=', '')),
+					'selector'=> array(
+						'type'=>'font',
+						'font'=>'{{ VALUE }}',
+						'css'=>'.sppb-person-name { font-family: {{ VALUE }}; }'
+					)
+				),
+
+				'name_color'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_NAME_COLOR'),
+					'depends'=>array(array('name', '!=', '')),
+				),
+				
 				'designation'=>array(
 					'type'=>'text',
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_DESIGNATION'),
@@ -60,12 +86,40 @@ SpAddonsConfig::addonConfig(
 					'placeholder'=>'CEO & Founder',
 					'std'=>'CEO & Founder',
 					),
+					
+				'designation_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_DESIGNATION_FONT_FAMILY'),
+					'depends'=>array(array('designation', '!=', '')),
+					'selector'=> array(
+						'type'=>'font',
+						'font'=>'{{ VALUE }}',
+						'css'=>'.sppb-person-designation { font-family: {{ VALUE }}; }'
+					)
+				),
+
+				'designation_color'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_DESIGNATION_COLOR'),
+					'depends'=>array(array('designation', '!=', '')),
+				),
 
 				'introtext'=>array(
 					'type'=>'textarea',
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_INTROTEXT'),
 					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_INTROTEXT_DESC'),
 					'std'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+				),
+				
+				'introtext_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>JText::_('FLEX_ADDON_PERSON_INTROTEXT_FONT_FAMILY'),
+					'depends'=>array(array('introtext', '!=', '')),
+					'selector'=> array(
+						'type'=>'font',
+						'font'=>'{{ VALUE }}',
+						'css'=>'.sppb-person-introtext { font-family: {{ VALUE }}; }'
+					)
 				),
 			
 				'facebook'=>array(

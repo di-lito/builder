@@ -38,14 +38,9 @@ if($this->helix3->getParam('comingsoon_mode')) header("Location: ".$this->baseUr
 //Class Classes
 $body_classes = '';
 if ($this->helix3->getParam('sticky_header')) {
-    $body_classes .= ' sticky-header';
+    $body_classes .= 'sticky-header ';
 }
-$body_classes .= ($this->helix3->getParam('boxed_layout', 0)) ? ' layout-boxed' : ' layout-fluid';
-if (isset($menu) && $menu) {
-  if ($menu->params->get('pageclass_sfx')) {
-    $body_classes .= ' ' . $menu->params->get('pageclass_sfx');
-  }
-}
+$body_classes .= ($this->helix3->getParam('boxed_layout', 0)) ? 'layout-boxed' : 'layout-fluid';
 
 //Body Background Image
 if ($bg_image = $this->helix3->getParam('body_bg_image')) {
@@ -157,11 +152,24 @@ if ($this->params->get('smooth_scroll_version') == '0') {
 } else {
 	$smooth_scroll_js = 'SmoothScroll.js, ';
 }
+	
+	$js_vars = '
+	var sp_preloader = "' . $this->params->get('preloader') . '";
+	var sp_offanimation = "' . $this->params->get('offcanvas_animation') . '";
+	var stickyHeaderVar = "' . $this->params->get('sticky_header') . '";
 
-//preloader & off-canvas animation
-$doc->addScriptdeclaration("\nvar sp_preloader = '" . $this->params->get('preloader') . "';");
-$doc->addScriptdeclaration("\nvar sp_offanimation = '" . $this->params->get('offcanvas_animation') . "';\n");
-$doc->addScriptdeclaration("\nvar stickyHeaderVar = '" . $this->params->get('sticky_header') . "';\n");
+	';
+	  
+	if ($this->params->get('sticky_header') == 1) {
+		$stickyHeaderAppearVar = ($this->helix3->getParam('sticky_header_appear_point')) ? 'var stickyHeaderAppearPoint = ' . $this->params->get('sticky_header_appear_point') . ';' : 'var stickyHeaderAppearPoint = 250;';
+	} else {
+		$stickyHeaderAppearVar = '';
+	}
+	 
+	$all_js_vars = $js_vars . $stickyHeaderAppearVar;
+	$all_js_vars = preg_replace(array('/([\s])\1+/', '/[\n\t]+/m'), '', $all_js_vars); // Remove whitespace
+	$doc->addScriptdeclaration($all_js_vars);
+		
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -183,7 +191,7 @@ $doc->addScriptdeclaration("\nvar stickyHeaderVar = '" . $this->params->get('sti
 				
                 // load css, less and js
                 $this->helix3->addCSS('bootstrap.min.css, font-awesome.min.css') // CSS Files
-                        ->addJS('bootstrap.min.js, modernizr.js, '.$smooth_scroll_js.'jquery.easing.min.js, main.js') // JS Files
+                        ->addJS('bootstrap.min.js, '.$smooth_scroll_js.'jquery.easing.min.js, main.js') // JS Files
                         ->lessInit()->setLessVariables(array(
                             'preset' => $this->helix3->Preset(),
                             'bg_color' => $this->helix3->PresetParam('_bg'),
@@ -244,6 +252,8 @@ $doc->addScriptdeclaration("\nvar stickyHeaderVar = '" . $this->params->get('sti
 		$mega_dropdown_bg = ($this->helix3->getParam('mega_dropdown_bg')) ? 'background:'. $this->helix3->getParam('mega_dropdown_bg') : '';
 		$mega_dropdown_color = ($this->helix3->getParam('mega_dropdown_color')) ? 'color:'. $this->helix3->getParam('mega_dropdown_color') : '';
 		$sticky_appearance_animation = ($this->helix3->getParam('sticky_appearance_animation')) ? '-webkit-animation-name:'. $this->helix3->getParam('sticky_appearance_animation') .';animation-name:'. $this->helix3->getParam('sticky_appearance_animation') .';' : '-webkit-animation-name:fade-in-down;animation-name:fade-in-down;';
+		$sticky_appearance_none = ($this->helix3->getParam('sticky_appearance_animation') == 'none') ? '-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;' : '';
+		
 		$sticky_header_link_color = ($this->helix3->getParam('sticky_header_link_color')) ? 'color:'. $this->helix3->getParam('sticky_header_link_color') : '';
 		$sticky_header_active_link_color = ($this->helix3->getParam('sticky_header_active_link_color')) ? $this->helix3->getParam('sticky_header_active_link_color') : '';
 		
@@ -258,6 +268,10 @@ $doc->addScriptdeclaration("\nvar stickyHeaderVar = '" . $this->params->get('sti
 		#sp-header .top-search-wrapper .icon-top-wrapper >i:before,
 		.sp-megamenu-wrapper > .sp-megamenu-parent >li >a,
 		.sp-megamenu-wrapper #offcanvas-toggler,
+		#sp-header .modal-login-wrapper span,
+		#sp-header .ap-my-account i.pe-7s-user,
+		#sp-header .ap-my-account .info-text,
+		#sp-header .mod-languages,
 		.logo,
 		#cart-menu,
 		#cd-menu-trigger,
@@ -321,7 +335,11 @@ $doc->addScriptdeclaration("\nvar stickyHeaderVar = '" . $this->params->get('sti
 			.sticky #cd-menu-trigger,
 			.sticky .cd-cart,
 			.sticky .cd-cart >i,
-			.sticky .menu-is-open >i,	
+			.sticky .menu-is-open >i,
+			#sp-header.sticky .modal-login-wrapper span,
+			#sp-header.sticky .ap-my-account i.pe-7s-user,
+			#sp-header.sticky .ap-my-account .info-text,
+			#sp-header.sticky .mod-languages,
 			#sp-header.sticky .top-search-wrapper .icon-top-wrapper,
 			#sp-header.sticky .top-search-wrapper .icon-top-wrapper >i:before,
 			.sticky .sp-megamenu-wrapper > .sp-megamenu-parent >li >a,
@@ -334,7 +352,7 @@ $doc->addScriptdeclaration("\nvar stickyHeaderVar = '" . $this->params->get('sti
 			 .sticky .sticky__wrapper{
 				'.$stickybgcolor.'
 				 height:'.$sticky_header_height.'px;
-				 '. $sticky_appearance_animation .'
+				 '. $sticky_appearance_none . $sticky_appearance_animation .'
 			}
 			'. $boxed_sticky_header .'
 			.sticky .sticky__wrapper .sp-sticky-logo {

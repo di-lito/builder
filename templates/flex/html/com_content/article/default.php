@@ -12,13 +12,14 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 
 // Create shortcuts to some parameters.
-$params  = $this->item->params;
+$params = $this->item->params;
 $tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
-$images  = json_decode($this->item->images);
-$urls    = json_decode($this->item->urls);
+$images = json_decode($this->item->images);
+$urls = json_decode($this->item->urls);
 $canEdit = $params->get('access-edit');
-$user    = JFactory::getUser();
-$info    = $params->get('info_block_position', 0);
+$page_header_tag = 'h1'; // switch H1 and H2 depending on Page Heading
+$user = JFactory::getUser();
+$info = $params->get('info_block_position', 0);
 
 // Check if associations are implemented. If they are, define the parameter.
 $assocParam = (JLanguageAssociations::isEnabled() && $params->get('show_associations'));
@@ -26,7 +27,6 @@ $assocParam = (JLanguageAssociations::isEnabled() && $params->get('show_associat
 //JHtml::_('behavior.caption');
 $useDefList = ($params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date')
 	|| $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author') || $assocParam);
-
 
 //get image
 $article_attribs 	= json_decode($this->item->attribs);
@@ -55,13 +55,17 @@ $has_post_format = $tpl_params->get('show_post_format');
 if($this->print) $has_post_format = false;
 $show_icons = '';
 
+// PageClass suffix and Featured Article (changed in Flex 3.0.4):
+$pageclass = ($this->pageclass_sfx != '') ? ' ' . $this->pageclass_sfx : '';
+$featured = ($this->item->featured) ? ' item-featured' : '';
 ?>
-<article class="item item-page<?php echo $this->pageclass_sfx . ($this->item->featured) ? ' item-featured' : ''; ?>" itemscope itemtype="http://schema.org/Article">
+<article class="item item-page<?php echo $pageclass . $featured ?>" itemscope itemtype="http://schema.org/Article">
 	<meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? JFactory::getConfig()->get('language') : $this->item->language; ?>" />
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
+	<?php if ($this->params->get('show_page_heading')) : ?>
 	<div class="page-header">
-		<h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
+		<h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	</div>
+	<?php $page_header_tag = 'h2'; ?>
 	<?php endif;
 
 	if (!empty($this->item->pagination) && $this->item->pagination && !$this->item->paginationposition && $this->item->paginationrelative) {
@@ -97,24 +101,15 @@ $show_icons = '';
             <span class="post-format"><?php echo $show_icons; ?></span>
             <?php } ?>
             <?php if ($params->get('show_title') || $params->get('show_author')) { ?>
-                <h2 itemprop="name">
-                    <?php if ($params->get('show_title')) : ?>
-                        <?php echo $this->escape($this->item->title); ?>
-                    <?php endif; ?>
-                </h2>
+            <?php echo '<'. $page_header_tag .' itemprop="headline">'. $this->escape($this->item->title) .'</'. $page_header_tag .'>'; ?>
             <?php } ?> 
-            
             <?php echo JLayoutHelper::render('joomla.content.info_block.block', array('item' => $this->item, 'params' => $params, 'position' => 'above')); ?>  
         <?php else : ?>
             <?php if($has_post_format) { ?>
         	<span class="post-format"><?php echo $show_icons; ?></span>
 			<?php } ?> 
         	<?php if ($params->get('show_title') || $params->get('show_author')) { ?>
-                <h2 itemprop="name">
-                    <?php if ($params->get('show_title')) : ?>
-                        <?php echo $this->escape($this->item->title); ?>
-                    <?php endif; ?>
-                </h2>
+                <?php echo '<'. $page_header_tag .' itemprop="headline">'; ?><?php if ($params->get('show_title')) : ?><?php echo $this->escape($this->item->title); ?><?php endif; ?><?php echo '</'. $page_header_tag .'>'; ?>
             <?php } ?> 
         <?php echo JLayoutHelper::render('joomla.content.info_block.block', array('item' => $this->item, 'params' => $params, 'position' => 'below')); ?>
 			<?php if ($this->item->state == 0) : ?>
@@ -131,8 +126,8 @@ $show_icons = '';
     </div>
     <?php endif; ?>
 
-	<?php if (!$params->get('show_intro')) : echo $this->item->event->afterDisplayTitle; endif; ?>
-    
+	<?php // Show edit SP Page Builder page (article integration) if present, or native edit article  ?>
+    <?php if (!$params->get('show_intro') || strpos($this->item->event->afterDisplayTitle, 'SP Page Builder') !== false) : echo '<div class="clearfix sppb_article_edit">'. $this->item->event->afterDisplayTitle .'</div><hr />'; endif; ?>
 	<?php echo $this->item->event->beforeDisplayContent; ?>
 
 	<?php if (isset($urls) && ((!empty($urls->urls_position) && ($urls->urls_position == '0')) || ($params->get('urls_position') == '0' && empty($urls->urls_position)))

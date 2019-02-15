@@ -12,6 +12,10 @@ defined ('_JEXEC') or die ('restricted access');
 class SppagebuilderAddonTestimonialflex extends SppagebuilderAddons {
 
 	public function render() {
+		
+		// Include template's params
+		$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+		$has_lazyload = $tpl_params->get('lazyload', 1);
 
 		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? $this->addon->settings->class : '';
 		$style = (isset($this->addon->settings->style) && $this->addon->settings->style) ? $this->addon->settings->style : '';
@@ -50,8 +54,24 @@ class SppagebuilderAddonTestimonialflex extends SppagebuilderAddons {
 			$output .= '<div class="sppb-media flex">';
 			$output .= '<div class="pull-'.$value->avatar_position.'">';
 			
-			$output .= (isset($value->avatar) && $value->avatar) ? '<img src="'.$value->avatar.'" height="' . $avatar_size . '" width="' . $avatar_size . '" class="sppb-img-responsive sppb-avatar '. $value->avatar_style .'" alt="'.$value->title.'">' : '';
-		
+			if (isset($value->avatar) && $value->avatar) { 
+				// Image
+				if(strpos($value->avatar, 'http://') !== false || strpos($value->avatar, 'https://') !== false){
+					/* Lazyload for images with absolute URL */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload sppb-img-responsive sppb-avatar '. $value->avatar_style .'" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. $value->avatar .'" height="' . $avatar_size . '" width="' . $avatar_size . '" alt="'. $value->title .'">';
+					} else {
+						$output .= '<img src="'.$value->avatar.'" height="' . $avatar_size . '" width="' . $avatar_size . '" class="sppb-img-responsive sppb-avatar '. $value->avatar_style .'" alt="'.$value->title.'">';	
+					}
+				} else {
+					/* Lazyload for images for relative URL (local image) */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload sppb-img-responsive sppb-avatar '. $value->avatar_style .'" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. JUri::root() . $value->avatar .'" height="' . $avatar_size . '" width="' . $avatar_size . '" alt="'. $value->title .'">';
+					} else {
+						$output .= '<img src="'.$value->avatar.'" height="' . $avatar_size . '" width="' . $avatar_size . '" class="sppb-img-responsive sppb-avatar '. $value->avatar_style .'" alt="'.$value->title.'">';	
+					}
+				}
+			}
 			$output .= '</div>';
 			
 			$output .= '<div style="text-align:'.$value->avatar_position.'" class="sppb-media-body">';

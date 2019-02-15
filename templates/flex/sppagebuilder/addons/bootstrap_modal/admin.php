@@ -3,7 +3,7 @@
  * Flex @package SP Page Builder
  * Template Name - Flex
  * @author Aplikko http://www.aplikko.com
- * @copyright Copyright (c) 2017 Aplikko
+ * @copyright Copyright (c) 2018 Aplikko
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 // no direct access
@@ -99,8 +99,22 @@ SpAddonsConfig::addonConfig(
 						''=>JText::_('JNO'),
 						'sppb-btn-block'=>JText::_('JYES'),
 						),
-					'depends'=>array('modal_selector'=>'button')
+					'depends'=>array(
+						array('modal_selector', '=', 'button')
 					),
+				),
+				'button_icon_position'=>array(
+					'type'=>'select',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_BUTTON_ICON_POSITION'),
+					'values'=>array(
+						'left'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LEFT'),
+						'right'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_RIGHT'),
+					),
+					'depends'=>array(
+						array('modal_selector', '=', 'button')
+					),
+				),
+
 				'selector_image'=>array(
 					'type'=>'media', 
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_MODAL_SELECTOR_IMAGE'),

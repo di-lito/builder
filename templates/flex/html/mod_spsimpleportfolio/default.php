@@ -1,8 +1,8 @@
 <?php
 /**
- * @package     SP Simple Portfolio
+ * @package     SP Simple Portfolio @ Flex
  * @subpackage  mod_spsimpleportfolio
- * @copyright   Copyright (C) 2010 - 2015 JoomShaper. All rights reserved.
+ * @copyright   Copyright (C) 2010 - 2018 JoomShaper. All rights reserved.
  * @license     GNU General Public License version 2 or later.
  */
 
@@ -150,7 +150,6 @@ $sizes = array(
 			}
 		}
 	?>
-
 	<div class="sp-simpleportfolio-items sp-simpleportfolio-columns-<?php echo $params->get('columns', 3); ?>">
 		<?php foreach ($items as $item) { ?>
 			
@@ -166,32 +165,38 @@ $sizes = array(
 			}
 
 			$groups = implode(',', $groups);
-
 			?>
-
 			<div<?php echo $column_background; ?> class="sp-simpleportfolio-item" data-groups='[<?php echo $groups; ?>]'>
 				<?php $item->url = JRoute::_('index.php?option=com_spsimpleportfolio&view=item&id='.$item->spsimpleportfolio_item_id.':'.$item->alias. ModSpsimpleportfolioHelper::getItemid()); ?>
-				
-				<div class="sp-simpleportfolio-overlay-wrapper clearfix">
-					
+				<div class="sp-simpleportfolio-overlay-wrapper clearfix">	
 					<?php if($item->video) { ?>
 						<span class="sp-simpleportfolio-icon-video"></span>
 					<?php } ?>
-
 					<?php if($params->get('thumbnail_type', 'masonry') == 'masonry') { ?>
 						<img class="sp-simpleportfolio-img" src="<?php echo JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_' . $sizes[$i] . '.' . JFile::getExt($item->image); ?>" alt="<?php echo $item->title; ?>">
 					<?php } else if($params->get('thumbnail_type', 'masonry') == 'rectangular') { ?>
 						<img class="sp-simpleportfolio-img" src="<?php echo JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_'. $rectangle .'.' . JFile::getExt($item->image); ?>" alt="<?php echo $item->title; ?>">
 					<?php } else { ?>
 						<img class="sp-simpleportfolio-img" src="<?php echo JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_'. $square .'.' . JFile::getExt($item->image); ?>" alt="<?php echo $item->title; ?>">
-					<?php } ?>
+					<?php } 
+					
+                    // Popup Image (default = "original image", square, rectangle, tower)
+                    $popup_image = $params->get('popup_image', 'default');
+                    if($popup_image == 'square') {
+                        $item->popup_img_url = JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_'. $square .'.' . JFile::getExt($item->image);
+                    } else if($popup_image == 'rectangle') {
+                        $item->popup_img_url = JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_'. $rectangle .'.' . JFile::getExt($item->image);
+                    } else if($popup_image == 'tower') {
+                        $item->popup_img_url = JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_'. $tower .'.' . JFile::getExt($item->image);
+                    } else {
+                        $item->popup_img_url = JURI::base() . $item->image;
+                    } ?>
 
 					<div class="sp-simpleportfolio-overlay">
 						<div class="sp-vertical-middle">
 							<div>
 								<div class="sp-simpleportfolio-btns">
-									<?php if($show_view_button!=0) { ?>
-                                        
+									<?php if($show_view_button!=0) { ?> 
                                          <?php if( $item->video ) { ?>
 											 <?php if($show_zoom_button!=0) { ?>
                                                 <a class="btn-zoom gallery-<?php echo $randomid; ?>" href="#" data-featherlight="#sp-simpleportfolio-video<?php echo $item->spsimpleportfolio_item_id; ?>"><?php echo JText::_('MOD_SPSIMPLEPORTFOLIO_WATCH'); ?></a>
@@ -200,24 +205,19 @@ $sizes = array(
                                              <a class="btn-view-only" href="<?php echo $item->url; ?>"><i class="fa fa-link"></i></a>
                                              <?php } ?>    
                                         <?php } else { ?>
-                                        
                                           <?php if($show_zoom_button!=0) { ?>
-                                            <a class="btn-zoom gallery-<?php echo $randomid; ?>" href="<?php echo JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_'. $rectangle .'.' . JFile::getExt($item->image); ?>" data-featherlight="image"><?php echo JText::_('MOD_SPSIMPLEPORTFOLIO_ZOOM'); ?></a>
+                                            <a class="btn-zoom gallery-<?php echo $randomid; ?>" href="<?php echo $item->popup_img_url; ?>" data-featherlight="image"><?php echo JText::_('MOD_SPSIMPLEPORTFOLIO_ZOOM'); ?></a>
                                             <a class="btn-view" href="<?php echo $item->url; ?>"><?php echo JText::_('MOD_SPSIMPLEPORTFOLIO_VIEW'); ?></a>  
                                            <?php } else { ?>
                                         	<a class="btn-view-only" href="<?php echo $item->url; ?>"><i class="fa fa-link"></i></a> 
                                         <?php } ?> 
-     
                                        <?php } ?> 
-    
                                      <?php } else { ?>
-                                     
-                                     
                                       <?php if($show_zoom_button!=0) { ?>
                                         <?php if( $item->video ) { ?>
                                             <a class="btn-zoom-icon gallery-<?php echo $randomid; ?>" href="#" data-featherlight="#sp-simpleportfolio-video<?php echo $item->spsimpleportfolio_item_id; ?>"><i class="fa fa-search"></i></a>
                                         <?php } else { ?>
-                                            <a class="btn-zoom-icon gallery-<?php echo $randomid; ?>" href="<?php echo JURI::base(true) . '/images/spsimpleportfolio/' . $item->alias . '/' . JFile::stripExt(JFile::getName($item->image)) . '_'. $rectangle .'.' . JFile::getExt($item->image); ?>" data-featherlight="image"><i class="fa fa-search"></i></a>
+                                          <a class="btn-zoom-icon gallery-<?php echo $randomid; ?>" href="<?php echo $item->popup_img_url; ?>" data-featherlight="image"><i class="fa fa-search"></i></a>
                                         <?php } ?>
                                       <?php } ?>
                                     <?php } ?>
@@ -239,7 +239,6 @@ $sizes = array(
 					</div>
 				</div>
  
-				
 				<?php if($layout_type=='default') { ?>
 					<div class="sp-simpleportfolio-info">
 						<h3 class="sp-simpleportfolio-title">

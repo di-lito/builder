@@ -3,7 +3,7 @@
  * Flex @package SP Page Builder
  * Template Name - Flex
  * @author Aplikko http://www.aplikko.com
- * @copyright Copyright (c) 2017 Aplikko
+ * @copyright Copyright (c) 2018 Aplikko
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 // no direct access
@@ -205,7 +205,9 @@ SpAddonsConfig::addonConfig(
 				),
 
 				'link'=>array(
-					'type'=>'text',
+					'type'=>'media',
+					'format'=>'attachment',
+					'hide_preview'=>true,
 					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LINK'),
 					'desc'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LINK_DESC'),
 					'std'=>'',

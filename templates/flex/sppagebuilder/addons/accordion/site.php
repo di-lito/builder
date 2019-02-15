@@ -17,7 +17,7 @@ class SppagebuilderAddonAccordion extends SppagebuilderAddons {
 		$style = (isset($this->addon->settings->style) && $this->addon->settings->style) ? $this->addon->settings->style : 'panel-flex';
 		$title = (isset($this->addon->settings->title) && $this->addon->settings->title) ? $this->addon->settings->title : '';
 		$heading_selector = (isset($this->addon->settings->heading_selector) && $this->addon->settings->heading_selector) ? $this->addon->settings->heading_selector : 'h3';
-
+		
 		$output   = '';
 		$output  = '<div class="sppb-addon sppb-addon-accordion ' . $class . '">';
 
@@ -30,17 +30,20 @@ class SppagebuilderAddonAccordion extends SppagebuilderAddons {
 
 		foreach ($this->addon->settings->sp_accordion_item as $key => $item) {
 			
-			$item->peicon_name = '';
+			// Pixeden icons
+			$peicon_name = (isset($item->peicon_name) && $item->peicon_name) ? $item->peicon_name : '';
+			// FontAwesome icons
+			$fa_icon = (isset($item->icon) && $item->icon) ? $item->icon : '';
 			
 			$output  .= '<div class="sppb-panel sppb-'. $style .'">';
 			$output  .= '<div class="sppb-panel-heading'. (($key == 0) ? ' active' : '') .'">';
 			$output  .= '<span class="sppb-panel-title">';
 
-			if ($item->peicon_name) {
-				$output .= '<i class="pe ' . $item->peicon_name . '"></i>';
+			if ($peicon_name) {
+				$output .= '<i class="pe ' . $peicon_name . '"></i>';
 			} else {
-				if($item->icon != '') {
-				   $output .= '<i class="fa ' . $item->icon . '"></i>';
+				if($fa_icon != '') {
+				   $output .= '<i class="fa ' . $fa_icon . '"></i>';
 				}
 			}
 
@@ -95,11 +98,10 @@ class SppagebuilderAddonAccordion extends SppagebuilderAddons {
 										<i class="fa {{ accordion_item.icon }}"></i>
 									<# } #>
 								<# } #>
-			
-			
+
 									{{ accordion_item.title }}
 								</span>
-								<span class="sppb-toggle-direction"><i class="fa fa-chevron-right"></i></span>
+								<span class="sppb-toggle-direction"></span>
 							</div>
 							<# var panelStyle = ((key != 0 || data.openitem == "hide") && data.openitem != "show") ? "display: none;" : ""; #>
 							<div class="sppb-panel-collapse" style="{{ panelStyle }}">
@@ -120,7 +122,5 @@ class SppagebuilderAddonAccordion extends SppagebuilderAddons {
 		</div>';
 		return $output;
 	}
-
-
 
 }

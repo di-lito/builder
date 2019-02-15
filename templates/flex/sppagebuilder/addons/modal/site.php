@@ -11,6 +11,11 @@ defined ('_JEXEC') or die ('restricted aceess');
 class SppagebuilderAddonModal extends SppagebuilderAddons{
 
 	public function render() {
+		
+		// Include template's params
+		$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+		$has_lazyload = $tpl_params->get('lazyload', 1);
+		
 		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? $this->addon->settings->class : '';
 		$title = (isset($this->addon->settings->title) && $this->addon->settings->title) ? $this->addon->settings->title : '';
 		$heading_selector = (isset($this->addon->settings->heading_selector) && $this->addon->settings->heading_selector) ? $this->addon->settings->heading_selector : 'h3';
@@ -27,6 +32,7 @@ class SppagebuilderAddonModal extends SppagebuilderAddons{
 		$button_peicon = (isset($this->addon->settings->button_peicon) && $this->addon->settings->button_peicon) ? $this->addon->settings->button_peicon : '';
 		$button_icon = (isset($this->addon->settings->button_icon) && $this->addon->settings->button_icon) ? $this->addon->settings->button_icon : '';
 		$button_icon_position = (isset($this->addon->settings->button_icon_position) && $this->addon->settings->button_icon_position) ? $this->addon->settings->button_icon_position: 'left';
+		$button_block = (isset($this->addon->settings->button_block) && $this->addon->settings->button_block) ? ' ' . $this->addon->settings->button_block : '';
 
 		if($button_icon_position == 'left') {
 			if ($button_peicon != '') {
@@ -46,7 +52,7 @@ class SppagebuilderAddonModal extends SppagebuilderAddons{
 		//Pixeden Icon
 		$peicon_name = (isset($this->addon->settings->peicon_name) && $this->addon->settings->peicon_name) ? $this->addon->settings->peicon_name : '';
 		$selector_icon_name = (isset($this->addon->settings->selector_icon_name) && $this->addon->settings->selector_icon_name) ? $this->addon->settings->selector_icon_name : '';
-		$alignment = (isset($this->addon->settings->alignment) && $this->addon->settings->alignment) ? $this->addon->settings->alignment : '';
+		$alignment = (isset($this->addon->settings->alignment) && $this->addon->settings->alignment) ? $this->addon->settings->alignment : 'sppb-text-center';
 		$modal_unique_id = 'sppb-modal-' . $this->addon->id;
 		$modal_content_type = (isset($this->addon->settings->modal_content_type) && $this->addon->settings->modal_content_type) ? $this->addon->settings->modal_content_type : 'text';
 		$modal_content_text = (isset($this->addon->settings->modal_content_text) && $this->addon->settings->modal_content_text) ? $this->addon->settings->modal_content_text : '';
@@ -62,6 +68,20 @@ class SppagebuilderAddonModal extends SppagebuilderAddons{
 			$mfg_type = 'iframe';
 		} else if ( $modal_content_type == 'image' ) {
 			$mfg_type = 'image';
+		}
+		
+		// Alignment
+		$css_align = '';
+		if ($button_block != 'sppb-btn-block') {
+			if($alignment == 'sppb-text-left'){
+				$css_align .= ' style="float:left;"';
+			} elseif( $alignment == 'sppb-text-right' ){
+				$css_align .= ' style="float:right;"';
+			} elseif( $alignment == 'sppb-text-center' ){
+				$css_align .= ' style="float:none;margin-left:auto;margin-right:auto;display:table;"';
+			}
+		} else {
+			$css_align .= ' style="display:block;"';
 		}
 
 		$output = '';
@@ -81,35 +101,68 @@ class SppagebuilderAddonModal extends SppagebuilderAddons{
 			$url = '#' . $modal_unique_id;
 			$output .= '<div id="' . $modal_unique_id . '" class="mfp-hide popup-image-block">';
 				$output .= '<div class="modal-inner-block">';
-				$output .= '<img class="mfp-img" src="'.$modal_content_image.'" >';
+				
+				// Image
+				if(strpos($modal_content_image, 'http://') !== false || strpos($modal_content_image, 'https://') !== false){
+					/* Lazyload for images with absolute URL */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload mfp-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. $modal_content_image .'">';
+					} else {
+						$output .= '<img class="mfp-img" src="'.$modal_content_image.'" >';	
+					}
+				} else {
+					/* Lazyload for images for relative URL (local image) */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload mfp-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. JUri::root() . $modal_content_image .'">';
+					} else {
+						$output .= '<img class="mfp-img" src="'.$modal_content_image.'" >';	
+					}
+				}
+				
 				$output .= '</div>';
 			$output .= '</div>';
 			$attribs = 'data-popup_type="inline" data-mainclass="mfp-no-margins mfp-with-zoom"';
 		}
 
-		$output .= '<div class="' . $class . ' ' . $alignment . '">';
+		$output .= '<div class="' . $class . ' ' . $alignment . ' mobile-centered">';
 
 		if($modal_selector=='image') {
 			if ($selector_image) {
-				$output .= '<a class="sppb-modal-selector sppb-magnific-popup" '. $attribs .' href="'. $url . '" id="'. $modal_unique_id .'-selector"><img src="' . $selector_image . '" alt="'.$selector_text.'">';
-					$output  .= ($selector_text) ? '<span class="text">' . $selector_text . '</span>' : '';
-				$output  .= '</a>';
+				$output .= '<a class="sppb-modal-selector sppb-magnific-popup" '. $attribs .' href="'. $url . '" id="'. $modal_unique_id .'-selector">';
+				// Image
+				if(strpos($selector_image, 'http://') !== false || strpos($selector_image, 'https://') !== false){
+					/* Lazyload for images with absolute URL */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. $selector_image .'" alt="'.$selector_text.'">';
+					} else {
+						$output .= '<img src="' . $selector_image . '" alt="'.$selector_text.'">';
+					}
+				} else {
+					/* Lazyload for images for relative URL (local image) */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. JUri::root() . $selector_image .'" alt="'.$selector_text.'">';
+					} else {
+						$output .= '<img src="' . $selector_image . '" alt="'.$selector_text.'">';	
+					}
+				}
+				$output .= ($selector_text) ? '<span class="text">' . $selector_text . '</span>' : '';
+				$output .= '</a>';
 			}
 		} else if ($modal_selector=='icon') {
 			if($selector_icon_name || $peicon_name) {
-				$output  .= '<a class="sppb-modal-selector sppb-magnific-popup" href="'. $url . '" '. $attribs .' id="'. $modal_unique_id .'-selector">';
+				$output .= '<a class="sppb-modal-selector sppb-magnific-popup" href="'. $url . '" '. $attribs .' id="'. $modal_unique_id .'-selector">';
 				$output  .= '<span>';
 				if ($peicon_name != '') {
-					$output  .= '<i class="pe ' . $peicon_name . '"></i>';
+					$output .= '<i class="pe ' . $peicon_name . '"></i>';
 				}else{
-					$output  .= '<i class="fa ' . $selector_icon_name . '"></i>';
+					$output .= '<i class="fa ' . $selector_icon_name . '"></i>';
 				}
-				$output  .= '</span>';
-				$output  .= ($selector_text) ? '<span class="text">' . $selector_text . '</span>' : '';
-				$output  .= '</a>';
+				$output .= '</span>';
+				$output .= ($selector_text) ? '<span class="text">' . $selector_text . '</span>' : '';
+				$output .= '</a>';
 			}
 		} else {
-			$output .= '<a class="sppb-btn ' . $button_class . ' sppb-magnific-popup sppb-modal-selector" '. $attribs .' href="'. $url . '" id="'. $modal_unique_id .'-selector">'. $button_text .'</a>';
+			$output .= '<a'. $css_align .' class="sppb-btn ' . $button_class . ' sppb-magnific-popup sppb-modal-selector" '. $attribs .' href="'. $url . '" id="'. $modal_unique_id .'-selector">'. $button_text .'</a>';
 		}
 
 		$output .= '</div>';

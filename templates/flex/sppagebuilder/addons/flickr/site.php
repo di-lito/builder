@@ -12,6 +12,10 @@ class SppagebuilderAddonFlickr extends SppagebuilderAddons {
 
 	public function render() {
 
+		// Include template's params
+		$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+		$has_lazyload = $tpl_params->get('lazyload', 1);
+		
 		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? ' ' . $this->addon->settings->class : '';
 		$title = (isset($this->addon->settings->title) && $this->addon->settings->title) ? $this->addon->settings->title : '';
 		$heading_selector = (isset($this->addon->settings->heading_selector) && $this->addon->settings->heading_selector) ? $this->addon->settings->heading_selector : 'h3';
@@ -32,7 +36,16 @@ class SppagebuilderAddonFlickr extends SppagebuilderAddons {
 		for ($i=0; $i < $count; $i++) {
 			$output .= '<li>';
 			$output .= '<a target="_blank" href="'. str_replace('_m', '_b', $images[$i]->media->m) .'" class="sppb-flickr-gallery-btn">';
-				$output .= '<img class="sppb-img-responsive" src="'. str_replace('_m', '_q', $images[$i]->media->m) .'" alt="'. $images[$i]->title .'">';
+			
+				// Image
+				/* Lazyload for images */
+				if($has_lazyload) {
+					$output .= '<img class="lazyload sppb-img-responsive" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. str_replace('_m', '_q', $images[$i]->media->m) .'" alt="'. $images[$i]->title .'" data-expand="-20">';
+				} else {
+					$output .= '<img class="sppb-img-responsive" src="'. str_replace('_m', '_q', $images[$i]->media->m) .'" alt="'. $images[$i]->title .'">';	
+				}
+				
+				//$output .= '<img class="sppb-img-responsive" src="'. str_replace('_m', '_q', $images[$i]->media->m) .'" alt="'. $images[$i]->title .'">';
 			$output .= '</a>';
 			$output .= '</li>';
 		}

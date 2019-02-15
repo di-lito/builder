@@ -76,7 +76,23 @@ if ($this->showsearch or !empty($this->keyword)) {
 
 			<?php if(!empty($this->searchCustomValues)) { ?>
 			<div class="vm-search-custom-values">
-				<?php echo $this->searchCustomValues ?>
+				<?php
+                echo ShopFunctionsF::renderVmSubLayoutAsGrid(
+                    'searchcustomvalues',
+                    array (
+                        'searchcustomvalues' => $this->searchCustomValues,
+                        'options' => array (
+                            'items_per_row' => array (
+                                'xs' => 2,
+                                'sm' => 2,
+                                'md' => 2,
+                                'lg' => 2,
+                                'xl' => 2,
+                            ),
+                        ),
+                    )
+                );
+                ?>
 			</div>
 			<?php } ?>
 			<input name="keyword" class="inputbox" type="text" size="220" value="<?php echo $this->keyword; ?>"/>
@@ -108,6 +124,7 @@ jQuery(".changeSendForm")
 	<?php echo $this->category->category_description; ?>
 </div>
 <?php } ?>
+
 <hr />
 <?php // Show child categories ?>
     
@@ -157,6 +174,7 @@ $j = "Virtuemart.container = jQuery('.category-view');
 Virtuemart.containerSelector = '.category-view';";
 $j = "jQuery(document).ready(function($) {var productCustomization=$('.cd-customization'),cart=$('.cd-cart'),animating=false;initCustomization(productCustomization);$('body').on('click',function(event){if($(event.target).is('body')||$(event.target).is('.cd-gallery')){deactivateCustomization()}});function initCustomization(items){items.each(function(){var actual=$(this),addToCartBtn=actual.find('.add-to-cart'),touchSettings=actual.next('.cd-customization-trigger');addToCartBtn.on('click',function(){if(!animating){animating=true;resetCustomization(addToCartBtn);addToCartBtn.addClass('is-added').find('path').eq(0).animate({'stroke-dashoffset':0},300,function(){setTimeout(function(){updateCart();addToCartBtn.removeClass('is-added').find('.addtocart-button').on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',function(){addToCartBtn.find('path').eq(0).css('stroke-dashoffset','19.79');animating=false});if($('.no-csstransitions').length>0){addToCartBtn.find('path').eq(0).css('stroke-dashoffset','19.79');animating=false}},600)})}});touchSettings.on('click',function(event){event.preventDefault();resetCustomization(addToCartBtn)})})}function resetCustomization(selectOptions){selectOptions.siblings('[data-type=\"select\"]').removeClass('is-open').end().parents('.cd-single-item').addClass('hover').parent('li').siblings('li').find('.cd-single-item').removeClass('hover').end().find('[data-type=\"select\"]').removeClass('is-open')}function deactivateCustomization(){productCustomization.parent('.cd-single-item').removeClass('hover').end().find('[data-type=\"select\"]').removeClass('is-open')}function updateCart(){(!cart.find('.total_products').hasClass('items-added'))&&cart.find('.total_products').addClass('items-added').removeClass('empty_basket');var cartItems=cart.find('span'),text=parseInt(cartItems.text())+1;cartItems.text(text)}});";
 //$j = preg_replace('/[\n\t]+/m', '', $j); // Remove whitespace
-vmJsApi::addJScript('ajaxContent',$j);
+vmJsApi::addJScript('ajax_category',$j);
+	vmJsApi::jDynUpdate();
 }
 ?>

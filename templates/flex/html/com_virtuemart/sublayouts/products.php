@@ -86,22 +86,33 @@ foreach ( $products as $product ) {
 					<?php
                     echo $product->images[0]->displayMediaThumb('class="browseProductImage"', false);
                     ?>
+                    
                 </a>
+                
 			</div> <!--spacer-img-->
-
-			<div class="spacer-inner">	
-				<div class="vm-product-rating-container">
-				<?php echo shopFunctionsF::renderVmSubLayout('rating',array('showRating'=>$showRating, 'product'=>$product));
-				if ( VmConfig::get ('display_stock', 1)) { ?>
-					<span class="vmicon vm2-<?php echo $product->stock->stock_level ?>" title="<?php echo $product->stock->stock_tip ?>"></span>
-				<?php }
-				echo shopFunctionsF::renderVmSubLayout('stockhandle',array('product'=>$product));
-				?>
-			</div>
-
-
-					<h2><?php echo JHtml::link ($product->link.$ItemidStr, $product->product_name); ?>
-                    </h2>
+			<div class="spacer-inner">
+				<div class="vm-product-rating-container centered">
+					<?php if (VmConfig::get('display_stock', 1)) { ?>
+                        <?php if ($product->product_in_stock > 0) { ?>
+                            <div class="product-in-stock">
+                            <span data-toggle="tooltip" title="<?php echo $product->stock->stock_tip ?>">
+                                <i class="pe pe-7s-check"></i>
+                                <span class="stock"><?php echo JText::_('VM_IN_STOCK'); ?>
+                                <?php echo $product->product_in_stock; ?></span>
+                                </span>
+                            </div>
+                        <?php } else { ?>
+                            <div class="product-in-stock">
+                            <span data-toggle="tooltip" title="<?php echo $product->stock->stock_tip ?>">
+                                <i class="pe pe-7s-less"></i>
+                                <span class="stock"><?php echo JText::_('VM_OUT_OF_STOCK'); ?></span>
+                                </span>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                    <?php // echo shopFunctionsF::renderVmSubLayout('rating',array('showRating'=>$showRating, 'product'=>$product)); ?>
+                </div>
+					<h2><?php echo JHtml::link ($product->link.$ItemidStr, $product->product_name); ?></h2>
 					<div class="main_price"><?php echo shopFunctionsF::renderVmSubLayout('prices',array('product'=>$product,'currency'=>$currency)); ?></div>
                 
 					<?php if(!empty($rowsHeight[$row]['product_s_desc'])){ ?>
@@ -117,15 +128,18 @@ foreach ( $products as $product ) {
                     
                 <div class="clear"></div>
 				<div class="vm3pr-<?php // echo $rowsHeight[$row]['customfields'] ?>"> <?php
-				echo shopFunctionsF::renderVmSubLayout('addtocart',array('product'=>$product,'rowHeights'=>$rowsHeight[$row], 'position' => array('ontop', 'addtocart'))); ?>
+				echo '<hr /><span style="margin:0 auto;display:table;" class="centered">'.shopFunctionsF::renderVmSubLayout('stockhandle',array('product'=>$product)).'</span>';
+				echo shopFunctionsF::renderVmSubLayout('addtocart',array('product'=>$product,'rowHeights'=>$rowsHeight[$row], 'position' => array('ontop', 'addtocart'))); 
+				
+				?>
 				</div>
                <div class="clear"></div>
 
 				<div class="vm-details-button">
 					<?php // Product Details Button
+					
 					$link = empty($product->link)? $product->canonical:$product->link;
 				echo JHtml::link($link.$ItemidStr,vmText::_ ( 'COM_VIRTUEMART_PRODUCT_DETAILS' ), array ('title' => $product->product_name, 'class' => 'product-details' ) );
-					//echo JHtml::link ( JRoute::_ ( 'index.php?option=com_virtuemart&view=productdetails&virtuemart_product_id=' . $product->virtuemart_product_id . '&virtuemart_category_id=' . $product->virtuemart_category_id , FALSE), vmText::_ ( 'COM_VIRTUEMART_PRODUCT_DETAILS' ), array ('title' => $product->product_name, 'class' => 'product-details' ) );
 					?>
 				</div>
                 <?php if(vRequest::getInt('dynamic')){

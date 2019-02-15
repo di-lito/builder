@@ -7,26 +7,8 @@
 
 defined('_JEXEC') or die();
 
-require_once JPATH_COMPONENT . '/helpers/helper.php';
-jimport( 'joomla.filesystem.file' );
-SpsimpleportfolioHelper::generateMeta($this->item);
-
 $doc = JFactory::getDocument();
 $doc->addStylesheet( JURI::root(true) . '/templates/flex/html/com_spsimpleportfolio/assets/css/spsimpleportfolio.css' );
-
-$menu = JFactory::getApplication()->getMenu();
-$category = '';
-if(is_object($menu->getActive())) {
-	$active = $menu->getActive();
-	$category = JRoute::_('index.php?option=com_spsimpleportfolio&Itemid=' . $active->id);
-}
-
-
-$tags = SpsimpleportfolioHelper::getTags( (array) $this->item->spsimpleportfolio_tag_id );
-$newtags = array();
-foreach ($tags as $tag) {
-	$newtags[] 	 = $tag->title;
-}
 
 //video
 if($this->item->video) {
@@ -52,7 +34,6 @@ if($this->item->video) {
 	}
 
 }
-
 ?>
 <div id="sp-simpleportfolio" class="sp-simpleportfolio sp-simpleportfolio-view-item">
 	<div class="sp-simpleportfolio-image">
@@ -68,17 +49,13 @@ if($this->item->video) {
 		<?php } ?>
 		<?php } ?>
 	</div>
-
 	<div class="sp-simpleportfolio-details clearfix">
-
 		<div class="sp-simpleportfolio-description entry-header">
 			<h2><?php echo $this->item->title; ?>
             <div class="divider"></div></h2>
-			<?php echo $this->item->description; ?>
-            <hr /><a class="btn sppb-btn-default btn-sm" href="<?php echo $category; ?>"><i style="margin-left:-7px;margin-right:7px;" class="pe pe-7s-back"></i><?php echo JText::_('COM_SPPORTFOLIO_BACK_TO_CATEGORY'); ?></a>
-		</div>
-        
-		
+			<div class="clearfix"><?php echo $this->item->description; ?></div>
+            <hr /><a class="btn sppb-btn-default btn-sm" href="javascript:history.back()"><i style="margin-left:-7px;margin-right:7px;" class="pe pe-7s-back"></i><?php echo JText::_('COM_SPPORTFOLIO_BACK_TO_CATEGORY'); ?></a>
+		</div>  
         <div class="sp-simpleportfolio-meta">
 			<?php if(isset($this->item->client) && $this->item->client){ ?>
                 <div class="sp-simpleportfolio-client sp-module">
@@ -90,12 +67,10 @@ if($this->item->video) {
                 <h3 class="sp-module-title"><i class="fa fa-calendar-o"></i> <?php echo JText::_('COM_SPSIMPLEPORTFOLIO_PROJECT_DATE'); ?><div class="divider"></div></h3><div class="divider"></div>
                 <div class="sp-module-content"><?php echo JHtml::_('date', $this->item->created_on, JText::_('DATE_FORMAT_LC3')); ?></div>
             </div>
-
             <div class="sp-simpleportfolio-tags sp-module">
                 <h3 class="sp-module-title"><i style="font-size:15px;margin-right:1px;" class="fa fa-tags"></i> <?php echo JText::_('COM_SPSIMPLEPORTFOLIO_PROJECT_CATEGORIES'); ?><div class="divider"></div></h3><div class="divider"></div>
-                <div class="sp-module-content"><?php echo implode(', ', $newtags); ?></div>
+                <div class="sp-module-content"><?php echo implode(', ', $this->item->tags); ?></div>
             </div>
- 
             <?php if ($this->item->url) { ?>
             <div class="sp-simpleportfolio-link sp-module">
                 <a class="btn btn-primary" target="_blank" href="<?php echo $this->item->url; ?>"><?php echo JText::_('COM_SPSIMPLEPORTFOLIO_VIEW_PROJECT'); ?></a>

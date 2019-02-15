@@ -914,8 +914,13 @@ body {
 	.sppb-addon-image-content {
 
 	&.aligment-left {
-
+		
+		.col-sm-6 {
+			left:50%;
+		}
+	
 		.sppb-content-holder {	
+
 			.sppb-btn {
 
 				>i.left {
@@ -928,8 +933,13 @@ body {
 	}
 
 	&.aligment-right {
-	
+		.col-sm-6 {
+			left:-50%;
+		}
 		.sppb-content-holder {
+			
+			left:0;
+			right: auto;
 
 			.sppb-btn {
 			
@@ -938,6 +948,17 @@ body {
 					margin-right:-2px;
 				}
 			}
+		}
+	}
+	
+	.sppb-addon-title,.sp-module-title {
+		padding-left:30px;
+		padding-right:0;
+		text-align:right;
+
+		&:after{
+			float:right;
+			margin:10px 0 0 30%;
 		}
 	}	
 
@@ -2377,7 +2398,7 @@ body {
 		}
 
 
-		// Call to Action addon
+	// Call to Action addon
 	.sppb-addon-cta {
 		
 		.sppb-btn {
@@ -2683,8 +2704,7 @@ body {
 
 @media (max-width: @screen-sm-min) {
 	#vmCartModule {
-		//display:inline-block;
-		//float:none;
+
 		margin-left:0;
 		margin-right:0;
 		left:0;
@@ -2757,6 +2777,14 @@ body {
 				}
 			}
 		}
+		
+	.sppb-addon-image-content {
+		.col-sm-6, .col-xs-12 {
+			//width:100%;
+			right:0;
+			left:0;
+		}
+	}
 			
 }
 @media (max-width: @screen-xs-min) {

@@ -34,13 +34,13 @@ class SppagebuilderAddonAnimated_headlines extends SppagebuilderAddons {
 		$output  = '<div class="sppb-addon-animated_headlines ' . $alignment . ' ' . $class . '">';
 		
 		// Before Text
-		$output .= '<'.$heading_selector.' class="sppb-addon-title cd-headline '. $effect .'">';
+		$output .= '<'.$heading_selector.' class="sppb-addon-title animated_headlines '. $effect .'">';
 		if($before_text) {
 			$output .= '<span class="before-text match-height">';
 			$output .= nl2br($before_text);
 			$output .= '</span>';
 		}
-		$output .= '<span class="cd-words-wrapper'. (($effect == 'letters type') ? ' waiting' : '' ) .' match-height">';
+		$output .= '<span class="ah-words-wrapper'. (($effect == 'letters type') ? ' waiting' : '' ) .' match-height">';
 	
 		// Repeatable Items
 		foreach ($this->addon->settings->sp_animated_headlines_item as $key => $value) {
@@ -146,16 +146,16 @@ class SppagebuilderAddonAnimated_headlines extends SppagebuilderAddons {
         }
 		
 		if ($typing_cursor_color) {
-			$css .= $addon_id . ' ' . $heading_selector . '.type .cd-words-wrapper::after {' . $typing_cursor_color .'}';
+			$css .= $addon_id . ' ' . $heading_selector . '.type .ah-words-wrapper::after {' . $typing_cursor_color .'}';
 		}
 		
 		if ($clip_cursor_color) {
-			$css .= $addon_id . ' ' . $heading_selector . '.clip .cd-words-wrapper::after {' . $clip_cursor_color .'}';
+			$css .= $addon_id . ' ' . $heading_selector . '.clip .ah-words-wrapper::after {' . $clip_cursor_color .'}';
 		}
 		
 		
 		if ($loading_bar || $loading_bar_color) {
-			$css .= $addon_id . ' ' . $heading_selector . '.loading-bar .cd-words-wrapper::after {' . $loading_bar . $loading_bar_color .'}';
+			$css .= $addon_id . ' ' . $heading_selector . '.loading-bar .ah-words-wrapper::after {' . $loading_bar . $loading_bar_color .'}';
 		}
 		
 	
@@ -334,9 +334,9 @@ class SppagebuilderAddonAnimated_headlines extends SppagebuilderAddons {
             }
         </style>
 		<div class="sppb-addon-animated_headlines {{ data.class }} {{ data.alignment }}">
-			<{{ data.heading_selector }} class="sppb-addon-title cd-headline {{ data.effect }}">
+			<{{ data.heading_selector }} class="sppb-addon-title animated_headlines {{ data.effect }}">
 			<span class="before-text match-height">{{{ data.before_text }}}</span>
-			<span class="cd-words-wrapper match-height">
+			<span class="ah-words-wrapper match-height">
 			<# _.each(data.sp_animated_headlines_item, function(animated_headlines_item, key){
 				var activeClass = (key == 0) ? "is-visible " : ""; 
 				#>

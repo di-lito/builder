@@ -1419,21 +1419,41 @@ ul.site-list li i {
   border: 1px solid #f35d4b;
   box-shadow: 0 0 5px rgba(241,72,51,0.3);
 }
+.sppb-addon-ajax-contact.dark .sppb-form-group label {
+  color: #ddd;
+  color: rgba(255,255,255,0.65);
+}
+.sppb-addon-ajax-contact.dark .sppb-form-control label {
+  color: #ddd;
+  color: rgba(255,255,255,0.65);
+}
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder] {
-  color: #a5a5a5;
-  color: rgba(255,255,255,0.85);
+  color: #f0f0f0;
   border: 1px solid #999;
   border: 1px solid rgba(200,200,200,0.8);
   background: transparent;
 }
+.sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]::-moz-placeholder {
+  color: rgba(255,255,255,0.65);
+}
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]::-webkit-input-placeholder {
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.65);
 }
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]::-webkit-input-placeholder:before {
   color: #f57b6c;
 }
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]:focus {
   border: 1px solid #f6887b;
+}
+.sppb-addon-ajax-contact.dark .tos label {
+  color: #ddd;
+  color: rgba(255,255,255,0.65);
+}
+.sppb-addon-ajax-contact.dark .tos label a {
+  color: #f6887b;
+}
+.sppb-addon-ajax-contact.dark .tos label a:hover {
+  color: #f9b3aa;
 }
 .dark .acymailing_form input.inputbox {
   color: #f79184;
@@ -1506,7 +1526,7 @@ ul.site-list li i {
   background-color: #ef2a12;
 }
 .no-touch .cd-customization .add-to-cart:hover {
-  background-color: darker(#f14833,7%);
+  background-color: #ef2a12;
 }
 .productdetails-view .vm-product-details-inner .product-price .vm-price-desc+span {
   color: #f14833;

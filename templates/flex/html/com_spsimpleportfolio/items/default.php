@@ -1,7 +1,7 @@
 <?php
 /**
- * @package     SP Simple Portfolio
- * @copyright   Copyright (C) 2010 - 2014 JoomShaper. All rights reserved.
+ * @package     SP Simple Portfolio @ Flex
+ * @copyright   Copyright (C) 2010 - 2018 JoomShaper. All rights reserved.
  * @license     GNU General Public License version 2 or later.
  */
 
@@ -192,45 +192,47 @@ $sizes = array(
 						<img class="sp-simpleportfolio-img" src="<?php echo JURI::base(true) . '/images/spsimpleportfolio/' . $this->item->alias . '/' . JFile::stripExt(JFile::getName($this->item->image)) . '_'. $rectangle .'.' . JFile::getExt($this->item->image); ?>" alt="<?php echo $this->item->title; ?>">
 					<?php } else { ?>
 						<img class="sp-simpleportfolio-img" src="<?php echo JURI::base(true) . '/images/spsimpleportfolio/' . $this->item->alias . '/' . JFile::stripExt(JFile::getName($this->item->image)) . '_'. $square .'.' . JFile::getExt($this->item->image); ?>" alt="<?php echo $this->item->title; ?>">
-					<?php } ?>
+					<?php } 
+					
+					// Popup Image (default = "original image", square, rectangle, tower)
+                    $popup_image = $this->params->get('popup_image', 'default');
+                    if($popup_image == 'square') {
+                        $this->item->popup_img_url = JURI::base(true) . '/images/spsimpleportfolio/' . $this->item->alias . '/' . JFile::stripExt(JFile::getName($this->item->image)) . '_'. $square .'.' . JFile::getExt($this->item->image);
+                    } else if($popup_image == 'rectangle') {
+                        $this->item->popup_img_url = JURI::base(true) . '/images/spsimpleportfolio/' . $this->item->alias . '/' . JFile::stripExt(JFile::getName($this->item->image)) . '_'. $rectangle .'.' . JFile::getExt($this->item->image);
+                    } else if($popup_image == 'tower') {
+                        $this->item->popup_img_url = JURI::base(true) . '/images/spsimpleportfolio/' . $this->item->alias . '/' . JFile::stripExt(JFile::getName($this->item->image)) . '_'. $tower .'.' . JFile::getExt($this->item->image);
+                    } else {
+                        $this->item->popup_img_url = JURI::base() . $this->item->image;
+                    } ?>
 
 					<div class="sp-simpleportfolio-overlay">
 						<div class="sp-vertical-middle">
 							<div>
 								<div class="sp-simpleportfolio-btns">
 									<?php if($show_view_button!=0) { ?>
-
                                         <?php if( $this->item->video ) { ?>
 											 <?php if($show_zoom_button!=0) { ?>
                                                 <a class="btn-zoom gallery-<?php echo $randomid; ?>" href="#" data-featherlight="#sp-simpleportfolio-video<?php echo $this->item->spsimpleportfolio_item_id; ?>"><?php echo JText::_('COM_SPSIMPLEPORTFOLIO_WATCH'); ?></a><a class="btn-view" href="<?php echo $this->item->url; ?>"><?php echo JText::_('COM_SPSIMPLEPORTFOLIO_VIEW'); ?></a>       
                                                 <?php } else { ?>
                                              <a class="btn-view-only" href="<?php echo $this->item->url; ?>"><i class="fa fa-link"></i></a>
                                              <?php } ?>          
-                                        <?php } else { ?>
-                                          
-                                        <?php if($show_zoom_button!=0) { ?>
+                                        <?php } else { ?> 
+                                         <?php if($show_zoom_button!=0) { ?>
                                             <a class="btn-zoom gallery-<?php echo $randomid; ?>" href="<?php echo $this->item->popup_img_url; ?>" data-featherlight="image"><?php echo JText::_('COM_SPSIMPLEPORTFOLIO_ZOOM'); ?></a>
                                             <a class="btn-view" href="<?php echo $this->item->url; ?>"><?php echo JText::_('COM_SPSIMPLEPORTFOLIO_VIEW'); ?></a>       
                                          <?php } else { ?>
                                         	<a class="btn-view-only" href="<?php echo $this->item->url; ?>"><i class="fa fa-link"></i></a>
+                                         <?php } ?> 
                                         <?php } ?> 
-                                           
-                                           
-                                        <?php } ?> 
-   
                                      <?php } else { ?>
-                                     
-                                     
-                                     <?php if($show_zoom_button!=0) { ?>
-                                     
+                                     <?php if($show_zoom_button!=0) { ?> 
                                         <?php if( $this->item->video ) { ?>
                                             <a class="btn-zoom-icon gallery-<?php echo $randomid; ?>" href="#" data-featherlight="#sp-simpleportfolio-video<?php echo $this->item->spsimpleportfolio_item_id; ?>"><i class="fa fa-search"></i></a>
                                         <?php } else { ?>
                                             <a class="btn-zoom-icon gallery-<?php echo $randomid; ?>" href="<?php echo $this->item->popup_img_url; ?>" data-featherlight="image"><i class="fa fa-search"></i></a>
                                         <?php } ?>
-                                        
-                                      <?php } ?>
-                                         
+                                      <?php } ?>   
                                     <?php } ?>
 								</div>
 								<?php if($layout_type!='default') { ?>

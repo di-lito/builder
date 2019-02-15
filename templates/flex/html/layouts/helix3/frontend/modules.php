@@ -18,6 +18,7 @@ if (file_exists($menu_class)) {
 $data = $displayData;
 
 $left_right_modules = '';
+$custom_class = (isset($data->settings->custom_class) && $data->settings->custom_class) ? ' ' . $data->settings->custom_class : '';
 
 if (JFilterOutput::stringURLSafe($data->settings->name) == 'left' || JFilterOutput::stringURLSafe($data->settings->name) == 'right') {
 	// When SPPB is inside Article with "left" modules
@@ -28,7 +29,7 @@ $output ='';
 
     $output .= '<div id="sp-' . JFilterOutput::stringURLSafe($data->settings->name) . '" class="' . $data->className . $left_right_modules . '">';
 
-        $output .= '<div class="sp-column ' . ($data->settings->custom_class) . '">';
+        $output .= '<div class="sp-column' . $custom_class . '">';
 
         $features = (Helix3::hasFeature($data->settings->name))? helix3::getInstance()->loadFeature[$data->settings->name] : array();
 
@@ -38,7 +39,17 @@ $output ='';
                 }
             }
 
+            if (JFilterOutput::stringURLSafe($data->settings->name) == 'left' || JFilterOutput::stringURLSafe($data->settings->name) == 'right') {
+			// Only "left" or "right" module positions
+			$output .= '<div class="sp-lr">';
+			} 
+			
             $output .= '<jdoc:include type="modules" name="' . $data->settings->name . '" style="sp_xhtml" />';
+			
+			if (JFilterOutput::stringURLSafe($data->settings->name) == 'left' || JFilterOutput::stringURLSafe($data->settings->name) == 'right') {
+			// Only "left" or "right" module positions
+			$output .= '</div>';
+			} 
 
             foreach ($features as $key => $feature){
                 if (isset($feature['feature']) && $feature['load_pos'] != 'before' ) {

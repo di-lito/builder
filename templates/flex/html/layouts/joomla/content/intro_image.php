@@ -14,6 +14,8 @@ $attribs 		= json_decode($displayData->attribs);
 $images 			= json_decode($displayData->images);
 $imgsize 		= $tplParams->get('blog_list_image', 'default');
 $intro_image 	= '';
+// Include lazy load params
+$has_lazyload = $tplParams->get('lazyload', 1);
 
 if(isset($attribs->spfeatured_image) && $attribs->spfeatured_image != '') {
 
@@ -39,11 +41,27 @@ if(isset($attribs->spfeatured_image) && $attribs->spfeatured_image != '') {
 		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>">
 	<?php } ?>
 
-	<img
-	<?php if ($images->image_intro_caption):
+	<?php 
+		if(strpos($intro_image, 'http://') !== false || strpos($intro_image, 'https://') !== false){
+			if($has_lazyload) { ?>
+				<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $intro_image; ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>">
+			<?php } else { ?>
+			<img <?php if ($images->image_intro_caption):
 			echo 'class="caption"' . ' title="' . htmlspecialchars($images->image_intro_caption) . '"';
 			endif; ?>
-	src="<?php echo htmlspecialchars($intro_image); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>" itemprop="thumbnailUrl"/>
+	src="<?php echo htmlspecialchars($intro_image); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>" itemprop="thumbnailUrl">
+			<?php } 
+			} else { 
+			if($has_lazyload) { ?>
+				<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo JUri::root() . $intro_image; ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>">
+			<?php } else { ?>
+			<img <?php if ($images->image_intro_caption):
+			echo 'class="caption"' . ' title="' . htmlspecialchars($images->image_intro_caption) . '"';
+			endif; ?>
+	src="<?php echo htmlspecialchars($intro_image); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>" itemprop="thumbnailUrl">
+			<?php }
+		} ?>
+        
 
 	<?php if ($params->get('link_titles') && $params->get('access-view')) { ?>
 		</a>

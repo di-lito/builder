@@ -37,10 +37,7 @@ nav[role="pagination"] {
 	  padding: .4em .8em;
 	  font-size: 100%;
 	}
-}
 
-
-.cd-pagination {
 	a {
 	  border: 1px solid #e6e6e6;
 	  border-radius: 0.25em;
@@ -127,26 +124,6 @@ No space - remove distance between list items
 
 }
 
-/* -------------------------------- 
-move buttons - move prev and next buttons to the sides
--------------------------------- */
-.cd-pagination.move-buttons {
-	&:after {
-	  content: "";
-	  display: table;
-	  clear: both;
-	}
-	.button {
-		&:first-of-type {
-		  float: left;
-		}
-		&:last-of-type {
-		  float: right;
-		}
-	}
-}
-
-
 
 /* -------------------------------- 
 custom icons - customize the small arrow inside the next and prev buttons 
@@ -224,16 +201,42 @@ custom buttons - replace prev and next buttons text with a custom icon
 animated buttons - animate the text inside prev and next buttons 
 -------------------------------- */
 .cd-pagination.animated-buttons {
+	
 	a, span {
 	  padding: 0 1.4em;
 	  height: 50px;
 	  line-height: 50px;
 	  overflow: hidden;
 	}
+	
 	.button {
+		
 		a {
 		  position: relative;
 		  padding: 0 2em;
+		  
+		  	i {
+				display: block;
+				height: 100%;
+				-webkit-transform: translateY(100%);
+				-moz-transform: translateY(100%);
+				-ms-transform: translateY(100%);
+				-o-transform: translateY(100%);
+				transform: translateY(100%);
+				-webkit-transition: -webkit-transform 0.3s;
+				-moz-transition: -moz-transform 0.3s;
+				transition: transform 0.3s;
+			}
+			
+			&:hover {
+				i {
+				  -webkit-transform: translateY(0);
+				  -moz-transform: translateY(0);
+				  -ms-transform: translateY(0);
+				  -o-transform: translateY(0);
+				  transform: translateY(0);
+				}
+			}
 		}
 		
 		&:first-of-type,
@@ -252,68 +255,18 @@ animated buttons - animate the text inside prev and next buttons
 					-moz-transition: -moz-transform 0.3s;
 					transition: transform 0.3s;
 				}
-			}
-			
-		}
-	}
-	
-	i {
-		display: block;
-		height: 100%;
-		-webkit-transform: translateY(100%);
-		-moz-transform: translateY(100%);
-		-ms-transform: translateY(100%);
-		-o-transform: translateY(100%);
-		transform: translateY(100%);
-		-webkit-transition: -webkit-transform 0.3s;
-		-moz-transition: -moz-transform 0.3s;
-		transition: transform 0.3s;
-	}
-	
-	[class^="ap-"] {
-		font-style:normal;
-		line-height:50px;
-		font-size:90%;
-		-webkit-transform: translateY(0);
-		-moz-transform: translateY(0);
-		-ms-transform: translateY(0);
-		-o-transform: translateY(0);
-		transform: translateY(0);
-	}
-	
-}
-
-.no-touch {
-	.cd-pagination.animated-buttons {
-		.button {
-			a {
+				
 				&:hover {
-					i {
-					  -webkit-transform: translateY(0);
-					  -moz-transform: translateY(0);
-					  -ms-transform: translateY(0);
-					  -o-transform: translateY(0);
-					  transform: translateY(0);
-					}
-		 		}
-			}
-			
-			&:first-of-type,
-			&:last-of-type {
-				a {
-					&:hover {
-						&:before,
-						&:after {
-						  -webkit-transform: translateX(-50%) translateY(-50px);
-						  -moz-transform: translateX(-50%) translateY(-50px);
-						  -ms-transform: translateX(-50%) translateY(-50px);
-						  -o-transform: translateX(-50%) translateY(-50px);
-						  transform: translateX(-50%) translateY(-50px);
-						}
+					&:before,
+					&:after {
+					  -webkit-transform: translateX(-50%) translateY(-50px);
+					  -moz-transform: translateX(-50%) translateY(-50px);
+					  -ms-transform: translateX(-50%) translateY(-50px);
+					  -o-transform: translateX(-50%) translateY(-50px);
+					  transform: translateX(-50%) translateY(-50px);
 					}
 				}
-			}		
+			}
 		}
-	}
+	}	
 }
-

@@ -17,12 +17,6 @@
 	margin: 0 auto;
 	display:block; /* for older browsers */
 
-	/* Megamenu centered using Flex
-	.flexbox();
-	.flex-align-items();
-	.flex-justify-content(center);
-	*/
-	
 	
 	>li {
 		display: inline-block;
@@ -36,7 +30,6 @@
 		>a {
 			display: inline-block;
 			padding: 0 12px;
-			//margin:0;
 			-webkit-transform: translateZ(0);
 			
 				>i {
@@ -494,7 +487,7 @@
 					.open-icon {
 					
 						&:before {
-							-webkit-transform: rotate(0dg);
+							-webkit-transform: rotate(0deg);
 							transform: rotate(0deg);
 						}
 					}
@@ -961,33 +954,6 @@
         }
     }
 }
-/*
-.sticky, #sp-header {
-	.menu-drop-in,
-	.menu-twist{
-		.sp-has-child {
-	
-			.sp-dropdown {
-				opacity:0;
-				visibility:hidden;
-				.transition(~'-webkit-transform 0.5s ease, transform 0.5s ease, opacity 0.3s ease, visibility 0.3s ease');	
-				-webkit-transform: translate3d(0, 80px, 0);
-				transform: translate3d(0, 80px, 0);
-
-			}
-			&:hover{
-				.sp-dropdown {
-					opacity:1;
-					visibility:visible;
-					-webkit-transform: translate3d(0, 0, 0);
-					transform: translate3d(0, 0, 0);
-				
-				}
-			}
-		}
-	}
-}
-*/
 
 /* Important hack (only) for mobile devices hover/click on parent link */
 .mobile {
@@ -1000,7 +966,6 @@
 			&:focus {
 				.sp-dropdown {
 					z-index: 99;
-					//display:block;
 					opacity:0;
 					visibility:hidden;
 					-webkit-animation:MobileFadeInDown 0.35s ease forwards 0.1s;

@@ -23,7 +23,12 @@
 	.flex-align-items();
 	.flex-justify-content(start); /* (start) will move it to the left (LTR), where (center) to center; */
 	z-index:10;
-
+	
+		.sp-default-logo,
+		.sp-retina-logo {
+			max-height:100%; /* fix when Logo graphic (image) is too wide (large) */
+			width:auto;
+		}
 }
 a.logo {
   .sp-retina-logo {
@@ -37,7 +42,6 @@ a.logo {
 *======= 	Start  Header	   ============
 *=======================================*/
 #sp-header{
-	//width:100%;
 
 	#sp-menu {
 		
@@ -46,7 +50,6 @@ a.logo {
 				float:right;
 				>li {
 					>a {
-						//.transition(~'opacity 0.3s ease, color 0.3s ease');	
 
 						>.pe {
 							font-size:125%;
@@ -362,6 +365,7 @@ only screen and (min-resolution: 192dpi) {
     }
     .sp-retina-logo {
     	display: block;
+		width:auto;
     }
   }
 }

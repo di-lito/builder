@@ -31,14 +31,7 @@
 
 
 .layout-edit {
-	/*
-	@import "bootstrap-legacy/variables";
-	@import "bootstrap-legacy/mixins";
-	@import "bootstrap-legacy/forms.less";
-	@import "bootstrap-legacy/wells.less";
-	@import "bootstrap-legacy/accordion.less";
-	*/
-
+	
 	//Edit
 	select.inputbox,
 	select {
@@ -174,8 +167,13 @@ iframe, svg {
 	
 	.sp-image-upload-wrapper {
 		width:300px;
+		margin:0 0 20px 0;
+		
 		img {
 			width:300px;
+			margin:0;
+			padding:0;
+			position:relative;
 			object-fit: cover;
 		}
 	}
@@ -213,6 +211,8 @@ iframe, svg {
 				
 				img {
 					width:180px;
+					margin:0;
+					padding:0;
 					object-fit: cover;
 
 				}
@@ -240,6 +240,23 @@ iframe, svg {
 
 div#images {
 	overflow:hidden;
+}
+
+.sppb_article_edit {
+	margin:0 auto 25px;
+ 	> a {
+		border:1px solid lighten(@major_color, 5%);
+		background:darken(gray, 8%);
+		padding:11px 25px;
+		border-radius:4px;
+		color:#fff;
+		text-shadow:1px 1px 2px rgba(0,0,0,.2);
+		
+		&:hover {
+			border:1px solid darken(@major_color, 5%);
+			background:darken(gray, 15%);
+		}
+	}
 }
 
 .edit-article {
@@ -286,8 +303,10 @@ div#images {
 		line-height:26px;
 	}
 }
+
+.controls .input-append a.modal.btn,
 a.modal.btn{
-	position:relative;
+	position:relative!important;
     background:lighten(@major_color, 5%);
 	line-height:16px;
 	color:#fff;

@@ -1,12 +1,13 @@
 <?php
 /**
- * @package Helix3 Framework
- * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2015 JoomShaper
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
+ * Flex @package Helix3 Framework
+ * Template Name - Flex
+ * @author Aplikko http://www.aplikko.com
+ * @copyright Copyright (c) 2018 Aplikko
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct accees
-defined ('_JEXEC') or die('resticted aceess');
+defined ('_JEXEC') or die('restricted access');
  
 class Helix3FeatureLogo {
 
@@ -21,7 +22,7 @@ class Helix3FeatureLogo {
 
 	public function renderFeature() {
 
-
+		$doc = JFactory::getDocument();
 		$extention = '';
 		//Retina Image
 		if( $this->helix3->getParam('logo_type') == 'image' ) {
@@ -74,32 +75,44 @@ class Helix3FeatureLogo {
 		}
 
 		$sticky_logo_class = ($this->helix3->getParam('sticky_logo')) ? ' has-sticky-logo' : '';
+		
+		/* From Flex 3.2: fix for Logo container. Logo graphic shouldn't go outside "Logo" container. */
+		$header_container = ( $height < $this->helix3->getParam('header_height') ) ? ' style="max-width:' . $width . 'px;max-height:' . $height . 'px;"' : '';
 
 		if( $this->helix3->getParam('logo_type') == 'image' ) {
 			if( $this->helix3->getParam('logo_image') ) {
 				$html .= '<a class="logo" href="' . JURI::base(true) . '/">';
 				
-			if ($extention != 'svg') {
-			  //$html .= '<img class="sp-default-logo'. $custom_logo_class .'" src="' . $this->helix3->getParam('logo_image') . '" alt="'. $sitename .'">';
-			  $html .= '<img class="sp-default-logo'. $custom_logo_class . $sticky_logo_class .'" src="' . $this->helix3->getParam('logo_image') . '" alt="'. $sitename .'">';
-			} else {
-				$html .= '<img class="'. $sticky_logo_class .'" style="width:100%;height:100%;" src="' . $this->helix3->getParam('logo_image') . '" alt="'. $sitename .'">';
-			}
+				if ($extention != 'svg') {
+				  $html .= '<img'. $header_container .' class="sp-default-logo'. $custom_logo_class . $sticky_logo_class .'" src="' . $this->helix3->getParam('logo_image') . '" alt="'. $sitename .'">';
+				} else {
+					$html .= '<img class="'. $sticky_logo_class .'" style="width:100%;height:100%;" src="' . $this->helix3->getParam('logo_image') . '" alt="'. $sitename .'">';
+				}
 				
-			
 			// Detecting SVG for retina
 			$extention_2x = explode('.', $this->helix3->getParam('logo_image_2x'));
  			$extention_2x = end($extention_2x);
 		
 				if ($extention_2x != 'svg') {
 					if( $this->helix3->getParam('logo_image_2x') ) {
-						$html .= '<img class="sp-retina-logo'. $custom_logo_class . $sticky_logo_class .'" src="' . $this->helix3->getParam('logo_image_2x') . '" alt="'. $sitename .'" width="' . $width . '" height="' . $height . '" />';
+						$html .= '<img'. $header_container .' class="sp-retina-logo'. $custom_logo_class . $sticky_logo_class .'" src="' . $this->helix3->getParam('logo_image_2x') . '" alt="'. $sitename .'">';
 					}
 				} else {
-					$html .= '<img class="'. $sticky_logo_class .'" style="width:' . $width . 'px;height:' . $height . 'px;" src="' . $this->helix3->getParam('logo_image_2x') . '" alt="'. $sitename .'" />';
+					$html .= '<img class="'. $sticky_logo_class .'" style="max-width:100%;height:' . $height . 'px;" src="' . $this->helix3->getParam('logo_image_2x') . '" alt="'. $sitename .'">';
 				}
 				
-
+				/* Sticky Logo */
+				if ($this->helix3->getParam('sticky_header') == 1) {
+					if ($svg_sticky != 'svg') {
+						if ($this->helix3->getParam('sticky_logo')) {
+							$html .= '<img class="sp-sticky-logo'. $custom_logo_class .'" src="' . $this->helix3->getParam('sticky_logo') . '" alt="'. $sitename .'">';
+						}
+					} else {
+						/* If Sticky Logo is SVG graphic*/
+						$html .= '<img class="sp-sticky-logo'. $custom_logo_class .'" src="' . $this->helix3->getParam('sticky_logo') . '" alt="'. $sitename .'">';
+					}
+				}
+				
 				if( $this->helix3->getParam('mobile_logo') ) {
 					$html .= '<img class="sp-default-logo visible-xs-block'. $sticky_logo_class .'" src="' . $this->helix3->getParam('mobile_logo') . '" alt="'. $sitename .'">';
 				}
@@ -108,17 +121,18 @@ class Helix3FeatureLogo {
 			} else {
 				$html .= '<a class="logo" href="' . JURI::base(true) . '/">';
 				$html .= '<img class="sp-default-logo'. $custom_logo_class . $sticky_logo_class .'" src="' . $this->helix3->getTemplateUri() . '/images/presets/' . $this->helix3->Preset() . '/logo.png" alt="'. $sitename .'">';
-				$html .= '<img class="sp-retina-logo'. $custom_logo_class . $sticky_logo_class .'" src="' . $this->helix3->getTemplateUri() . '/images/presets/' . $this->helix3->Preset() . '/logo@2x.png" alt="'. $sitename .'" width="' . $width . '" height="' . $height . '">';
-				
+				$html .= '<img style="max-width:' . $width . 'px;max-height:' . $height . 'px;" class="sp-retina-logo'. $custom_logo_class . $sticky_logo_class .'" src="' . $this->helix3->getTemplateUri() . '/images/presets/' . $this->helix3->Preset() . '/logo@2x.png" alt="'. $sitename .'">';
 				
 				/* Sticky Logo */
-				if ($svg_sticky != 'svg') {
-					if ($this->helix3->getParam('sticky_logo')) {
-						$html .= '<img class="sp-sticky-logo'. $custom_logo_class .'" src="' . $this->helix3->getParam('sticky_logo') . '" alt="'. $sitename .'">';
+				if ($this->helix3->getParam('sticky_header') == 1) {
+					if ($svg_sticky != 'svg') {
+						if ($this->helix3->getParam('sticky_logo')) {
+							$html .= '<img class="sp-sticky-logo'. $custom_logo_class .'" src="' . $this->helix3->getParam('sticky_logo') . '" alt="'. $sitename .'">';
+						}
+					} else {
+						/* If Sticky Logo is SVG graphic*/
+						$html .= '<img class="sp-sticky-logo'. $custom_logo_class .'" style="max-width:100%;" src="' . $this->helix3->getParam('sticky_logo') . '" alt="'. $sitename .'">';
 					}
-				} else {
-					/* If Sticky Logo is SVG graphic*/
-					$html .= '<img class="sp-sticky-logo'. $custom_logo_class .'" style="max-width:100%;" src="' . $this->helix3->getParam('sticky_logo') . '" alt="'. $sitename .'" />';
 				}
 
 				/* Mobile Logo */
@@ -128,6 +142,7 @@ class Helix3FeatureLogo {
 
 				$html .= '</a>';
 			}
+			
 			
 			
 		} else {
@@ -144,5 +159,4 @@ class Helix3FeatureLogo {
 		
 		return $html;
 	}
-
 }

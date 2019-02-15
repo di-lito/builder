@@ -12,6 +12,10 @@ defined ('_JEXEC') or die ('restricted access');
 class SppagebuilderAddonGallery extends SppagebuilderAddons{
 
 	public function render() {
+		
+		// Include template's params
+		$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+		$has_lazyload = $tpl_params->get('lazyload', 1);
 
 		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? $this->addon->settings->class : '';
 		$title = (isset($this->addon->settings->title) && $this->addon->settings->title) ? $this->addon->settings->title : '';
@@ -43,7 +47,22 @@ class SppagebuilderAddonGallery extends SppagebuilderAddons{
 				if($value->thumb) {
 					$output .= '<li'.$thumbs_padding.'>';
 					$output .= ($value->full) ? '<a href="' . $value->full . '" class="sppb-gallery-btn">' : '';
-					$output .= '<img class="sppb-img-responsive" src="' . $value->thumb . '" alt="' . $value->title . '" style="width:'.$width.'px;">';
+					// Thumb Image
+					if(strpos($value->thumb, 'http://') !== false || strpos($value->thumb, 'https://') !== false){
+					// Lazyload for images with absolute URL
+						if($has_lazyload) {
+							$output .= '<img class="lazyload sppb-img-responsive" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="'. $value->thumb .'" alt="' . $value->title . '" style="width:'.$width.'px;" data-expand="-10">';
+						} else {
+							$output .= '<img class="sppb-img-responsive" src="' . $value->thumb . '" alt="' . $value->title . '" style="width:'.$width.'px;">';	
+						}
+					} else {
+						// Lazyload for images for relative URL (local image)
+						if($has_lazyload) {
+							$output .= '<img class="lazyload sppb-img-responsive" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="'. JUri::root() . $value->thumb .'" alt="' . $value->title . '" style="width:'.$width.'px;" data-expand="-10">';
+						} else {
+							$output .= '<img class="sppb-img-responsive" src="' . $value->thumb . '" alt="' . $value->title . '" style="width:'.$width.'px;">';	
+						}
+					}
 					$output .= ($value->full) ? '</a>' : '';
 					$output .= '</li>';
 				}

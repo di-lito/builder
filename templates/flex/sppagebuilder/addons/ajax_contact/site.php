@@ -21,7 +21,8 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
         $recipient_email = (isset($this->addon->settings->recipient_email) && $this->addon->settings->recipient_email) ? $this->addon->settings->recipient_email : '';
         $from_email = (isset($this->addon->settings->from_email) && $this->addon->settings->from_email) ? $this->addon->settings->from_email : '';
         $from_name = (isset($this->addon->settings->from_name) && $this->addon->settings->from_name) ? $this->addon->settings->from_name : '';
-        $formcaptcha = (isset($this->addon->settings->formcaptcha) && $this->addon->settings->formcaptcha) ? $this->addon->settings->formcaptcha : '';
+        $show_phone = (isset($this->addon->settings->show_phone) && $this->addon->settings->show_phone) ? $this->addon->settings->show_phone : '';
+		$formcaptcha = (isset($this->addon->settings->formcaptcha) && $this->addon->settings->formcaptcha) ? $this->addon->settings->formcaptcha : '';
         $captcha_type = (isset($this->addon->settings->captcha_type)) ? $this->addon->settings->captcha_type : 'default';
         $captcha_question = (isset($this->addon->settings->captcha_question) && $this->addon->settings->captcha_question) ? $this->addon->settings->captcha_question : '';
         $captcha_answer = (isset($this->addon->settings->captcha_answer) && $this->addon->settings->captcha_answer) ? $this->addon->settings->captcha_answer : '';
@@ -35,6 +36,7 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
         $email_input_col = (isset($this->addon->settings->email_input_col) && $this->addon->settings->email_input_col) ? ' sppb-col-sm-' . $this->addon->settings->email_input_col : 'sppb-col-sm-12';
         $captcha_input_col = (isset($this->addon->settings->captcha_input_col) && $this->addon->settings->captcha_input_col) ? ' sppb-col-sm-' . $this->addon->settings->captcha_input_col : 'sppb-col-sm-12';
         $subject_input_col = (isset($this->addon->settings->subject_input_col) && $this->addon->settings->subject_input_col) ? ' sppb-col-sm-' . $this->addon->settings->subject_input_col : 'sppb-col-sm-12';
+		$phone_input_col = (isset($this->addon->settings->phone_input_col) && $this->addon->settings->phone_input_col) ? ' sppb-col-sm-' . $this->addon->settings->phone_input_col : 'sppb-col-sm-12';
         $message_input_col = (isset($this->addon->settings->message_input_col) && $this->addon->settings->message_input_col) ? ' sppb-col-sm-' . $this->addon->settings->message_input_col : 'sppb-col-sm-12';
 
         $show_label = (isset($this->addon->settings->show_label) && $this->addon->settings->show_label) ? $this->addon->settings->show_label : false;
@@ -90,6 +92,15 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
         }
 		$output .= '<input type="email" name="email" class="sppb-form-control input-email" placeholder="'. JText::_('FLEX_ADDON_AJAX_CONTACT_EMAIL') .'" required="required">';
         $output .= '</div>';
+		
+		if ($show_phone) {
+			$output .= '<div class="sppb-form-group ' . $phone_input_col . '">';
+				if ($show_label) {
+					$output .= '<label for="phone">' . JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_PHONE') . '</label>';
+				}
+				$output .= '<input type="text" name="phone" class="sppb-form-control input-phone" placeholder="' . JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_PHONE') . '" required="required">';
+			$output .= '</div>';
+		}
 
         $output .= '<div class="sppb-form-group ' . $subject_input_col . '">';
         if ($show_label) {
@@ -155,7 +166,7 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
 
         $input = JFactory::getApplication()->input;
         $mail = JFactory::getMailer();
-
+		$message = '';
         $showcaptcha = false;
 
         //inputs
@@ -190,10 +201,16 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
             if ($input['name'] == 'subject') {
                 $subject = $input['value'];
             }
+			
+			if ($input['name'] == 'phone') {
+                $phone = $input['value'];
+                $message = JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_PHONE'). ': ' . $phone . '<br /> <br />' . JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_MESSAGE'). ': ';
+            }
 
             if ($input['name'] == 'message') {
-                $message = nl2br($input['value']);
+                $message .= nl2br($input['value']);
             }
+
 
             if ($input['name'] == 'captcha_question') {
                 $captcha_question = $input['value'];
@@ -243,6 +260,7 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
         $mail->isHTML(true);
         $mail->Encoding = 'base64';
         $mail->setBody($message);
+		
 
         if ($mail->Send()) {
             $output['status'] = true;
@@ -451,6 +469,15 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
 							<# } #>
 							<input type="email" name="email" class="sppb-form-control" placeholder="' . JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_EMAIL') . '" required="required">
 						</div>
+						
+						<# if(data.show_phone) { #>
+                            <div class="sppb-form-group col-sm-{{ data.phone_input_col || 12 }}">
+                                <# if(data.show_label){ #>
+                                    <label for="subject">' . JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_PHONE') . '</label>
+                                <# } #>
+                                <input type="text" name="phone" class="sppb-form-control" placeholder="' . JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_PHONE') . '" required="required">
+                            </div>
+                        <# } #>
 
 						<div class="sppb-form-group col-sm-{{ data.subject_input_col || 12 }}">
 							<# if(data.show_label){ #>

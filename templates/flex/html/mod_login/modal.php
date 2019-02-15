@@ -16,7 +16,7 @@ $user = JFactory::getUser();
 ?>
 <div class="modal-login-wrapper">
 	<span class="top-divider"></span>
-    <div class="ap-modal-login">
+    <div class="ap-modal-login" >
         <span class="ap-login">
             <a href="#" role="button" data-toggle="modal" data-target="#login">
                 <i class="pe pe-7s-user"></i>
@@ -27,7 +27,7 @@ $user = JFactory::getUser();
         </span>
     
         <!--Modal-->
-        <div id="login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="login" class="modal fade modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -37,15 +37,15 @@ $user = JFactory::getUser();
                     </div>
                     <div class="modal-body">
     
-                        <form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure')); ?>" method="post" id="login-form" >
+                        <form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure')); ?>" method="post" id="modal-login-form" >
                             <?php if ($params->get('pretext')): ?>
                                 <div class="pretext">
                                     <p><?php echo $params->get('pretext'); ?></p>
                                 </div>
                             <?php endif; ?>
                             <fieldset class="userdata">
-                                <input id="modlgn-username" placeholder="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME') ?>" type="text" name="username" class="input-block-level" required="required"  />
-                                <input id="modlgn-passwd" type="password" placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>" name="password" class="input-block-level" required="required" />
+                                <input id="modallgn-username" placeholder="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME') ?>" type="text" name="username" class="input-block-level" required="required"  />
+                                <input id="modallgn-passwd" type="password" placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>" name="password" class="input-block-level" required="required" />
                                 <?php if (count($twofactormethods) > 1) : ?>
                                 <!-- Secret Key -->
                                 <div class="clearfix"></div>
@@ -55,17 +55,17 @@ $user = JFactory::getUser();
                                             <div class="input-prepend input-append">
                                                 <span class="add-on">
                                                     <span class="fa fa-star"></span>
-                                                        <label for="modlgn-secretkey" class="hidden"><?php echo JText::_('JGLOBAL_SECRETKEY'); ?></label>
+                                                        <label for="modallgn-secretkey" class="hidden"><?php echo JText::_('JGLOBAL_SECRETKEY'); ?></label>
                                                 </span>
-                                                <input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" tabindex="0" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY'); ?>" />
+                                                <input id="modallgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" tabindex="0" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY'); ?>" />
                                                 <span class="add-on hasTooltip" title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
                                                     <span class="fa fa-question-circle"></span>
                                                 </span>
                                         </div>
                                         <?php else : ?>
                                         <div class="input-append">
-                                            <label for="modlgn-secretkey"><?php echo JText::_('JGLOBAL_SECRETKEY'); ?></label>
-                                            <input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" tabindex="0" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY'); ?>" />
+                                            <label for="modallgn-secretkey"><?php echo JText::_('JGLOBAL_SECRETKEY'); ?></label>
+                                            <input id="modallgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" tabindex="0" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY'); ?>" />
                                             <span class="add-on hasTooltip" title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
                                                 <span class="fa fa-question-circle"></span>
                                             </span>

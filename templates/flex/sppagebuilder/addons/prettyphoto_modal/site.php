@@ -3,16 +3,20 @@
  * Flex @package SP Page Builder
  * Template Name - Flex
  * @author Aplikko http://www.aplikko.com
- * @copyright Copyright (c) 2017 Aplikko
+ * @copyright Copyright (c) 2018 Aplikko
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 // no direct access
-defined ('_JEXEC') or die ('restricted aceess');
+defined ('_JEXEC') or die ('restricted access');
 
 class SppagebuilderAddonPrettyphoto_modal extends SppagebuilderAddons{
 
 	public function render() {
-
+		
+		// Include template's params
+		$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+		$has_lazyload = $tpl_params->get('lazyload', 1);
+		
 		$class = (isset($this->addon->settings->class) && $this->addon->settings->class) ? $this->addon->settings->class : '';
 		$title = (isset($this->addon->settings->title) && $this->addon->settings->title) ? $this->addon->settings->title : '';
 		$heading_selector = (isset($this->addon->settings->heading_selector) && $this->addon->settings->heading_selector) ? $this->addon->settings->heading_selector : 'h3';
@@ -78,8 +82,28 @@ class SppagebuilderAddonPrettyphoto_modal extends SppagebuilderAddons{
 		$output .= '<div class="' . $class . ' ' . $alignment . '">';
 
 		if($modal_selector=='image') {
-			$output .= ($selector_image) ? '<a class="sppb-modal-selector modal-selector-image" href="'. $url . '" id="'. $modal_unique_id .'"><img src="' . $selector_image . '" alt="'.$modal_selector.'"></a>' : '';
 			
+			if ($selector_image) {
+				
+				$output .= '<a class="sppb-modal-selector modal-selector-image" href="'. $url . '" id="'. $modal_unique_id .'">';
+				// Image
+				if(strpos($selector_image, 'http://') !== false || strpos($selector_image, 'https://') !== false){
+					/* Lazyload for images with absolute URL */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. $selector_image .'" alt="'.$modal_selector.'">';
+					} else {
+						$output .= '<img src="' . $selector_image . '" alt="'.$modal_selector.'">';	
+					}
+				} else {
+					/* Lazyload for images for relative URL (local image) */
+					if($has_lazyload) {
+						$output .= '<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'. JUri::root() . $selector_image .'" alt="'.$modal_selector.'">';
+					} else {
+						$output .= '<img src="' . $selector_image . '" alt="'.$modal_selector.'">';	
+					}
+				}
+				$output .= '</a>';
+			}
 		
 		
 		} else if ($modal_selector=='icon') {

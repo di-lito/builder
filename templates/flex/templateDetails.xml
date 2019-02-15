@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.5" type="template" client="site" method="upgrade">
     <name>Flex</name>
-    <creationDate>May 2018</creationDate>
+    <creationDate>December 2018</creationDate>
     <author>Aplikko.com</author>
     <authorEmail>aplikko@gmail.com</authorEmail>
     <authorUrl>http://www.aplikko.com</authorUrl>
     <copyright>Copyright (C) 2018 Aplikko.com. All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GPLv2 or later</license>
-    <version>3.0.2</version>
-    <description>Flex - Multipurpose Template from Aplikko. Version 3.0</description>
+    <version>3.5</version>
+    <description>Flex - Multipurpose Template from Aplikko. Version 3.5</description>
     <languages>
         <language tag="en-GB">en-GB.tpl_flex.ini</language>
     </languages>
@@ -75,6 +75,7 @@
         <folder>layout/</folder>
         <folder>less/</folder>
         <folder>sppagebuilder/</folder>
+		<folder>webfonts/</folder>
     </files>
     <config>
         <fields name="params">
@@ -338,6 +339,7 @@
 				<field name="sticky_logo" type="media" preview="true" label="FLEX_STICKY_LOGO" description="FLEX_STICKY_LOGO_DESC" showon="sticky_header:1" />
 				
 				<field name="sticky_appearance_animation" type="list" default="fade-in-down" label="FLEX_STICKY_HEADER_ANIMATION" description="FLEX_STICKY_HEADER_ANIMATION_DESC" showon="sticky_header:1">
+					<option value="none">FLEX_STICKY_HEADER_ANIMATION_NONE</option>
 					<option value="simple-fade">FLEX_STICKY_HEADER_ANIMATION_FADE</option>
                     <option value="fade-in-down">FLEX_STICKY_HEADER_ANIMATION_FADE_IN_DOWN</option>
                     <option value="header-in">FLEX_STICKY_HEADER_ANIMATION_HEADER_IN_3D</option>
@@ -349,6 +351,7 @@
 				<field name="stickybg" type="colorpicker" default="" label="FLEX_STICKY_HEADER_BG_COLOR" description="FLEX_STICKY_HEADER_BG_COLOR_DESC" showon="sticky_header:1" />
 				<field name="sticky_header_link_color" type="color" default="" label="FLEX_STICKY_HEADER_LINK_COLOR" description="FLEX_STICKY_HEADER_LINK_COLOR_DESC" showon="sticky_header:1" />
 				<field name="sticky_header_active_link_color" type="color" default="" label="FLEX_STICKY_HEADER_ACTIVE_LINK_COLOR" description="FLEX_STICKY_HEADER_ACTIVE_LINK_COLOR_DESC" showon="sticky_header:1" />
+				<field name="sticky_header_appear_point" type="number" default="250" label="FLEX_STICKY_HEADER_APPEAR_POINT" description="FLEX_STICKY_HEADER_APPEAR_POINT_DESC" min="1" max="1000" step="1" hint="250" showon="sticky_header:1" />
 			
 			</fieldset>
 
@@ -407,7 +410,9 @@
 
             <!--Start Font Tab-->
             <fieldset name="typography" addfieldpath="/plugins/system/helix3/fields">
-                <field type="group" title="Google Fonts List" />
+
+				<field type="group" title="HELIX_GOOGLE_FONTS_LIST" subtitle="HELIX_GOOGLE_FONTS_LIST_DESC"/>
+                <field name="gfont_api" type="text" class="parent" label="HELIX_GFONT_API" description="HELIX_GFONT_API_DESC" />
                 <field name="update_fonts" type="button" url="#" text="HELIX_UPDATE_FONTS_CLICK" label="HELIX_UPDATE_FONTS_LIST" description="HELIX_UPDATE_FONTS_LIST_DESC" class="btn-primary btn-update-fonts-list" />
                 
                 <field type="group" title="HELIX_BODY_FONT" subtitle="HELIX_BODY_FONT_DESC" />
@@ -508,6 +513,12 @@
 
                 <field type="group" title="HELIX_LESS"  />
                 <field name="lessoption" type="radio" default="1" label="HELIX_ENABLE_LESS" description="HELIX_ENABLE_LESS_DESC">
+                    <option value="1">HELIX_YES</option>
+                    <option value="0">HELIX_NO</option>
+                </field>
+				
+				<field type="group" title="FLEX_LAZYLOAD_IMAGES"  />
+                <field name="lazyload" type="radio" default="1" label="FLEX_LAZYLOAD_IMAGES_LABEL" description="FLEX_LAZYLOAD_IMAGES_DESC">
                     <option value="1">HELIX_YES</option>
                     <option value="0">HELIX_NO</option>
                 </field>

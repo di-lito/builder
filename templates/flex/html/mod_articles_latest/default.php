@@ -9,6 +9,10 @@
 
 defined('_JEXEC') or die;
 
+// Include template's params
+$tpl_params 	= JFactory::getApplication()->getTemplate(true)->params;
+$has_lazyload = $tpl_params->get('lazyload', 1);
+
 ?>
 <div class="latest-articles<?php echo $moduleclass_sfx; ?>">
 <?php foreach ($list as $item) {
@@ -37,7 +41,20 @@ defined('_JEXEC') or die;
 			<?php if (!empty($thumb_image)) {?>
                 <span class="img-responsive article-list-img">
                     <span class="overlay"></span>
-                    <img src="<?php echo $thumb_image; ?>" alt="<?php echo $item->title; ?>">
+                    <?php 
+					if(strpos($thumb_image, 'http://') !== false || strpos($thumb_image, 'https://') !== false){
+						if($has_lazyload) { ?>
+                        	<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $thumb_image; ?>" alt="<?php echo $item->title; ?>" data-expand="-20">
+                    	<?php } else { ?>
+                        	<img src="<?php echo $thumb_image; ?>" alt="<?php echo $item->title; ?>">
+                        <?php } 
+						} else { 
+                        if($has_lazyload) { ?>
+                        	<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo JUri::root() . $thumb_image; ?>" alt="<?php echo $item->title; ?>" data-expand="-20">
+                    	<?php } else { ?>
+                        	<img src="<?php echo $thumb_image; ?>" alt="<?php echo $item->title; ?>">
+                        <?php }
+						} ?>  
                 </span>
                 <span class="latest-articles-title" itemprop="name">
 					<?php echo $item->title; ?>

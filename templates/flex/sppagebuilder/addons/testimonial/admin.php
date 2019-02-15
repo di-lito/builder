@@ -248,21 +248,6 @@ SpAddonsConfig::addonConfig(
 						array('show_avatar', '=', 1)
 					)
 				),
-				/*
-				'avatar_shape'=>array(
-					'type'=>'select',
-					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_AVATAR_SHAPE'),
-					'values' =>array(
-						'sppb-avatar-sqaure'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_SQUARE'),
-						'sppb-avatar-round'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_ROUNDED'),
-						'sppb-avatar-circle'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_CIRCLE'),
-					),
-					'std' => 'sppb-avatar-circle',
-					'depends'=>array(
-						array('show_avatar', '=', 1)
-					)
-				),
-				*/
 				
 				'link'=>array(
 					'type'=>'text', 
@@ -305,6 +290,62 @@ SpAddonsConfig::addonConfig(
 					),
 					'std'=>'left',
 				),
+				
+				// Rating
+				'rating_separator'=>array(
+					'type'=>'separator',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_RATING_OPTIONS'),
+				),
+				'client_rating_enable'=>array(
+					'type'=>'checkbox',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_RATING_ENABLE'),
+					'std'=>0
+				),
+				'client_rating'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_RATING'),
+					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_RATING_DESC'),
+					'depends'=>array(
+						array('client_rating_enable', '=', 1),
+					),
+					'max'=>5,
+					'min'=>1,
+					'std'=>5,
+				),
+				'client_rating_color'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_RATING_COLOR'),
+					'depends'=>array(
+						array('client_rating_enable', '=', 1),
+					),
+					'std'=>''
+				),
+				'client_unrated_color'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_UNRATED_COLOR'),
+					'depends'=>array(
+						array('client_rating_enable', '=', 1),
+					),
+					'std'=>''
+				),
+				'client_rating_fontsize'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_RATING_FONTSIZE'),
+					'depends'=>array(
+						array('client_rating_enable', '=', 1),
+					),
+					'responsive'=>true,
+					'std'=>array('md'=>14),
+				),
+				'client_rating_margin'=>array(
+					'type'=>'margin',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TESTIMONIAL_CLIENT_RATING_MARGIN'),
+					'depends'=>array(
+						array('client_rating_enable', '=', 1),
+					),
+					'responsive'=>true,
+					'std'=>'20px 0px 10px 0px',
+				),
 
 				'class'=>array(
 					'type'=>'text',
@@ -312,7 +353,6 @@ SpAddonsConfig::addonConfig(
 					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_CLASS_DESC'),
 					'std'=>''
 				),
-
 			),
 		),
 	)
