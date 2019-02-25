@@ -966,7 +966,7 @@ SpAddonsConfig::addonConfig(
 						'' => JText::_('COM_SPPAGEBUILDER_ADDON_GLOBAL_TARGET_SAME_WINDOW'),
 						'_blank' => JText::_('COM_SPPAGEBUILDER_ADDON_GLOBAL_TARGET_NEW_WINDOW'),
 					),
-					'depends' => array(array('url', '!=', '')),
+					'depends' => array(array('btn_url', '!=', '')),
 				),
 				'btn_type' => array(
 					'type' => 'select',

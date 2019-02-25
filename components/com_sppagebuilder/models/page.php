@@ -320,7 +320,7 @@ class SppagebuilderModelPage extends JModelItem
 				$item->preview = $sefURI;
 
 				// Frontend Editing URL
-				$front_link = 'index.php?option=com_sppagebuilder&view=form&tmpl=componenet&layout=edit&id=' . $item->id . $Itemid;
+				$front_link = 'index.php?option=com_sppagebuilder&view=form&tmpl=component&layout=edit&id=' . $item->id . $Itemid;
 				$sefURI = str_replace('/administrator', '', $siteRouter->build($front_link));
 				if($lang_code && $lang_code !== '*' && $enable_lang_filter && $conf->get('sef') ){
 					$sefURI = str_replace('/index.php/', '/index.php/' . $lang_code . '/', $sefURI);

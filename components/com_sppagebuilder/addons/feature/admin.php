@@ -412,7 +412,7 @@ SpAddonsConfig::addonConfig(
 
 				'global_separator'=>array(
 					'type'=>'separator',
-					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_FEATURE_BOX_GLOBAL_AND_OVER_OPTIONS'),
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_GLOBAL_HOVER_OPTIONS'),
 				),
 				'addon_hover_bg'=>array(
 					'type'=>'color',

@@ -411,22 +411,25 @@ class SpPgaeBuilderBase {
 				$sppbOneAddon = true;
 				if($options['type'] == 'repeatable'){
 					$default[$key] = self::repeatableFieldVal($options['attr']);
-				} else if ( isset( $options['std'] ) ) {
+				}else if ( isset( $options['std'] ) ) {
 					$default[$key] = $options['std'];
 				}
 			} else {
 				foreach ( $options as $key => $option ) {
-					if ( isset( $option['attr'] ) ) {
+					if ( isset( $option['std'] ) ) {
+						$default[$key] = $option['std'];
+					} else if( isset( $option['attr'] ) ) {
 						$default[$key] = self::repeatableFieldVal($option['attr']);
-					} else {
+					}else {
 						if ( isset( $option['std'] ) ) {
 							$default[$key] = $option['std'];
 						}
 					}
 				}
 			}
+			
 		}
-
+		
 		$newAddonAttr = array();
 
 		$newAddonAttr['default'] = $default;
@@ -449,6 +452,7 @@ class SpPgaeBuilderBase {
                 }
             }
 		}
+	
 		return $redefault;
 	}
 

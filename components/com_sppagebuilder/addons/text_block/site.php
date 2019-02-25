@@ -132,7 +132,9 @@ class SppagebuilderAddonText_block extends SppagebuilderAddons {
 			}
 		</style>
 		<div class="sppb-addon sppb-addon-text-block {{ dropcap }} {{ data.alignment }} {{ data.class }}">
-			<# if( !_.isEmpty( data.title ) ){ #><{{ data.heading_selector }} class="sppb-addon-title sp-inline-editable-element" data-id={{data.id}} data-fieldName="title" contenteditable="true">{{{ data.title }}}</{{ data.heading_selector }}><# } #>
+			<#
+			let heading_selector = data.heading_selector || "h3";
+			if( !_.isEmpty( data.title ) ){ #><{{ heading_selector }} class="sppb-addon-title sp-inline-editable-element" data-id={{data.id}} data-fieldName="title" contenteditable="true">{{{ data.title }}}</{{ heading_selector }}><# } #>
 			<div id="addon-text-{{data.id}}" class="sppb-addon-content sp-editable-content" data-id={{data.id}} data-fieldName="text">{{{ data.text }}}</div>
 		</div>';
 		return $output;

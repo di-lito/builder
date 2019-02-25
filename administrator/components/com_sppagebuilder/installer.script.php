@@ -304,7 +304,7 @@ class com_sppagebuilderInstallerScript
             </div> <!-- /.sppb-installation-left -->
             <div class="sppb-installation-right span8">
                 <div class="sppb-installation-texts">
-                    <h2>SP Page Builder Pro <span>Version: 3.4.3</span></h2>
+                    <h2>SP Page Builder Pro <span>Version: 3.4.4</span></h2>
                     <p>Trusted by <strong>400,000+</strong> people worldwide, SP Page Builder is an extremely powerful drag &amp; drop design system.<br/>Whether you're a beginner or a professional, you must love taking control over your website design.</p>
                     <p>With SP Page Builder, you can build a unique, stunning and functional site without coding a single line.<br/>Using the tool, anyone can build a professional quality site in minutes.</p>
                     <div class="sppb-installation-jed">

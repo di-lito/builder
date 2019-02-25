@@ -216,7 +216,7 @@ class SppagebuilderModelPages extends JModelList
 				$item->preview = $sefURI;
 
 				// Frontend Editing URL
-				$front_link = 'index.php?option=com_sppagebuilder&view=form&tmpl=componenet&layout=edit&id=' . $item->id;
+				$front_link = 'index.php?option=com_sppagebuilder&view=form&tmpl=component&layout=edit&id=' . $item->id;
 				if ($item->language && $item->language !== '*' && JLanguageMultilang::isEnabled()) {
 					$front_link .= '&lang=' . $item->language;
 				}

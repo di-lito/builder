@@ -23,6 +23,9 @@ if(isset($options->xs_col) && $options->xs_col) {
 }
 //Column order
 $column_order = '';
+if(isset($options->tablet_order) && $options->tablet_order) {
+	$column_order .= ' sppb-order-sm-'.$options->tablet_order;
+}
 if(isset($options->mobile_order) && $options->mobile_order) {
 	$column_order .= ' sppb-order-xs-'.$options->mobile_order;
 }

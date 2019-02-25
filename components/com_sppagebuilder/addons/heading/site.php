@@ -228,12 +228,15 @@ class SppagebuilderAddonHeading extends SppagebuilderAddons {
             }
         </style>
         <div class="sppb-addon sppb-addon-header {{ data.class }} {{ data.alignment }}">
-            <# if(data.use_link && data.title_link){ #><a {{ link_target }} href=\'{{ data.title_link }}\'><# } #>
-                <{{ data.heading_selector }} class="sppb-addon-title">
+            <#
+            let heading_selector = data.heading_selector || "h2";
+            if(data.use_link && data.title_link){ #><a {{ link_target }} href=\'{{ data.title_link }}\'><# }
+            #>
+                <{{ heading_selector }} class="sppb-addon-title">
                 <# if(data.title_icon && data.title_icon_position == "before"){ #><span class="fa {{ data.title_icon }} sppb-addon-title-icon"></span> <# } #>
                 <span class="sp-inline-editable-element" data-id={{data.id}} data-fieldName="title" contenteditable="true">{{{ data.title }}}</span>
                 <# if(data.title_icon && data.title_icon_position == "after"){ #> <span class="fa {{ data.title_icon }} sppb-addon-title-icon"></span><# } #>
-                </{{ data.heading_selector }}>
+                </{{ heading_selector }}>
             <# if(data.use_link && data.title_link){ #></a><# } #>
         </div>
         ';

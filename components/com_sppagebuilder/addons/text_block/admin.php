@@ -44,6 +44,9 @@ SpAddonsConfig::addonConfig(
 						'h4'=>JText::_('COM_SPPAGEBUILDER_ADDON_HEADINGS_H4'),
 						'h5'=>JText::_('COM_SPPAGEBUILDER_ADDON_HEADINGS_H5'),
 						'h6'=>JText::_('COM_SPPAGEBUILDER_ADDON_HEADINGS_H6'),
+						'p'=>	'p',
+						'span'=> 'span',
+						'div'=> 'div'
 					),
 					'std'=>'h3',
 					'depends'=>array(array('title', '!=', '')),

@@ -2,7 +2,7 @@
 /**
  * @package SP Page Builder
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2016 JoomShaper
+ * @copyright Copyright (c) 2010 - 2019 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct accees
@@ -291,32 +291,34 @@ abstract class SppagebuilderHelperArticles
 					}
 					
 					$gallery_images = array();
-					foreach ($gallery_all_images as $key=>$value) {
-						$gallery_images[$key]['full'] = $value;
-						$gallery_img_baseurl = basename($value);
+					if(isset($gallery_all_images) && is_array($gallery_all_images)){
+						foreach ($gallery_all_images as $key=>$value) {
+							$gallery_images[$key]['full'] = $value;
+							$gallery_img_baseurl = basename($value);
 
-						//Small
-						$small = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_small.' . JFile::getExt($gallery_img_baseurl);
-						if(file_exists($small)) {
-							$gallery_images[$key]['small'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_small.' . JFile::getExt($gallery_img_baseurl);
-						}
+							//Small
+							$small = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_small.' . JFile::getExt($gallery_img_baseurl);
+							if(file_exists($small)) {
+								$gallery_images[$key]['small'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_small.' . JFile::getExt($gallery_img_baseurl);
+							}
 
-						//Thumbnail
-						$thumbnail = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_thumbnail.' . JFile::getExt($gallery_img_baseurl);
-						if(file_exists($thumbnail)) {
-							$gallery_images[$key]['thumbnail'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_thumbnail.' . JFile::getExt($gallery_img_baseurl);
-						}
+							//Thumbnail
+							$thumbnail = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_thumbnail.' . JFile::getExt($gallery_img_baseurl);
+							if(file_exists($thumbnail)) {
+								$gallery_images[$key]['thumbnail'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_thumbnail.' . JFile::getExt($gallery_img_baseurl);
+							}
 
-						//Medium
-						$medium = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_medium.' . JFile::getExt($gallery_img_baseurl);
-						if(file_exists($medium)) {
-							$gallery_images[$key]['medium'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_medium.' . JFile::getExt($gallery_img_baseurl);
-						}
+							//Medium
+							$medium = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_medium.' . JFile::getExt($gallery_img_baseurl);
+							if(file_exists($medium)) {
+								$gallery_images[$key]['medium'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_medium.' . JFile::getExt($gallery_img_baseurl);
+							}
 
-						//Large
-						$large = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_large.' . JFile::getExt($gallery_img_baseurl);
-						if(file_exists($large)) {
-							$gallery_images[$key]['large'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_large.' . JFile::getExt($gallery_img_baseurl);
+							//Large
+							$large = JPATH_ROOT . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) .  '_large.' . JFile::getExt($gallery_img_baseurl);
+							if(file_exists($large)) {
+								$gallery_images[$key]['large'] = JURI::root(true) . '/' . dirname($value) . '/' . JFile::stripExt($gallery_img_baseurl) . '_large.' . JFile::getExt($gallery_img_baseurl);
+							}
 						}
 					}
 

@@ -178,11 +178,11 @@ array(
 						'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_ACCORDION_TITLE_DESC'),
 						'std'=>'Accordion Title',
 					),
-					'icon'		=>	array(
+					'icon' => array(
 						'type'	=>	'icon',
 						'title'	=>	JText::_('COM_SPPAGEBUILDER_ADDON_ACCORDION_ICON'),
 						'desc'	=>	JText::_('COM_SPPAGEBUILDER_ADDON_ACCORDION_ICON_DESC'),
-						'std'		=> 	''
+						'std'	=> 	''
 					),
 					'content'	=>	array(
 						'type'	=>	'builder',

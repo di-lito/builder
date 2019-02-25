@@ -211,7 +211,7 @@ class SppagebuilderControllerPage extends JControllerForm {
 				}
 
 				// Frontend Editing URL
-				$front_link = 'index.php?option=com_sppagebuilder&view=form&tmpl=componenet&layout=edit&id=' . $recordId . $Itemid;
+				$front_link = 'index.php?option=com_sppagebuilder&view=form&tmpl=component&layout=edit&id=' . $recordId . $Itemid;
 				$output['frontend_editor_url'] = str_replace('/administrator', '', $siteRouter->build($front_link));
 				if($lang_code && $lang_code !== '*' ){
 					$output['frontend_editor_url'] = str_replace('/index.php/', '/index.php/' . $lang_code . '/', $output['frontend_editor_url']);
