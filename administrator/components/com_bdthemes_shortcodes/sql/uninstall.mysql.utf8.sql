@@ -1,1 +1,0 @@
-DROP TABLE IF EXISTS `#__shortcode_file_download`;
