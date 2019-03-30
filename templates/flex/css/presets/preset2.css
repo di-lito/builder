@@ -1148,13 +1148,17 @@ blockquote {
   border: 2px solid rgba(0,0,0,0.2);
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
+.entry-header h1 a,
 .entry-header h2 a {
   color: #000000;
 }
+.entry-header h1 a:hover,
+.entry-header h1 a:focus,
 .entry-header h2 a:hover,
 .entry-header h2 a:focus {
   color: #fca224;
 }
+.entry-header h1:after,
 .entry-header h2:after {
   background: #fdb756;
 }
@@ -1274,6 +1278,12 @@ ul.site-list li i {
 .sppb-nav-pills >li.active >a >i {
   color: #fca224;
 }
+.sppb-addon-testimonial .sppb-addon-testimonial-rating i.fa-star {
+  color: #fdb756;
+}
+.sppb-addon-testimonial .sppb-addon-testimonial-rating i.fa-star-o {
+  color: #c0c0c0;
+}
 .pro-client-url {
   color: #fca224;
 }
@@ -1367,21 +1377,41 @@ ul.site-list li i {
   border: 1px solid #fcad3d;
   box-shadow: 0 0 5px rgba(252,162,36,0.3);
 }
+.sppb-addon-ajax-contact.dark .sppb-form-group label {
+  color: #ddd;
+  color: rgba(255,255,255,0.65);
+}
+.sppb-addon-ajax-contact.dark .sppb-form-control label {
+  color: #ddd;
+  color: rgba(255,255,255,0.65);
+}
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder] {
-  color: #a5a5a5;
-  color: rgba(255,255,255,0.85);
+  color: #f0f0f0;
   border: 1px solid #999;
   border: 1px solid rgba(200,200,200,0.8);
   background: transparent;
 }
+.sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]::-moz-placeholder {
+  color: rgba(255,255,255,0.65);
+}
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]::-webkit-input-placeholder {
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.65);
 }
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]::-webkit-input-placeholder:before {
   color: #fdbc60;
 }
 .sppb-addon-ajax-contact.dark .sppb-form-control[placeholder]:focus {
   border: 1px solid #fdc26f;
+}
+.sppb-addon-ajax-contact.dark .tos label {
+  color: #ddd;
+  color: rgba(255,255,255,0.65);
+}
+.sppb-addon-ajax-contact.dark .tos label a {
+  color: #fdc26f;
+}
+.sppb-addon-ajax-contact.dark .tos label a:hover {
+  color: #fed7a2;
 }
 .dark .acymailing_form input.inputbox {
   color: #fdc67a;
@@ -1454,7 +1484,7 @@ ul.site-list li i {
   background-color: #f99303;
 }
 .no-touch .cd-customization .add-to-cart:hover {
-  background-color: darker(#fca224,7%);
+  background-color: #f99303;
 }
 .productdetails-view .vm-product-details-inner .product-price .vm-price-desc+span {
   color: #fca224;

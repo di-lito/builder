@@ -1,4 +1,4 @@
-a:4:{s:4:"root";s:54:"W:\domains\builder.loc\templates/flex/less/master.less";s:8:"compiled";s:394495:".form-control {
+a:4:{s:4:"root";s:54:"W:\domains\builder.loc\templates/flex/less/master.less";s:8:"compiled";s:395315:".form-control {
   display: block;
   height: 34px;
   padding: 6px 12px;
@@ -2213,6 +2213,8 @@ dl.article-info dd.hits span[class*=" icon-"] {
   visibility: visible;
   z-index: 9999;
   right: 0;
+  position: fixed;
+  height: 100%;
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
@@ -5461,6 +5463,47 @@ a#scroll-top:hover >i {
 }
 .dark .acymailing_form input.inputbox {
   opacity: .8;
+}
+.dark .acym_module_form input.cell {
+  background: transparent;
+}
+.acym_module_form {
+  position: relative;
+}
+.acym_module_form input.cell {
+  width: 100%;
+  background: transparent;
+}
+.acym_module_form .btn {
+  margin: 0 auto;
+}
+.acym_module_form .acysubbuttons-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: yellow;
+}
+.acym_module_form .acysubbuttons-icon input.icon_button_subscribe {
+  padding: 0;
+  border: none;
+  width: 44px;
+  height: 34px;
+  line-height: 44px;
+}
+.acym_module_form .acysubbuttons-icon::before {
+  content: "\e639";
+  font-family: "peIcon7";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42px;
+  height: 34px;
+  line-height: 34px;
+  font-size: 110%;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  border-radius: 0 4px 4px 0;
 }
 #system-message-container .alert-error {
   color: #a94442;
@@ -8855,6 +8898,11 @@ a[href*="//maps.google.com/maps"],
 }
 .sppb-addon-timeline .sppb-addon-timeline-wrapper .timeline-item .timeline-panel.left-part:before {
   top: 34px;
+}
+.sppb-form-builder-range-output {
+  top: -26px;
+  line-height: 21px;
+  padding: 0;
 }
 .animated_headlines .before-text {
   margin-right: .1em;
@@ -14611,8 +14659,9 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
     padding: 15px 35px;
   }
   #sp-top2 {
-    width: 100%;
-    margin: 0 auto;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
     display: -webkit-box;
     display: -moz-box;
     display: -webkit-flex;
@@ -14630,7 +14679,8 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
   }
   #sp-top2 ul {
     width: auto;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   #sp-addspace-logo #sp-logo,
   #sp-addspace-logo #sp-addspace {
@@ -14642,8 +14692,6 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
   .addspace .sp-column,
   .centered .sp-column {
     text-align: center;
-    margin: 0 auto;
-    padding: 0;
   }
   .addspace .sp-column >div,
   .centered .sp-column >div {
@@ -14708,10 +14756,6 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
     position: inherit;
     width: 100%;
     min-height: 350px;
-  }
-  .sppb-addon-image-content .sppb-col-sm-6,
-  .sppb-addon-image-content .col-sm-6 {
-    width: 100%;
   }
   .com-sppagebuilder #sp-main-body #sp-left,
   .com-sppagebuilder #sp-main-body #sp-right {
@@ -15414,4 +15458,4 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
-";s:5:"files";a:26:{s:64:"W:\domains\builder.loc\templates\flex\less\legacy\bootstrap.less";i:1553194403;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\variables.less";i:1553194403;s:61:"W:\domains\builder.loc\templates\flex\less\legacy\mixins.less";i:1553194403;s:59:"W:\domains\builder.loc\templates\flex\less\legacy\grid.less";i:1553194403;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\forms.less";i:1553194403;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\wells.less";i:1553194403;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\accordion.less";i:1553194403;s:82:"W:\domains\builder.loc\templates\flex\less\legacy\responsive-767px-max.joomla.less";i:1553194403;s:54:"W:\domains\builder.loc\templates\flex\less\master.less";i:1553194403;s:57:"W:\domains\builder.loc\templates\flex\less\variables.less";i:1553194403;s:54:"W:\domains\builder.loc\templates\flex\less\mixins.less";i:1553194403;s:55:"W:\domains\builder.loc\templates\flex\less\icomoon.less";i:1553194403;s:57:"W:\domains\builder.loc\templates\flex\less\ap-arrows.less";i:1553194403;s:55:"W:\domains\builder.loc\templates\flex\less\pe-icon.less";i:1553194403;s:52:"W:\domains\builder.loc\templates\flex\less\menu.less";i:1553194403;s:53:"W:\domains\builder.loc\templates\flex\less\theme.less";i:1553194403;s:59:"W:\domains\builder.loc\templates\flex\less\pagebuilder.less";i:1553194403;s:55:"W:\domains\builder.loc\templates\flex\less\headers.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\pagination.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\typography.less";i:1553194403;s:59:"W:\domains\builder.loc\templates\flex\less\lightslider.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\virtuemart.less";i:1553194403;s:56:"W:\domains\builder.loc\templates\flex\less\svg-logo.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\responsive.less";i:1553194403;s:67:"W:\domains\builder.loc\templates\flex\less\ajax-intro-articles.less";i:1553194403;s:61:"W:\domains\builder.loc\templates\flex\less\sticky-header.less";i:1553194403;}s:7:"updated";i:1553194631;}
+";s:5:"files";a:26:{s:64:"W:\domains\builder.loc\templates\flex\less\legacy\bootstrap.less";i:1553972240;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\variables.less";i:1553972240;s:61:"W:\domains\builder.loc\templates\flex\less\legacy\mixins.less";i:1553972240;s:59:"W:\domains\builder.loc\templates\flex\less\legacy\grid.less";i:1553972240;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\forms.less";i:1553972240;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\wells.less";i:1553972240;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\accordion.less";i:1553972240;s:82:"W:\domains\builder.loc\templates\flex\less\legacy\responsive-767px-max.joomla.less";i:1553972240;s:54:"W:\domains\builder.loc\templates\flex\less\master.less";i:1553972240;s:57:"W:\domains\builder.loc\templates\flex\less\variables.less";i:1553972240;s:54:"W:\domains\builder.loc\templates\flex\less\mixins.less";i:1553972240;s:55:"W:\domains\builder.loc\templates\flex\less\icomoon.less";i:1553972240;s:57:"W:\domains\builder.loc\templates\flex\less\ap-arrows.less";i:1553972240;s:55:"W:\domains\builder.loc\templates\flex\less\pe-icon.less";i:1553972240;s:52:"W:\domains\builder.loc\templates\flex\less\menu.less";i:1553972240;s:53:"W:\domains\builder.loc\templates\flex\less\theme.less";i:1553972240;s:59:"W:\domains\builder.loc\templates\flex\less\pagebuilder.less";i:1553972240;s:55:"W:\domains\builder.loc\templates\flex\less\headers.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\pagination.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\typography.less";i:1553972240;s:59:"W:\domains\builder.loc\templates\flex\less\lightslider.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\virtuemart.less";i:1553972240;s:56:"W:\domains\builder.loc\templates\flex\less\svg-logo.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\responsive.less";i:1553972240;s:67:"W:\domains\builder.loc\templates\flex\less\ajax-intro-articles.less";i:1553972240;s:61:"W:\domains\builder.loc\templates\flex\less\sticky-header.less";i:1553972240;}s:7:"updated";i:1553972317;}

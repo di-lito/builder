@@ -2619,6 +2619,59 @@ a#scroll-top {
 			opacity:.8;
 		}
 	}
+	.acym_module_form {
+		input.cell {
+			background:transparent;
+		}
+	}
+}
+
+/* Acymailing Module (from version 6.x) */
+.acym_module_form {
+	
+	position:relative;
+	
+	input.cell {
+		width:100%;
+		background:transparent;
+	}
+	
+	.btn {
+		margin:0 auto;
+	}
+	
+	.acysubbuttons-icon {	
+		position:absolute;
+		top:0;
+		right:0;
+		color:yellow;
+		
+		
+		input.icon_button_subscribe {
+			padding:0;
+			border:none;
+			width:44px;
+			height:34px;
+			line-height:44px;
+		}
+	
+		&::before{
+			content:"\e639";
+			font-family: "peIcon7";
+			position:absolute;
+			top:0;
+			right:0;
+			width:42px;
+			height:34px;
+			line-height:34px;
+			font-size:110%;
+			text-align:center;
+			color:#fff;
+			pointer-events:none;
+			border-radius:0 4px 4px 0;
+			
+		}	
+	}	
 }
 
 	

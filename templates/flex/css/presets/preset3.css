@@ -331,7 +331,7 @@ a:hover {
   color: #f0e95b;
 }
 .sp-pre-loader {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.64);
 }
 .sp-pre-loader .sp-loader-clock {
   border: 3px solid #333333;

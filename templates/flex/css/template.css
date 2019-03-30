@@ -2213,6 +2213,8 @@ dl.article-info dd.hits span[class*=" icon-"] {
   visibility: visible;
   z-index: 9999;
   right: 0;
+  position: fixed;
+  height: 100%;
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
@@ -5461,6 +5463,47 @@ a#scroll-top:hover >i {
 }
 .dark .acymailing_form input.inputbox {
   opacity: .8;
+}
+.dark .acym_module_form input.cell {
+  background: transparent;
+}
+.acym_module_form {
+  position: relative;
+}
+.acym_module_form input.cell {
+  width: 100%;
+  background: transparent;
+}
+.acym_module_form .btn {
+  margin: 0 auto;
+}
+.acym_module_form .acysubbuttons-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: yellow;
+}
+.acym_module_form .acysubbuttons-icon input.icon_button_subscribe {
+  padding: 0;
+  border: none;
+  width: 44px;
+  height: 34px;
+  line-height: 44px;
+}
+.acym_module_form .acysubbuttons-icon::before {
+  content: "\e639";
+  font-family: "peIcon7";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42px;
+  height: 34px;
+  line-height: 34px;
+  font-size: 110%;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  border-radius: 0 4px 4px 0;
 }
 #system-message-container .alert-error {
   color: #a94442;
@@ -8855,6 +8898,11 @@ a[href*="//maps.google.com/maps"],
 }
 .sppb-addon-timeline .sppb-addon-timeline-wrapper .timeline-item .timeline-panel.left-part:before {
   top: 34px;
+}
+.sppb-form-builder-range-output {
+  top: -26px;
+  line-height: 21px;
+  padding: 0;
 }
 .animated_headlines .before-text {
   margin-right: .1em;
@@ -14611,8 +14659,9 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
     padding: 15px 35px;
   }
   #sp-top2 {
-    width: 100%;
-    margin: 0 auto;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
     display: -webkit-box;
     display: -moz-box;
     display: -webkit-flex;
@@ -14630,7 +14679,8 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
   }
   #sp-top2 ul {
     width: auto;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   #sp-addspace-logo #sp-logo,
   #sp-addspace-logo #sp-addspace {
@@ -14642,8 +14692,6 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
   .addspace .sp-column,
   .centered .sp-column {
     text-align: center;
-    margin: 0 auto;
-    padding: 0;
   }
   .addspace .sp-column >div,
   .centered .sp-column >div {
@@ -14708,10 +14756,6 @@ svg.flex-logo-default.delayed g#flex_after path#f_top {
     position: inherit;
     width: 100%;
     min-height: 350px;
-  }
-  .sppb-addon-image-content .sppb-col-sm-6,
-  .sppb-addon-image-content .col-sm-6 {
-    width: 100%;
   }
   .com-sppagebuilder #sp-main-body #sp-left,
   .com-sppagebuilder #sp-main-body #sp-right {

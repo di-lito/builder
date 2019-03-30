@@ -1,4 +1,4 @@
-a:4:{s:4:"root";s:55:"W:\domains\builder.loc\templates/flex/less/presets.less";s:8:"compiled";s:47646:".major_color_bckg-100 {
+a:4:{s:4:"root";s:55:"W:\domains\builder.loc\templates/flex/less/presets.less";s:8:"compiled";s:48275:".major_color_bckg-100 {
   background-color: #f14833;
 }
 .major_color_bckg-90 {
@@ -1413,10 +1413,19 @@ ul.site-list li i {
 .sppb-addon-ajax-contact.dark .tos label a:hover {
   color: #f9b3aa;
 }
-.dark .acymailing_form input.inputbox {
+.acym_module_form .acysubbuttons-icon::before {
+  background: #f14833;
+}
+.dark .acymailing_form .acysubbuttons {
   color: #f79184;
 }
-.dark .acymailing_form input.inputbox:focus {
+.dark .acymailing_form .acysubbuttons:focus {
+  border: 1px solid #f6887b;
+}
+.dark .acym_module_form input.cell {
+  color: #fbc8c2;
+}
+.dark .acym_module_form input.cell:focus {
   border: 1px solid #f6887b;
 }
 .sppb-addon-timeline .sppb-addon-timeline-wrapper:before {
@@ -1427,6 +1436,17 @@ ul.site-list li i {
 }
 .sppb-addon-timeline .sppb-addon-timeline-wrapper .timeline-badge:after {
   background-color: #f89e92 !important;
+}
+.form-builder-checkbox-item label::before,
+.form-builder-radio-item label::before,
+.sppb-addon-form-builder .sppb-form-check-label::before {
+  border: 2px solid #f6887b;
+}
+.form-builder-checkbox-item input:checked+label::before,
+.form-builder-radio-item input:checked+label::before,
+.sppb-addon-form-builder .sppb-form-check-input:checked+label::before {
+  background: #f35d4b;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
 .error-page .error-page-inner >div.container .btn-error {
   background: #f35d4b;
@@ -1707,4 +1727,4 @@ header.color .vm-menu ul.productdetails:last-child li {
     stroke: #f14833;
   }
 }
-";s:5:"files";a:27:{s:64:"W:\domains\builder.loc\templates\flex\less\legacy\bootstrap.less";i:1553194403;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\variables.less";i:1553194403;s:61:"W:\domains\builder.loc\templates\flex\less\legacy\mixins.less";i:1553194403;s:59:"W:\domains\builder.loc\templates\flex\less\legacy\grid.less";i:1553194403;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\forms.less";i:1553194403;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\wells.less";i:1553194403;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\accordion.less";i:1553194403;s:82:"W:\domains\builder.loc\templates\flex\less\legacy\responsive-767px-max.joomla.less";i:1553194403;s:54:"W:\domains\builder.loc\templates\flex\less\master.less";i:1553194403;s:57:"W:\domains\builder.loc\templates\flex\less\variables.less";i:1553194403;s:54:"W:\domains\builder.loc\templates\flex\less\mixins.less";i:1553194403;s:55:"W:\domains\builder.loc\templates\flex\less\icomoon.less";i:1553194403;s:57:"W:\domains\builder.loc\templates\flex\less\ap-arrows.less";i:1553194403;s:55:"W:\domains\builder.loc\templates\flex\less\pe-icon.less";i:1553194403;s:52:"W:\domains\builder.loc\templates\flex\less\menu.less";i:1553194403;s:53:"W:\domains\builder.loc\templates\flex\less\theme.less";i:1553194403;s:59:"W:\domains\builder.loc\templates\flex\less\pagebuilder.less";i:1553194403;s:55:"W:\domains\builder.loc\templates\flex\less\headers.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\pagination.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\typography.less";i:1553194403;s:59:"W:\domains\builder.loc\templates\flex\less\lightslider.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\virtuemart.less";i:1553194403;s:56:"W:\domains\builder.loc\templates\flex\less\svg-logo.less";i:1553194403;s:58:"W:\domains\builder.loc\templates\flex\less\responsive.less";i:1553194403;s:67:"W:\domains\builder.loc\templates\flex\less\ajax-intro-articles.less";i:1553194403;s:61:"W:\domains\builder.loc\templates\flex\less\sticky-header.less";i:1553194403;s:55:"W:\domains\builder.loc\templates\flex\less\presets.less";i:1553194403;}s:7:"updated";i:1553194631;}
+";s:5:"files";a:27:{s:64:"W:\domains\builder.loc\templates\flex\less\legacy\bootstrap.less";i:1553972240;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\variables.less";i:1553972240;s:61:"W:\domains\builder.loc\templates\flex\less\legacy\mixins.less";i:1553972240;s:59:"W:\domains\builder.loc\templates\flex\less\legacy\grid.less";i:1553972240;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\forms.less";i:1553972240;s:60:"W:\domains\builder.loc\templates\flex\less\legacy\wells.less";i:1553972240;s:64:"W:\domains\builder.loc\templates\flex\less\legacy\accordion.less";i:1553972240;s:82:"W:\domains\builder.loc\templates\flex\less\legacy\responsive-767px-max.joomla.less";i:1553972240;s:54:"W:\domains\builder.loc\templates\flex\less\master.less";i:1553972240;s:57:"W:\domains\builder.loc\templates\flex\less\variables.less";i:1553972240;s:54:"W:\domains\builder.loc\templates\flex\less\mixins.less";i:1553972240;s:55:"W:\domains\builder.loc\templates\flex\less\icomoon.less";i:1553972240;s:57:"W:\domains\builder.loc\templates\flex\less\ap-arrows.less";i:1553972240;s:55:"W:\domains\builder.loc\templates\flex\less\pe-icon.less";i:1553972240;s:52:"W:\domains\builder.loc\templates\flex\less\menu.less";i:1553972240;s:53:"W:\domains\builder.loc\templates\flex\less\theme.less";i:1553972240;s:59:"W:\domains\builder.loc\templates\flex\less\pagebuilder.less";i:1553972240;s:55:"W:\domains\builder.loc\templates\flex\less\headers.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\pagination.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\typography.less";i:1553972240;s:59:"W:\domains\builder.loc\templates\flex\less\lightslider.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\virtuemart.less";i:1553972240;s:56:"W:\domains\builder.loc\templates\flex\less\svg-logo.less";i:1553972240;s:58:"W:\domains\builder.loc\templates\flex\less\responsive.less";i:1553972240;s:67:"W:\domains\builder.loc\templates\flex\less\ajax-intro-articles.less";i:1553972240;s:61:"W:\domains\builder.loc\templates\flex\less\sticky-header.less";i:1553972240;s:55:"W:\domains\builder.loc\templates\flex\less\presets.less";i:1553972240;}s:7:"updated";i:1553972318;}

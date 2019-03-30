@@ -1413,10 +1413,19 @@ ul.site-list li i {
 .sppb-addon-ajax-contact.dark .tos label a:hover {
   color: #f9b3aa;
 }
-.dark .acymailing_form input.inputbox {
+.acym_module_form .acysubbuttons-icon::before {
+  background: #f14833;
+}
+.dark .acymailing_form .acysubbuttons {
   color: #f79184;
 }
-.dark .acymailing_form input.inputbox:focus {
+.dark .acymailing_form .acysubbuttons:focus {
+  border: 1px solid #f6887b;
+}
+.dark .acym_module_form input.cell {
+  color: #fbc8c2;
+}
+.dark .acym_module_form input.cell:focus {
   border: 1px solid #f6887b;
 }
 .sppb-addon-timeline .sppb-addon-timeline-wrapper:before {
@@ -1427,6 +1436,17 @@ ul.site-list li i {
 }
 .sppb-addon-timeline .sppb-addon-timeline-wrapper .timeline-badge:after {
   background-color: #f89e92 !important;
+}
+.form-builder-checkbox-item label::before,
+.form-builder-radio-item label::before,
+.sppb-addon-form-builder .sppb-form-check-label::before {
+  border: 2px solid #f6887b;
+}
+.form-builder-checkbox-item input:checked+label::before,
+.form-builder-radio-item input:checked+label::before,
+.sppb-addon-form-builder .sppb-form-check-input:checked+label::before {
+  background: #f35d4b;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
 .error-page .error-page-inner >div.container .btn-error {
   background: #f35d4b;

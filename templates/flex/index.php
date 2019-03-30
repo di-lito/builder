@@ -3,7 +3,7 @@
  * Flex @package Helix3 Framework
  * Template Name - Flex
  * @author Aplikko http://www.aplikko.com
- * @copyright Copyright (c) 2018 Aplikko
+ * @copyright Copyright (c) 2019 Aplikko
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct access
@@ -148,7 +148,7 @@ $this->helix3->addGoogleFont($webfonts);
 if ($this->params->get('smooth_scroll_version') == '0') { 
 	$smooth_scroll_js = '';
 } else if ($this->params->get('smooth_scroll_version') == '2') { 
-	$smooth_scroll_js = 'SmoothScroll-1.4.6.js, ';
+	$smooth_scroll_js = 'SmoothScroll-1.4.9.js, ';
 } else {
 	$smooth_scroll_js = 'SmoothScroll.js, ';
 }
