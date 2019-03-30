@@ -45,6 +45,24 @@ SpAddonsConfig::addonConfig(
 					'show_input' => true,
 					'std'=>'http://sppagebuilder.com/addons/image_layouts/image_layouts_default.jpg'
 				),
+				'image_container_column' => array(
+					'type' => 'select',
+					'title' => JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUTS_IMG_CONTAINER'),
+					'desc' => JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUTS_IMG_CONTAINER_DESC'),
+					'depends'=> array(
+						array('image_preset_thumb', '=', 'card'),
+					),
+					'values'=> array(
+						1=>1,
+						2=>2,
+						3=>3,
+						4=>4,
+						5=>5,
+						6=>6,
+						7=>7,
+						8=>8,
+					),
+				),
 				'image_border_radius' => array(
 					'type' => 'slider',
 					'title' => JText::_('COM_SPPAGEBUILDER_GLOBAL_BORDER_RADIUS'),
@@ -214,6 +232,25 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_LINK_NEW_WINDOW'),
 					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_LINK_NEW_WINDOW_DESC'),
 					'std'=>0,
+				),
+				'popup_video_on_image'=>array(
+					'type'=>'checkbox',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUT_VIDEO_POPUP'),
+					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUT_VIDEO_POPUP_DESC'),
+					'depends'=> array(
+						array('image_preset_thumb', '=', 'card'),
+					),
+					'std'=>0,
+				),
+				'popup_video_src'=>array(
+					'type'=>'text',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUT_VIDEO_POPUP_SRC'),
+					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUT_VIDEO_POPUP_SRC_DESC'),
+					'depends'=> array(
+						array('image_preset_thumb', '=', 'card'),
+						array('popup_video_on_image', '=', 1),
+					),
+					'std'=>'https://www.youtube.com/watch?v=BWLRMBrKH_c',
 				),
 				//content for inline style
 				'caption_separator'=>array(
@@ -506,7 +543,7 @@ SpAddonsConfig::addonConfig(
 				
 				'content_text_align'=>array(
 					'type'=>'select',
-					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUT_CONT_TEXT_ALIGN'),
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TEXT_ALIGN'),
 					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_IMAGE_LAYOUT_CONT_TEXT_ALIGN_DESC'),
 					'depends'=> array(
 						array('image_preset_thumb', '!=', 'inline'),

@@ -259,7 +259,7 @@ array(
 			//title style
 			'title_separator'=>array(
 				'type'=>'separator',
-				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ACCORDION_TITLE_STYLE_OPTIONS'),
+				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_STYLE_OPTION'),
 				'depends'=> array(
 					array('style', '=', 'panel-custom'),
 				),
@@ -425,7 +425,7 @@ array(
 			//accordion content style
 			'content_separator'=>array(
 				'type'=>'separator',
-				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ACCORDION_CONTENT_STYLE_OPTIONS'),
+				'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_CONTENT_STYLE_OPTION'),
 				'depends'=> array(
 					array('style', '=', 'panel-custom'),
 				),

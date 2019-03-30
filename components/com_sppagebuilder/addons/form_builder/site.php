@@ -45,6 +45,7 @@ class SppagebuilderAddonForm_builder extends SppagebuilderAddons {
 
         //Button options
         $btn_text = (isset($settings->btn_text) && $settings->btn_text) ? $settings->btn_text : '';
+        $btn_text_aria = (isset($settings->btn_text) && $settings->btn_text) ? $settings->btn_text : '';
         $btn_class = (isset($settings->btn_type) && $settings->btn_type) ? ' sppb-btn-' . $settings->btn_type : ' sppb-btn-primary';
         $btn_class .= (isset($settings->btn_size) && $settings->btn_size) ? ' sppb-btn-' . $settings->btn_size : '';
         $btn_class .= (isset($settings->btn_shape) && $settings->btn_shape) ? ' sppb-btn-' . $settings->btn_shape : ' sppb-btn-rounded';
@@ -246,7 +247,7 @@ class SppagebuilderAddonForm_builder extends SppagebuilderAddons {
             //Button
             if($btn_text){
                 $output .= '<div class="sppb-form-builder-btn'.$btn_position.'">';
-                $output .= '<button type="submit" id="btn-' . $addon_id . '" class="sppb-btn' . $btn_class . '" aria-label="' . $btn_text . '"><i class="fa" aria-hidden="true"></i>' . $btn_text . '</button>';
+                $output .= '<button type="submit" id="btn-' . $addon_id . '" class="sppb-btn' . $btn_class . '" aria-label="'. strip_tags($btn_text_aria) .'"><i class="fa" aria-hidden="true"></i>' . $btn_text . '</button>';
                 $output .= '</div>';//.sppb-form-builder-btn
             }
         $output .= '</form>';//.sppb-addon-form-builder-form

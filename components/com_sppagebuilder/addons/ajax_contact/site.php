@@ -35,6 +35,8 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
         $show_checkbox      = (isset($settings->show_checkbox) && $settings->show_checkbox) ? $settings->show_checkbox : 0;
         $checkbox_title     = (isset($settings->checkbox_title) && $settings->checkbox_title) ? $settings->checkbox_title : '';
         $button_class       = (isset($settings->button_type) && $settings->button_type) ? ' sppb-btn-' . $settings->button_type : ' sppb-btn-success';
+        $button_text = (isset($settings->button_text) && $settings->button_text) ? $settings->button_text : JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_SEND');
+        $button_aria_text = (isset($settings->button_text) && $settings->button_text) ? $settings->button_text : JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_SEND');
 
         $name_input_col = (isset($settings->name_input_col) && $settings->name_input_col) ? ' sppb-col-sm-' . $settings->name_input_col : 'sppb-col-sm-12';
         $email_input_col = (isset($settings->email_input_col) && $settings->email_input_col) ? ' sppb-col-sm-' . $settings->email_input_col : 'sppb-col-sm-12';
@@ -47,7 +49,6 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
         $button_position = (isset($settings->button_position) && $settings->button_position) ? $settings->button_position : 'sppb-text-left';
 
         if ($use_custom_button) {
-            $button_text = (isset($settings->button_text) && $settings->button_text) ? $settings->button_text : JText::_('COM_SPPAGEBUILDER_ADDON_AJAX_CONTACT_SEND');
             $button_class .= (isset($settings->button_size) && $settings->button_size) ? ' sppb-btn-' . $settings->button_size : '';
             $button_class .= (isset($settings->button_shape) && $settings->button_shape) ? ' sppb-btn-' . $settings->button_shape : ' sppb-btn-rounded';
             $button_class .= (isset($settings->button_appearance) && $settings->button_appearance) ? ' sppb-btn-' . $settings->button_appearance : '';
@@ -147,7 +148,7 @@ class SppagebuilderAddonAjax_contact extends SppagebuilderAddons {
 
                 $output .= '<input type="hidden" name="captcha_type" value="' . $captcha_type . '">';
                 $output .= '<div class="'.$button_position.'">';
-                $output .= '<button type="submit" id="btn-' . $this->addon->id . '" class="sppb-btn' . $button_class . '" aria-label="' . $button_text . '"><i class="fa" aria-hidden="true"></i>' . $button_text . '</button>';
+                $output .= '<button type="submit" id="btn-' . $this->addon->id . '" aria-label="'. strip_tags($button_aria_text) .'" class="sppb-btn' . $button_class . '"><i class="fa" aria-hidden="true"></i>' . $button_text . '</button>';
                 $output .= '</div>';
             $output .= '</form>';
         $output .= '<div style="display:none;margin-top:10px;" class="sppb-ajax-contact-status"></div>';

@@ -416,6 +416,7 @@ foreach ($addons_list as $addon) {
 						position: relative;
 						overflow: hidden;
 					<# } #>
+					
 				}
 				<# if(data.global_use_overlay){ #>
 					#{{ addonId }} .sppb-addon-overlayer{
@@ -602,6 +603,7 @@ foreach ($addons_list as $addon) {
 						<# if(typeof data.use_global_width !== "undefined" && data.use_global_width && typeof data.global_width !== "undefined" && _.isObject(data.global_width)) { #>
 							width: {{data.global_width.xs}}%;
 						<# } #>
+
 					}
 
 					<# if (!_.isEmpty(data.title)){ #>

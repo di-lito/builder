@@ -497,7 +497,7 @@ SpAddonsConfig::addonConfig(
                     ),
                     'content_backround' => array(
                         'type' => 'color',
-                        'title' => JText::_('COM_SPPAGEBUILDER_TAB_CONTENT_BACKGROUND'),
+                        'title' => JText::_('COM_SPPAGEBUILDER_ADDON_CONTENT_BG'),
                         'std' => '#e5e5e5',
                         'depends' => array(
                             array('style', '=', 'custom')

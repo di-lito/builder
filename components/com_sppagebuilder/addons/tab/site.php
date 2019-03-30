@@ -36,13 +36,13 @@ class SppagebuilderAddonTab extends SppagebuilderAddons {
 
             if(isset($tab->icon)){
                 if($tab->icon && $nav_icon_postion == 'top'){
-                    $icon_top = '<span class="sppb-tab-icon tab-icon-block" aria-label="'.trim($title).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
+                    $icon_top = '<span class="sppb-tab-icon tab-icon-block" aria-label="'.trim(strip_tags($title)).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
                 } elseif ($tab->icon && $nav_icon_postion == 'bottom') {
-                    $icon_bottom = '<span class="sppb-tab-icon tab-icon-block" aria-label="'.trim($title).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
+                    $icon_bottom = '<span class="sppb-tab-icon tab-icon-block" aria-label="'.trim(strip_tags($title)).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
                 } elseif ($tab->icon && $nav_icon_postion == 'right') {
-                    $icon_right = '<span class="sppb-tab-icon" aria-label="'.trim($title).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
+                    $icon_right = '<span class="sppb-tab-icon" aria-label="'.trim(strip_tags($title)).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
                 } else {
-                    $icon_left = '<span class="sppb-tab-icon" aria-label="'.trim($title).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
+                    $icon_left = '<span class="sppb-tab-icon" aria-label="'.trim(strip_tags($title)).'"><i class="fa ' . $tab->icon . '" aria-hidden="true"></i></span>';
                 }
             }
             if($nav_icon_postion == 'top' || $nav_icon_postion == 'bottom'){

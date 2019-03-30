@@ -101,7 +101,7 @@ class SppagebuilderAddonImage_overlay extends SppagebuilderAddons{
 			$output .= '</div>';
 		}
 		$output  .= '<div class="overlay-background-image-wrapper">';
-		$output  .= '<div class="overlay-background-image" style=" background-image:url('.$image_link.');"></div>';
+		$output  .= '<div class="overlay-background-image" style="background-image:url('.$image_link.');"></div>';
 		if($image_in_lightbox && $title_subtitle_position !== 'center-center' && $image){
 			$output .= '<a class="sppb-magnific-popup sppb-addon-image-overlay-icon" data-popup_type="image" data-mainclass="mfp-no-margins mfp-with-zoom" href="' . $image_link . '">+</a>';
 		}

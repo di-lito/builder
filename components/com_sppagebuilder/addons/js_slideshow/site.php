@@ -91,8 +91,9 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		$content_vertical_alignment = (isset($settings->content_vertical_alignment) && $settings->content_vertical_alignment) ? $settings->content_vertical_alignment : '';
 		
 		//Output
+		$dots = '';
 		$output = '';
-		$output .= '<div id="sppb-sp-slider-'. $this->addon->id .'" class="sppb-addon-sp-slider sp-slider '.$class.' '.$dot_style_class.' '.$dot_position_class.' '.$arrow_position_class.' '.$arrow_hover_class.'" data-height="'.$slider_height.'" data-height-sm="'.$slider_height_sm.'" data-height-xs="'.$slider_height_xs.'" data-slider-animation="'.$slider_animation.'" '.$dataVerticleSlide.' '.$data_three_d_rotate .' data-autoplay="'.($autoplay ? 'true' : 'false').'" data-interval="'.($interval ? $interval*1000 : '4000' ).'" data-timer="'.($timer ? 'true' : 'false').'" data-speed="'.($speed ? $speed : 800).'" data-dot-control="'.($dot_controllers ? 'true' : 'false').'" data-arrow-control="'.($arrow_controllers ? 'true' : 'false').'" data-indecator="'.($line_indecator ? 'true' : 'false').'" data-arrow-content="'.($arrow_controllers_content ? $arrow_controllers_content : 'text_only').'" data-slide-count="'.($slide_counter ? 'true' : 'false').'">';
+		$output .= '<div id="sppb-sp-slider-'. $this->addon->id .'" class="sppb-addon-sp-slider sp-slider '.$class.' '.$dot_style_class.' '.$dot_position_class.' '.$arrow_position_class.' '.$arrow_hover_class.'" data-height="'.$slider_height.'" data-height-sm="'.$slider_height_sm.'" data-height-xs="'.$slider_height_xs.'" data-slider-animation="'.$slider_animation.'" '.$dataVerticleSlide.' '.$data_three_d_rotate .' data-autoplay="'.($autoplay ? 'true' : 'false').'" data-interval="'.($interval ? $interval*1000 : '4000' ).'" data-timer="'.($timer ? 'true' : 'false').'" data-speed="'.($speed ? $speed : 800).'" data-dot-control="'.($dot_controllers ? 'true' : 'false').'" data-arrow-control="'.($arrow_controllers ? 'true' : 'false').'" data-indecator="'.($line_indecator ? 'true' : 'false').'" data-arrow-content="'.($arrow_controllers_content ? $arrow_controllers_content : 'text_only').'" data-slide-count="'.($slide_counter ? 'true' : 'false').'" data-dot-style="'.$dot_controllers_style.'">';
 
 		if(isset($settings->slideshow_items) && is_array($settings->slideshow_items)){
 			$increasing_addon_id = $this->addon->id;
@@ -129,17 +130,17 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 									$inner_uniqid = 'sp-slider-inner-item-' . $increasing_addon_id .'-num-' . $inner_item_key . '-key';
 
 									//Common animation options for settings
-									$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : '';
-									$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : '';
-									$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : '';
+									$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : 800;
+									$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : 1000;
+									$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : 'ease';
 									$animation_cubic_bezier_value = (isset($inner_value->animation_cubic_bezier_value) && $inner_value->animation_cubic_bezier_value) ? $inner_value->animation_cubic_bezier_value : '';
 									if($animation_timing_function == 'cubic-bezier'){
 										$animation_timing_function = 'cubic-bezier('.$animation_cubic_bezier_value.')';
 									}
 									//Slide animation options
-									$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : '';
-									$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : '';
-									$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : '';
+									$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : 'slide';
+									$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : 'top';
+									$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : 100;
 									
 									//Rotate animation options
 									$animation_rotate_from = (isset($inner_value->animation_rotate_from) && gettype($inner_value->animation_rotate_from) == 'string') ? $inner_value->animation_rotate_from : '';
@@ -217,18 +218,18 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 										$inner_uniqid = 'sp-slider-inner-item-' . $increasing_addon_id .'-num-' . $inner_item_key . '-key';
 
 										//Common animation options for settings
-										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : '';
-										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : '';
-										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : '';
+										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : 800;
+										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : 1000;
+										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : 'ease';
 										$animation_cubic_bezier_value = (isset($inner_value->animation_cubic_bezier_value) && $inner_value->animation_cubic_bezier_value) ? $inner_value->animation_cubic_bezier_value : '';
 										if($animation_timing_function == 'cubic-bezier'){
 											$animation_timing_function = 'cubic-bezier('.$animation_cubic_bezier_value.')';
 										}
 										
 										//Slide animation options
-										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : '';
-										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : '';
-										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : '';
+										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : 'slide';
+										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : 'top';
+										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : 100;
 										
 										//Rotate animation options
 										$animation_rotate_from = (isset($inner_value->animation_rotate_from) && gettype($inner_value->animation_rotate_from) == 'string') ? $inner_value->animation_rotate_from : '';
@@ -250,7 +251,7 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 										$content_type = (isset($inner_value->content_type) && $inner_value->content_type) ? $inner_value->content_type : '';
 										//Title
 										$title_content_title = (isset($inner_value->title_content_title) && $inner_value->title_content_title) ? $inner_value->title_content_title : '';
-										$title_heading_selector = (isset($inner_value->title_heading_selector) && $inner_value->title_heading_selector) ? $inner_value->title_heading_selector : '';
+										$title_heading_selector = (isset($inner_value->title_heading_selector) && $inner_value->title_heading_selector) ? $inner_value->title_heading_selector : 'h2';
 										//Text
 										$content_text = (isset($inner_value->content_text) && $inner_value->content_text) ? $inner_value->content_text : '';
 										//Button
@@ -299,18 +300,18 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 										$inner_uniqid = 'sp-slider-inner-item-' . $increasing_addon_id .'-num-' . $inner_item_key . '-key';
 
 										//Common animation options for settings
-										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : '';
-										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : '';
-										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : '';
+										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : 800;
+										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : 1000;
+										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : 'ease';
 										$animation_cubic_bezier_value = (isset($inner_value->animation_cubic_bezier_value) && $inner_value->animation_cubic_bezier_value) ? $inner_value->animation_cubic_bezier_value : '';
 										if($animation_timing_function == 'cubic-bezier'){
 											$animation_timing_function = 'cubic-bezier('.$animation_cubic_bezier_value.')';
 										}
 										
 										//Slide animation options
-										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : '';
-										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : '';
-										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : '';
+										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : 'slide';
+										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : 'top';
+										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : 100;
 										
 										//Rotate animation options
 										$animation_rotate_from = (isset($inner_value->animation_rotate_from) && gettype($inner_value->animation_rotate_from) == 'string') ? $inner_value->animation_rotate_from : '';
@@ -352,18 +353,18 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 										$inner_uniqid = 'sp-slider-inner-item-' . $increasing_addon_id .'-num-' . $inner_item_key . '-key';
 
 										//Common animation options for settings
-										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : '';
-										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : '';
-										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : '';
+										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : 800;
+										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : 1000;
+										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : 'ease';
 										$animation_cubic_bezier_value = (isset($inner_value->animation_cubic_bezier_value) && $inner_value->animation_cubic_bezier_value) ? $inner_value->animation_cubic_bezier_value : '';
 										if($animation_timing_function == 'cubic-bezier'){
 											$animation_timing_function = 'cubic-bezier('.$animation_cubic_bezier_value.')';
 										}
 										
 										//Slide animation options
-										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : '';
-										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : '';
-										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : '';
+										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : 'slide';
+										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : 'top';
+										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : 100;
 										
 										//Rotate animation options
 										$animation_rotate_from = (isset($inner_value->animation_rotate_from) && gettype($inner_value->animation_rotate_from) == 'string') ? $inner_value->animation_rotate_from : '';
@@ -405,18 +406,18 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 										$inner_uniqid = 'sp-slider-inner-item-' . $increasing_addon_id .'-num-' . $inner_item_key . '-key';
 
 										//Common animation options for settings
-										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : '';
-										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : '';
-										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : '';
+										$animation_duration = (isset($inner_value->animation_duration) && $inner_value->animation_duration) ? $inner_value->animation_duration : 800;
+										$animation_delay = (isset($inner_value->animation_delay) && $inner_value->animation_delay) ? $inner_value->animation_delay : 1000;
+										$animation_timing_function = (isset($inner_value->animation_timing_function) && $inner_value->animation_timing_function) ? $inner_value->animation_timing_function : 'ease';
 										$animation_cubic_bezier_value = (isset($inner_value->animation_cubic_bezier_value) && $inner_value->animation_cubic_bezier_value) ? $inner_value->animation_cubic_bezier_value : '';
 										if($animation_timing_function == 'cubic-bezier'){
 											$animation_timing_function = 'cubic-bezier('.$animation_cubic_bezier_value.')';
 										}
 										
 										//Slide animation options
-										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : '';
-										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : '';
-										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : '';
+										$content_animation_type = (isset($inner_value->content_animation_type) && $inner_value->content_animation_type) ? $inner_value->content_animation_type : 'slide';
+										$animation_slide_direction = (isset($inner_value->animation_slide_direction) && $inner_value->animation_slide_direction) ? $inner_value->animation_slide_direction : 'top';
+										$animation_slide_from = (isset($inner_value->animation_slide_from) && gettype($inner_value->animation_slide_from) == 'string') ? $inner_value->animation_slide_from : 100;
 										
 										//Rotate animation options
 										$animation_rotate_from = (isset($inner_value->animation_rotate_from) && gettype($inner_value->animation_rotate_from) == 'string') ? $inner_value->animation_rotate_from : '';
@@ -496,10 +497,48 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 							$output .= '<div class="sp-background" style="background-image: url('. JURI::base() . '/' . $item_value->slider_img .');"></div>';
 						}
 					}
+					 
+					if($dot_controllers_style == 'with_text'){
+						$captionItem = []; 
+						if(isset($item_value->slideshow_inner_items) && is_array($item_value->slideshow_inner_items)){
+							$dot_item = 0;
+							foreach($item_value->slideshow_inner_items as $inner_item_key => $inner_value){
+								$content_type = (isset($inner_value->content_type) && $inner_value->content_type) ? $inner_value->content_type : '';
+								if($content_type == 'title_content' && $dot_item < 2 ) {
+									array_unshift( $captionItem, $inner_value);
+								}
+								$dot_item++;
+							}
+						}
+						$dots .= '<li class="'.($item_key == 0 ? 'active sp-text-thumbnail-list' : 'sp-text-thumbnail-list').'">';
+							$dots .= '<div class="sp-slider-text-thumb-number">'.($item_key > 8 ? ($item_key + 1) : '0'.($item_key + 1).'').'</div>';
+							$dots .= '<div class="sp-dot-indicator-wrap">';
+								$dots .= '<span class="dot-indicator"></span>';
+							$dots .= '</div>';//.sp-dot-indicator-wrap
+							$dots .= '<div class="sp-slider-text-thumb-caption">';
+								if( count($captionItem) > 0 ){
+									foreach($captionItem as $dot_key => $inner_value){
+										//Content type
+										$title_content_title = (isset($inner_value->title_content_title) && $inner_value->title_content_title) ? $inner_value->title_content_title : '';
+										$dots .='<div class="sp-slider-dot-indecator-text sp-dot-text-key-'.($dot_key + 1).'">';
+											$dots .= $title_content_title;
+										$dots .='</div>';
+									}
+								}
+							$dots .= '</div>';//.sp-slider-caption
+						$dots .= '</li>';
+					}
+
 				$output .= '</div>';
 			}
 		}
-		$output .= '</div>';//.sppb-addon-sp-slider
+		if($dot_controllers_style == 'with_text' && $dot_controllers){
+			$output .= '<div class="sp-slider-custom-dot-indecators">
+						<ul>
+							'.$dots.'
+						</ul>';
+			$output .= '</div>';//.sp-slider-custom-dot-indecators
+		}
 
 		return $output;
 	}
@@ -523,8 +562,16 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		//Timer style
 		$timer_color = (isset($settings->timer_color) && $settings->timer_color) ? $settings->timer_color : '';
 		if($timer_color){
+			$css .= $addon_id . ' .sp-dot-indicator-wrap .dot-indicator,';
 			$css .= $addon_id . ' .sp-indicator.line-indicator {';
 				$css .= 'background: '.$timer_color.';';
+			$css .= '}';
+		}
+
+		$timer_bg_color = (isset($settings->timer_bg_color) && $settings->timer_bg_color) ? 'background: '.$settings->timer_bg_color.';' : '';
+		if($timer_bg_color){
+			$css .= $addon_id . ' .sp-dot-indicator-wrap {';
+				$css .= $timer_bg_color;
 			$css .= '}';
 		}
 
@@ -546,7 +593,7 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		$dot_ctlr_width = (isset($settings->dot_ctlr_width) && $settings->dot_ctlr_width) ? $settings->dot_ctlr_width : '';
 		$dot_ctlr_margin = (isset($settings->dot_ctlr_margin) && trim($settings->dot_ctlr_margin)) ? $settings->dot_ctlr_margin : '';
 		$dot_ctlr_border_color = (isset($settings->dot_ctlr_border_color) && $settings->dot_ctlr_border_color) ? $settings->dot_ctlr_border_color : '';
-		$dot_ctlr_border_width = (isset($settings->dot_ctlr_border_width) && $settings->dot_ctlr_border_width!='') ? $settings->dot_ctlr_border_width : '0';
+		$dot_ctlr_border_width = (isset($settings->dot_ctlr_border_width) && $settings->dot_ctlr_border_width!='') ? $settings->dot_ctlr_border_width : '2';
 		$dot_ctlr_border_radius = (isset($settings->dot_ctlr_border_radius) && $settings->dot_ctlr_border_radius!='') ? $settings->dot_ctlr_border_radius : '0';
 
 		if($dot_controllers_position == 'vertical_left' || $dot_controllers_position == 'vertical_right'){
@@ -632,7 +679,6 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		}
 
 		//Dot/line gap
-
 		$dot_controllers_bottom_gap = (isset($settings->dot_controllers_bottom_gap) && $settings->dot_controllers_bottom_gap) ? 'bottom: '.$settings->dot_controllers_bottom_gap.'px;' : 'bottom:0px;';
 		$dot_controllers_left_gap = (isset($settings->dot_controllers_left_gap) && $settings->dot_controllers_left_gap) ? 'left: '.$settings->dot_controllers_left_gap.'px;' : 'left:0px;';
 		$dot_controllers_right_gap = (isset($settings->dot_controllers_right_gap) && $settings->dot_controllers_right_gap) ? 'right: '.$settings->dot_controllers_right_gap.'px;' : 'right:0px;';
@@ -666,6 +712,59 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		if($dot_controllers_position === 'vertical_right' && $dot_controllers_right_gap){
 			$css .= $addon_id . ' .dot-controller-position-vertical_right.sp-slider .sp-dots{';
 				$css .= $dot_controllers_right_gap;
+			$css .= '}';
+		}
+
+		//Text thumbnail style
+		$text_thumb_style = '';
+		$text_thumb_style .= (isset($settings->text_thumb_ctlr_wrap_bg) && $settings->text_thumb_ctlr_wrap_bg) ? 'background:'.$settings->text_thumb_ctlr_wrap_bg.';' : '';
+		$text_thumb_style .= (isset($settings->text_thumb_ctlr_wrap_padding) && trim($settings->text_thumb_ctlr_wrap_padding)) ? 'padding:'.$settings->text_thumb_ctlr_wrap_padding.';' : '';
+		$text_thumb_style .= (isset($settings->text_thumb_ctlr_wrap_width) && $settings->text_thumb_ctlr_wrap_width) ? 'width:'.$settings->text_thumb_ctlr_wrap_width.'%;' : '';
+
+		if($text_thumb_style){
+			$css .= $addon_id . ' .sp-slider-custom-dot-indecators {';
+				$css .= $text_thumb_style;
+			$css .= '}';
+		}
+
+		$text_thumb_ctlr_individual_width = (isset($settings->text_thumb_ctlr_individual_width) && $settings->text_thumb_ctlr_individual_width) ? 'width:'.$settings->text_thumb_ctlr_individual_width.'px;' : '';
+		if($text_thumb_ctlr_individual_width){
+			$css .= $addon_id . ' .sp-slider-custom-dot-indecators ul li {';
+				$css .= $text_thumb_ctlr_individual_width;
+			$css .= '}';
+		}
+		//thumb number style
+		$text_thumb_number_style = '';
+		$text_thumb_number_style .= (isset($settings->text_thumb_number_color) && $settings->text_thumb_number_color) ? 'color:'.$settings->text_thumb_number_color.';' : '';
+		$text_thumb_number_style .= (isset($settings->text_thumb_number_font_size) && $settings->text_thumb_number_font_size) ? 'font-size:'.$settings->text_thumb_number_font_size.'px;' : '';
+		$text_thumb_number_style .= (isset($settings->text_thumb_number_font_weight) && $settings->text_thumb_number_font_weight) ? 'font-weight:'.$settings->text_thumb_number_font_weight.';' : '';
+
+		if($text_thumb_number_style){
+			$css .= $addon_id . ' .sp-slider-text-thumb-number {';
+				$css .= $text_thumb_number_style;
+			$css .= '}';
+		}
+		//thumb title style
+		$text_thumb_title_style = '';
+		$text_thumb_title_style .= (isset($settings->text_thumb_title_color) && $settings->text_thumb_title_color) ? 'color:'.$settings->text_thumb_title_color.';' : '';
+		$text_thumb_title_style .= (isset($settings->text_thumb_title_font_size) && $settings->text_thumb_title_font_size) ? 'font-size:'.$settings->text_thumb_title_font_size.'px;' : '';
+		$text_thumb_title_style .= (isset($settings->text_thumb_title_font_weight) && $settings->text_thumb_title_font_weight) ? 'font-weight:'.$settings->text_thumb_title_font_weight.';' : '';
+		$text_thumb_title_style .= (isset($settings->text_thumb_title_lineheight) && $settings->text_thumb_title_lineheight) ? 'line-height:'.$settings->text_thumb_title_lineheight.'px;' : '';
+
+		if($text_thumb_title_style){
+			$css .= $addon_id . ' .sp-slider-dot-indecator-text.sp-dot-text-key-1 {';
+				$css .= $text_thumb_title_style;
+			$css .= '}';
+		}
+		//thumb subtitle style
+		$text_thumb_subtitle_style = '';
+		$text_thumb_subtitle_style .= (isset($settings->text_thumb_subtitle_color) && $settings->text_thumb_subtitle_color) ? 'color:'.$settings->text_thumb_subtitle_color.';' : '';
+		$text_thumb_subtitle_style .= (isset($settings->text_thumb_subtitle_font_size) && $settings->text_thumb_subtitle_font_size) ? 'font-size:'.$settings->text_thumb_subtitle_font_size.'px;' : '';
+		$text_thumb_subtitle_style .= (isset($settings->text_thumb_subtitle_font_weight) && $settings->text_thumb_subtitle_font_weight) ? 'font-weight:'.$settings->text_thumb_subtitle_font_weight.';' : '';
+
+		if($text_thumb_subtitle_style){
+			$css .= $addon_id . ' .sp-slider-dot-indecator-text.sp-dot-text-key-2 {';
+				$css .= $text_thumb_subtitle_style;
 			$css .= '}';
 		}
 		
@@ -874,7 +973,7 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 						}
 						$content_style .= (isset($inner_value->content_border) && trim($inner_value->content_border)) ? 'border-width: ' . $inner_value->content_border . ';border-style: solid;' : '';
 						$content_style .= (isset($inner_value->content_border_color) && $inner_value->content_border_color) ? 'border-color: ' . $inner_value->content_border_color . ';' : '';
-						$content_style .= (isset($inner_value->content_border_radius) && $inner_value->content_border_radius) ? 'border-radius: ' . $inner_value->content_border_radius . 'px;' : 'border-radius:0px;';
+						$content_style .= (isset($inner_value->content_border_radius) && $inner_value->content_border_radius != '') ? 'border-radius: ' . $inner_value->content_border_radius . 'px;' : '';
 
 						$content_style .= (isset($inner_value->content_padding) && $inner_value->content_padding && trim($inner_value->content_padding->md)) ? 'padding: ' . $inner_value->content_padding->md . ';' : '';
 						$content_style_sm .= (isset($inner_value->content_padding) && $inner_value->content_padding && trim($inner_value->content_padding->sm)) ? 'padding: ' . $inner_value->content_padding->sm . ';' : '';
@@ -945,8 +1044,8 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 							//Button Normal gradient
 							$button_background_gradient = (isset($inner_value->button_background_gradient) && $inner_value->button_background_gradient) ? $inner_value->button_background_gradient : '';
 
-							$gradient_color1 = (isset($button_background_gradient->color) && $button_background_gradient->color) ? $button_background_gradient->color : '#B4EC51';
-							$gradient_color2 = (isset($button_background_gradient->color2) && $button_background_gradient->color2) ? $button_background_gradient->color2 : '#429321';
+							$gradient_color1 = (isset($button_background_gradient->color) && $button_background_gradient->color) ? $button_background_gradient->color : '';
+							$gradient_color2 = (isset($button_background_gradient->color2) && $button_background_gradient->color2) ? $button_background_gradient->color2 : '';
 							$degree = (isset($button_background_gradient->deg) && $button_background_gradient->deg) ? $button_background_gradient->deg : '0';
 							$type = (isset($button_background_gradient->type) && $button_background_gradient->type) ? $button_background_gradient->type : '';
 							$radialPos = (isset($button_background_gradient->radialPos) && $button_background_gradient->radialPos) ? $button_background_gradient->radialPos : '';
@@ -963,8 +1062,8 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 							//Button hover gradient
 							$button_background_gradient_hover = (isset($inner_value->button_background_gradient_hover) && $inner_value->button_background_gradient_hover) ? $inner_value->button_background_gradient_hover : '';
 
-							$gradient_hover_color1 = (isset($button_background_gradient_hover->color) && $button_background_gradient_hover->color) ? $button_background_gradient_hover->color : '#429321';
-							$gradient_hover_color2 = (isset($button_background_gradient_hover->color2) && $button_background_gradient_hover->color2) ? $button_background_gradient_hover->color2 : '#B4EC51';
+							$gradient_hover_color1 = (isset($button_background_gradient_hover->color) && $button_background_gradient_hover->color) ? $button_background_gradient_hover->color : '';
+							$gradient_hover_color2 = (isset($button_background_gradient_hover->color2) && $button_background_gradient_hover->color2) ? $button_background_gradient_hover->color2 : '';
 							$hover_degree = (isset($button_background_gradient_hover->deg) && $button_background_gradient_hover->deg) ? $button_background_gradient_hover->deg : '0';
 							$hover_type = (isset($button_background_gradient_hover->type) && $button_background_gradient_hover->type) ? $button_background_gradient_hover->type : '';
 							$hover_radialPos = (isset($button_background_gradient_hover->radialPos) && $button_background_gradient_hover->radialPos) ? $button_background_gradient_hover->radialPos : '';
@@ -1113,13 +1212,39 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		$slide_counter_style_sm .= (isset($settings->slide_counter_gap_bottom_sm) && $settings->slide_counter_gap_bottom_sm) ? 'bottom:'.$settings->slide_counter_gap_bottom_sm.'px;' : 'bottom:0px;';
 		$slide_counter_style_sm .= (isset($settings->slide_counter_gap_left_sm) && $settings->slide_counter_gap_left_sm) ? 'left:'.$settings->slide_counter_gap_left_sm.'px;' : 'left:0px;';
 
+		$text_thumb_ctlr_individual_width = (isset($settings->text_thumb_ctlr_individual_width) && $settings->text_thumb_ctlr_individual_width) ? 'width:'.$settings->text_thumb_ctlr_individual_width.'px;' : '';
+		if($text_thumb_ctlr_individual_width){
+			$css .= $addon_id . ' .sp-slider-custom-dot-indecators ul li {';
+				$css .= $text_thumb_ctlr_individual_width;
+			$css .= '}';
+		}
+
+		//Text thumbnail style
+		$text_thumb_style_sm = '';
+		$text_thumb_style_sm .= (isset($settings->text_thumb_ctlr_wrap_padding_sm) && trim($settings->text_thumb_ctlr_wrap_padding_sm)) ? 'padding:'.$settings->text_thumb_ctlr_wrap_padding_sm.';' : '';
+		$text_thumb_style_sm .= (isset($settings->text_thumb_ctlr_wrap_width_sm) && $settings->text_thumb_ctlr_wrap_width_sm) ? 'width:'.$settings->text_thumb_ctlr_wrap_width_sm.'%;' : '';
+
+		$text_thumb_ctlr_individual_width_sm = (isset($settings->text_thumb_ctlr_individual_width_sm) && $settings->text_thumb_ctlr_individual_width_sm) ? 'width:'.$settings->text_thumb_ctlr_individual_width_sm.'px;' : '';
+		//thumb title style
+		$text_thumb_title_style_sm = '';
+		$text_thumb_title_style_sm .= (isset($settings->text_thumb_title_font_size_sm) && $settings->text_thumb_title_font_size_sm) ? 'font-size:'.$settings->text_thumb_title_font_size_sm.'px;' : '';
+		$text_thumb_title_style_sm .= (isset($settings->text_thumb_title_lineheight_sm) && $settings->text_thumb_title_lineheight_sm) ? 'line-height:'.$settings->text_thumb_title_lineheight_sm.'px;' : '';
+
+		//text thumb number style table
+		$text_thumb_number_style_sm = '';
+		$text_thumb_number_style_sm .= (isset($settings->text_thumb_number_font_size_sm) && $settings->text_thumb_number_font_size_sm) ? 'font-size:'.$settings->text_thumb_number_font_size_sm.'px;' : '';
+
+		//text thumb subtitle style table
+		$text_thumb_subtitle_style_sm = '';
+		$text_thumb_subtitle_style_sm .= (isset($settings->text_thumb_subtitle_font_size_sm) && $settings->text_thumb_subtitle_font_size_sm) ? 'font-size:'.$settings->text_thumb_subtitle_font_size_sm.'px;' : '';
+
 		$css .= '@media (min-width: 768px) and (max-width: 991px) {';
 			if($timer_style_sm){
 				$css .= $addon_id . ' .sp-indicator-container {';
 					$css .= $timer_style_sm;
 				$css .= '}';
 			}
-			if($content_container_width_sm && $content_container_option!=='bootstrap'){
+			if($content_container_width_sm && $content_container_option !== 'bootstrap'){
 				$css .= $addon_id . ' .sp-slider .sp-slider-content-wrap {';
 					$css .= 'width: ' . $content_container_width_sm . '%;margin: 0 auto;';
 				$css .= '}';
@@ -1236,6 +1361,33 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 				$css .= '}';
 			}
 
+			//text thumbnail tablet style
+			if($text_thumb_style_sm){
+				$css .= $addon_id . ' .sp-slider-custom-dot-indecators {';
+					$css .= $text_thumb_style_sm;
+				$css .= '}';
+			}
+			if($text_thumb_ctlr_individual_width_sm){
+				$css .= $addon_id . ' .sp-slider-custom-dot-indecators ul li {';
+					$css .= $text_thumb_ctlr_individual_width_sm;
+				$css .= '}';
+			}
+			if($text_thumb_number_style_sm){
+				$css .= $addon_id . ' .sp-slider-text-thumb-number {';
+					$css .= $text_thumb_number_style_sm;
+				$css .= '}';
+			}
+			if($text_thumb_title_style_sm){
+				$css .= $addon_id . ' .sp-slider-dot-indecator-text.sp-dot-text-key-1 {';
+					$css .= $text_thumb_title_style_sm;
+				$css .= '}';
+			}
+			if($text_thumb_subtitle_style_sm){
+				$css .= $addon_id . ' .sp-slider-dot-indecator-text.sp-dot-text-key-2 {';
+					$css .= $text_thumb_subtitle_style_sm;
+				$css .= '}';
+			}
+
 		$css .= '}';
 
 		//Mobile style
@@ -1270,6 +1422,24 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		$slide_counter_style_xs .= (isset($settings->slide_counter_padding_xs) && trim($settings->slide_counter_padding_xs)) ? 'padding:'.$settings->slide_counter_padding_xs.';' : '';
 		$slide_counter_style_xs .= (isset($settings->slide_counter_gap_bottom_xs) && $settings->slide_counter_gap_bottom_xs) ? 'bottom:'.$settings->slide_counter_gap_bottom_xs.'px;' : 'bottom:0px;';
 		$slide_counter_style_xs .= (isset($settings->slide_counter_gap_left_xs) && $settings->slide_counter_gap_left_xs) ? 'left:'.$settings->slide_counter_gap_left_xs.'px;' : 'left:0px;';
+
+		//Text thumbnail style
+		$text_thumb_style_xs = '';
+		$text_thumb_style_xs .= (isset($settings->text_thumb_ctlr_wrap_padding_xs) && trim($settings->text_thumb_ctlr_wrap_padding_xs)) ? 'padding:'.$settings->text_thumb_ctlr_wrap_padding_xs.';' : '';
+		$text_thumb_style_xs .= (isset($settings->text_thumb_ctlr_wrap_width_xs) && $settings->text_thumb_ctlr_wrap_width_xs) ? 'width:'.$settings->text_thumb_ctlr_wrap_width_xs.'%;' : '';
+
+		$text_thumb_ctlr_individual_width_xs = (isset($settings->text_thumb_ctlr_individual_width_xs) && $settings->text_thumb_ctlr_individual_width_xs) ? 'width:'.$settings->text_thumb_ctlr_individual_width_xs.'px;' : '';
+		//thumb title style
+		$text_thumb_title_style_xs = '';
+		$text_thumb_title_style_xs .= (isset($settings->text_thumb_title_font_size_xs) && $settings->text_thumb_title_font_size_xs) ? 'font-size:'.$settings->text_thumb_title_font_size_xs.'px;' : '';
+		$text_thumb_title_style_xs .= (isset($settings->text_thumb_title_lineheight_xs) && $settings->text_thumb_title_lineheight_xs) ? 'line-height:'.$settings->text_thumb_title_lineheight_xs.'px;' : '';
+		// text thumb number style mobile
+		$text_thumb_number_style_xs = '';
+		$text_thumb_number_style_xs .= (isset($settings->text_thumb_number_font_size_xs) && $settings->text_thumb_number_font_size_xs) ? 'font-size:'.$settings->text_thumb_number_font_size_xs.'px;' : '';
+
+		//text thumb subtitle style table
+		$text_thumb_subtitle_style_xs = '';
+		$text_thumb_subtitle_style_xs .= (isset($settings->text_thumb_subtitle_font_size_xs) && $settings->text_thumb_subtitle_font_size_xs) ? 'font-size:'.$settings->text_thumb_subtitle_font_size_xs.'px;' : '';
 
 		$css .= '@media (max-width: 767px) {';
 			if($timer_style_xs){
@@ -1394,6 +1564,34 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 					$css .= $slide_counter_style_xs;
 				$css .= '}';
 			}
+			//text thumbnail mobile style
+			if($text_thumb_style_xs){
+				$css .= $addon_id . ' .sp-slider-custom-dot-indecators {';
+					$css .= $text_thumb_style_xs;
+				$css .= '}';
+			}
+
+			if($text_thumb_ctlr_individual_width_xs){
+				$css .= $addon_id . ' .sp-slider-custom-dot-indecators ul li {';
+					$css .= $text_thumb_ctlr_individual_width_xs;
+				$css .= '}';
+			}
+			
+			if($text_thumb_title_style_xs){
+				$css .= $addon_id . ' .sp-slider-dot-indecator-text.sp-dot-text-key-1 {';
+					$css .= $text_thumb_title_style_xs;
+				$css .= '}';
+			}
+			if($text_thumb_number_style_xs){
+				$css .= $addon_id . ' .sp-slider-text-thumb-number {';
+					$css .= $text_thumb_number_style_xs;
+				$css .= '}';
+			}
+			if($text_thumb_subtitle_style_xs){
+				$css .= $addon_id . ' .sp-slider-dot-indecator-text.sp-dot-text-key-2 {';
+					$css .= $text_thumb_subtitle_style_xs;
+				$css .= '}';
+			}
 
 		$css .= '}';
 
@@ -1424,10 +1622,18 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 		#>
 		
 		<# if(data.timer_color){ #>
+			#sppb-addon-{{ data.id }} .sp-dot-indicator-wrap .dot-indicator,
 			#sppb-addon-{{ data.id }} .sp-indicator.line-indicator {
 				background: {{data.timer_color}};
 			}
 		<# }
+		if(data.timer_bg_color){
+		#>
+			#sppb-addon-{{ data.id }} .sp-dot-indicator-wrap{
+				background: {{data.timer_bg_color}};
+			}
+		<#
+		}
 		if(timer_style){
 		#>
 			#sppb-addon-{{ data.id }} .sp-indicator-container {
@@ -1975,6 +2181,66 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 				}
 			})
 		} #>
+
+		#sppb-addon-{{ data.id }} .sp-slider-custom-dot-indecators {
+			background:{{data.text_thumb_ctlr_wrap_bg}};
+			<# if(_.isObject(data.text_thumb_ctlr_wrap_padding)) { #>
+				padding:{{data.text_thumb_ctlr_wrap_padding.md}};
+			<# } else { #>
+				padding:{{data.text_thumb_ctlr_wrap_padding}};
+			<# }
+			if(_.isObject(data.text_thumb_ctlr_wrap_width)) {
+			#>
+				width: {{data.text_thumb_ctlr_wrap_width.md}}%;
+			<# } else { #>
+				width: {{data.text_thumb_ctlr_wrap_width}}%;
+			<# } #>
+		}
+
+		#sppb-addon-{{ data.id }} .sp-slider-custom-dot-indecators ul li {
+			<# if(_.isObject(data.text_thumb_ctlr_individual_width)) { #>
+				width:{{data.text_thumb_ctlr_individual_width.md}}px;
+			<# } else { #>
+				width:{{data.text_thumb_ctlr_individual_width}}px;
+			<# } #>
+		}
+
+		#sppb-addon-{{ data.id }} .sp-slider-text-thumb-number {
+			color:{{data.text_thumb_number_color}};
+			font-weight:{{data.text_thumb_number_font_weight}};
+			<# if(_.isObject(data.text_thumb_number_font_size)) { #>
+				font-size:{{data.text_thumb_number_font_size.md}}px;
+			<# } else { #>
+				font-size:{{data.text_thumb_number_font_size}}px;
+			<# } #>
+		}
+
+		#sppb-addon-{{ data.id }} .sp-slider-dot-indecator-text.sp-dot-text-key-1 {
+			color:{{data.text_thumb_title_color}};
+			font-weight:{{data.text_thumb_title_font_weight}};
+			<# if(_.isObject(data.text_thumb_title_font_size)) { #>
+				font-size:{{data.text_thumb_title_font_size.md}}px;
+			<# } else { #>
+				font-size:{{data.text_thumb_title_font_size}}px;
+			<# }
+			if(_.isObject(data.text_thumb_title_lineheight)) {
+			#>
+				line-height:{{data.text_thumb_title_lineheight.md}}px;
+			<# } else { #>
+				line-height:{{data.text_thumb_title_lineheight}}px;
+			<# } #>
+		}
+
+		#sppb-addon-{{ data.id }} .sp-slider-dot-indecator-text.sp-dot-text-key-2 {
+			color:{{data.text_thumb_subtitle_color}};
+			font-weight:{{data.text_thumb_subtitle_font_weight}};
+			<# if(_.isObject(data.text_thumb_subtitle_font_size)) { #>
+				font-size:{{data.text_thumb_subtitle_font_size.md}}px;
+			<# } else { #>
+				font-size:{{data.text_thumb_subtitle_font_size}}px;
+			<# } #>
+		}
+
 		<# 
 		let content_container_width = (!_.isEmpty(data.content_container_width) && data.content_container_width.md) ? data.content_container_width.md : "100";
 		if(content_container_width){
@@ -2164,6 +2430,44 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 					<# } #>
 				}
 			<# } #>
+
+			#sppb-addon-{{ data.id }} .sp-slider-custom-dot-indecators {
+				<# if(_.isObject(data.text_thumb_ctlr_wrap_padding)) { #>
+					padding:{{data.text_thumb_ctlr_wrap_padding.sm}};
+				<# }
+				if(_.isObject(data.text_thumb_ctlr_wrap_width)) {
+				#>
+					width: {{data.text_thumb_ctlr_wrap_width.sm}}%;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-custom-dot-indecators ul li {
+				<# if(_.isObject(data.text_thumb_ctlr_individual_width)) { #>
+					width:{{data.text_thumb_ctlr_individual_width.sm}}px;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-text-thumb-number {
+				<# if(_.isObject(data.text_thumb_number_font_size)) { #>
+					font-size:{{data.text_thumb_number_font_size.sm}}px;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-dot-indecator-text.sp-dot-text-key-1 {
+				<# if(_.isObject(data.text_thumb_title_font_size)) { #>
+					font-size:{{data.text_thumb_title_font_size.sm}}px;
+				<# }
+				if(_.isObject(data.text_thumb_title_lineheight)) {
+				#>
+					line-height:{{data.text_thumb_title_lineheight.sm}}px;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-dot-indecator-text.sp-dot-text-key-2 {
+				<# if(_.isObject(data.text_thumb_subtitle_font_size)) { #>
+					font-size:{{data.text_thumb_subtitle_font_size.sm}}px;
+				<# } #>
+			}
 		}
 		<#
 		let content_container_width_xs = (_.isObject(data.content_container_width) && data.content_container_width.xs) ? data.content_container_width.xs : "";
@@ -2346,6 +2650,43 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 					<# } #>
 				}
 			<# } #>
+			#sppb-addon-{{ data.id }} .sp-slider-custom-dot-indecators {
+				<# if(_.isObject(data.text_thumb_ctlr_wrap_padding)) { #>
+					padding:{{data.text_thumb_ctlr_wrap_padding.xs}};
+				<# }
+				if(_.isObject(data.text_thumb_ctlr_wrap_width)) {
+				#>
+					width: {{data.text_thumb_ctlr_wrap_width.xs}}%;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-custom-dot-indecators ul li {
+				<# if(_.isObject(data.text_thumb_ctlr_individual_width)) { #>
+					width:{{data.text_thumb_ctlr_individual_width.xs}}px;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-text-thumb-number {
+				<# if(_.isObject(data.text_thumb_number_font_size)) { #>
+					font-size:{{data.text_thumb_number_font_size.xs}}px;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-dot-indecator-text.sp-dot-text-key-1 {
+				<# if(_.isObject(data.text_thumb_title_font_size)) { #>
+					font-size:{{data.text_thumb_title_font_size.xs}}px;
+				<# }
+				if(_.isObject(data.text_thumb_title_lineheight)) {
+				#>
+					line-height:{{data.text_thumb_title_lineheight.xs}}px;
+				<# } #>
+			}
+	
+			#sppb-addon-{{ data.id }} .sp-slider-dot-indecator-text.sp-dot-text-key-2 {
+				<# if(_.isObject(data.text_thumb_subtitle_font_size)) { #>
+					font-size:{{data.text_thumb_subtitle_font_size.xs}}px;
+				<# } #>
+			}
 		}
 		</style>
 		<# 
@@ -2419,10 +2760,11 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 			}
 			
 			let content_vertical_alignment = (typeof data.content_vertical_alignment !== "undefined" && data.content_vertical_alignment) ? "slider-content-vercally-center" : "";
+			var dots = "";
 
 			#>
 
-			<div id="sppb-sp-slider-{{data.id}}" class="sppb-addon-sp-slider sp-slider {{content_class}} {{dot_style_class}} {{dot_position_class}} {{arrow_position_class}} {{arrow_hover_class}}" data-height="{{slider_height}}" data-height-sm="{{slider_height_sm}}" data-height-xs="{{slider_height_xs}}" data-slider-animation="{{slider_animation}}" {{{dataVerticleSlide}}} {{{data_three_d_rotate}}} data-autoplay="{{autoplay}}" data-interval="{{interval * 1000}}" data-timer="{{timer}}" data-speed="{{speed}}" data-dot-control="{{dot_controllers}}" data-arrow-control="{{arrow_controllers}}" data-indecator="{{line_indecator}}" data-arrow-content="{{arrow_controllers_content}}" data-slide-count="{{slide_counter}}">
+			<div id="sppb-sp-slider-{{data.id}}" class="sppb-addon-sp-slider sp-slider {{content_class}} {{dot_style_class}} {{dot_position_class}} {{arrow_position_class}} {{arrow_hover_class}}" data-height="{{slider_height}}" data-height-sm="{{slider_height_sm}}" data-height-xs="{{slider_height_xs}}" data-slider-animation="{{slider_animation}}" {{{dataVerticleSlide}}} {{{data_three_d_rotate}}} data-autoplay="{{autoplay}}" data-interval="{{interval * 1000}}" data-timer="{{timer}}" data-speed="{{speed}}" data-dot-control="{{dot_controllers}}" data-arrow-control="{{arrow_controllers}}" data-indecator="{{line_indecator}}" data-arrow-content="{{arrow_controllers_content}}" data-slide-count="{{slide_counter}}" data-dot-style="{{data.dot_controllers_style}}">
 			<#
 				if(!_.isEmpty(data.slideshow_items)){
 					_.each (data.slideshow_items, function(item_value, item_key) {
@@ -2880,10 +3222,49 @@ class SppagebuilderAddonJs_slideshow extends SppagebuilderAddons {
 						#>
 							<div class="sp-background"></div>
 						<# } #>
+
+						<#
+						if(data.dot_controllers_style == "with_text"){
+							let captionItem = []; 
+							if(_.isArray(item_value.slideshow_inner_items)){
+								let dot_item = 0;
+								_.each(item_value.slideshow_inner_items, function(inner_value, inner_item_key){
+									if(inner_value.content_type == "title_content" && dot_item < 2 ) {
+										captionItem.unshift(inner_value);
+									}
+									dot_item++;
+								})
+							}
+							dots += `<li class="${item_key == 0 ? "active sp-text-thumbnail-list" : "sp-text-thumbnail-list"}">`;
+								dots += `<div class="sp-slider-text-thumb-number">${(item_key > 8 ? (item_key + 1) : "0"+(item_key + 1))}</div>`;
+								dots += `<div class="sp-dot-indicator-wrap">`;
+									dots += `<span class="dot-indicator"></span>`;
+								dots += `</div>`;
+								dots += `<div class="sp-slider-text-thumb-caption">`;
+									if(_.isArray(captionItem)){
+										_.each(captionItem, function(inner_value, dot_key){
+											dots += `<div class="sp-slider-dot-indecator-text sp-dot-text-key-${dot_key + 1}">`;
+												dots += inner_value.title_content_title;
+											dots +=`</div>`;
+										})
+									}
+								dots += `</div>`;
+							dots += `</li>`;
+						}
+						#>
 					</div>
 				<# }) 
 
 			} #>
+
+			<# if(data.dot_controllers_style == "with_text" && data.dot_controllers){ #>
+				<div class="sp-slider-custom-dot-indecators">
+					<ul>
+						{{{dots}}}
+					</ul>
+				</div>
+			<# } #>
+
 			</div>
 		 ';
 		 

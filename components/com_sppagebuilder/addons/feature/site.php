@@ -56,7 +56,7 @@ class SppagebuilderAddonFeature extends SppagebuilderAddons {
 			if($icon_name) {
 				$media  .= '<div class="sppb-icon">';
                     if( ($title_url && $url_appear == 'icon') || ($title_url && $url_appear == 'both' ) ) $media .= '<a href="'. $title_url .'"'.($link_open_new_window ? ' rel="noopener noreferrer" target="_blank"' : '').'>';
-                        $media  .= '<span class="sppb-icon-container" aria-label="'.$title.'">';
+                        $media  .= '<span class="sppb-icon-container" aria-label="'.strip_tags($title).'">';
                         $media  .= '<i class="fa ' . $icon_name . '" aria-hidden="true"></i>';
                         $media  .= '</span>';
                     if(($title_url && $url_appear == 'icon') || ($title_url && $url_appear == 'both' )) $media .= '</a>';
@@ -76,7 +76,7 @@ class SppagebuilderAddonFeature extends SppagebuilderAddons {
         if($feature_type == 'both' && $icon_name) {
             $image_icon .= '<div class="sppb-icon">';
                 if( ($title_url && $url_appear == 'icon') || ($title_url && $url_appear == 'both' )) $image_icon .= '<a href="'. $title_url .'"'.($link_open_new_window ? ' rel="noopener noreferrer" target="_blank"' : '').'>';
-                    $image_icon .= '<span class="sppb-icon-container" aria-label="'.$title.'">';
+                    $image_icon .= '<span class="sppb-icon-container" aria-label="'.strip_tags($title).'">';
                     $image_icon .= '<i class="fa ' . $icon_name . '" aria-hidden="true"></i>';
                     $image_icon .= '</span>';
                 if(($title_url && $url_appear == 'icon') || ($title_url && $url_appear == 'both' )) $image_icon .= '</a>';

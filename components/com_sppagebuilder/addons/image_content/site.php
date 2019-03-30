@@ -54,9 +54,9 @@ class SppagebuilderAddonImage_content extends SppagebuilderAddons{
 
 			//Image
 			if(strpos($image, 'http://') !== false || strpos($image, 'https://') !== false){
-				$output .= '<div class="sppb-image-holder" style="background-image: url(' . $image . ');" role="img" aria-label="'. $title .'">';
+				$output .= '<div class="sppb-image-holder" style="background-image: url(' . $image . ');" role="img" aria-label="'. strip_tags($title) .'">';
 			} else {
-				$output .= '<div class="sppb-image-holder" style="background-image: url(' . JURI::base(true) . '/' . $image . ');" role="img" aria-label="'. $title .'">';
+				$output .= '<div class="sppb-image-holder" style="background-image: url(' . JURI::base(true) . '/' . $image . ');" role="img" aria-label="'. strip_tags($title) .'">';
 			}
 			$output .= '</div>';
 

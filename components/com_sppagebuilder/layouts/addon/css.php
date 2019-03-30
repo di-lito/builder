@@ -2,7 +2,7 @@
 /**
  * @package SP Page Builder
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2016 JoomShaper
+ * @copyright Copyright (c) 2010 - 2019 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct accees
@@ -385,6 +385,7 @@ $inlineCSS .= "@media (min-width: 768px) and (max-width: 991px) {";
             $inlineCSS .= $addon_id ." .sppb-addon-title {\n" . $title_style_sm . "}\n";
         }
     }
+
 $inlineCSS .= "}";
 
 // Responsive Phone
@@ -416,6 +417,7 @@ $inlineCSS .= "@media (max-width: 767px) {";
             $inlineCSS .= $addon_id ." .sppb-addon-title {\n" . $title_style_xs . "}\n";
         }
     }
+
 $inlineCSS .= "}";
 
 

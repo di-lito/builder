@@ -254,5 +254,25 @@ class SppagebuilderModelPage extends JModelAdmin {
 
         return $db->execute();
     }
+
+    public function createBrandNewPage($title = '', $extension = '', $extension_view = '', $view_id = 0) {
+		$user = JFactory::getUser();
+		$date = JFactory::getDate();
+        $db = $this->getDbo();
+        $page = new stdClass();
+        $page->title = $title;
+        $page->text = '[]';
+        $page->extension = $extension;
+        $page->extension_view = $extension_view;
+        $page->view_id = $view_id;
+		$page->published = 1;
+		$page->created_by = (int) $user->id;
+		$page->created_on = $date->toSql();
+		$page->language = '*';
+		$page->access = 1;
+		$page->active = 1;
+		$db->insertObject('#__sppagebuilder', $page);
+		return $db->insertid();
+	}
     
 }

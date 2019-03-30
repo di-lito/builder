@@ -2,7 +2,7 @@
 /**
 * @package SP Page Builder
 * @author JoomShaper http://www.joomshaper.com
-* @copyright Copyright (c) 2010 - 2018 JoomShaper
+* @copyright Copyright (c) 2010 - 2019 JoomShaper
 * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct accees
@@ -402,9 +402,9 @@ array(
 				'values'=>array(
 					''=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_FULL'),
 					'top-'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_TOP'),
-					'right-'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_RIGHT'),
+					'right-'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_RIGHT'),
 					'bottom-'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_BOTTOM'),
-					'left-'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_LEFT'),
+					'left-'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LEFT'),
 				),
 				'std'=>'',
 				'depends'=>array('custom_input'=> 1, 'custom_input_borderless'=> 0),
@@ -497,9 +497,9 @@ array(
 				'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_MEDIA_POSITION_DESC'),
 				'values'=>array(
 					'top'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_TOP'),
-					'right'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_RIGHT'),
+					'right'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_RIGHT'),
 					'bottom'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_BOTTOM'),
-					'left'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_POSITION_LEFT'),
+					'left'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LEFT'),
 				),
 				'depends'=>array(array('media_type', '!=', '')),
 				'std'=>'',

@@ -63,6 +63,98 @@ SpAddonsConfig::addonConfig(
 				'slideshow_items'=>array(
 					'title'=> JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_ITEMS'),
 					'type'=>'repeatable',
+					'std'=> array(
+						array(
+							'slider_img'=>'https://sppagebuilder.com/addons/js_slideshow/slideshow-default-bg.jpg',
+							'content_alignment'=>'center',
+							'slideshow_inner_items'=>array(
+								array(
+									'title_content_title'=>'THE AMAZING SLIDESHOW ADDON!',
+									'content_type'=> 'title_content',
+									'title_heading_selector'=> 'h2',
+									'content_color'=>'#fff',
+									'content_animation_type'=> 'slide',
+									'animation_slide_direction'=>'top',
+									'animation_duration'=> 800,
+									'animation_delay'=> 1000,
+									'animation_slide_from'=> 100,
+									'animation_timing_function'=> 'ease',
+								),
+								array(
+									'content_text'=>'<br>Want to make your website more attractive? Get a stunning hero <br>section with the Slideshow addon in SP Page Builder Pro. <br>It’s easy, fast, and gorgeous.<br><br>',
+									'content_type'=> 'text_content',
+									'content_color'=>'#fff',
+									'content_fontsize'=>array(
+										'md'=> 20,
+										'sm'=> 16,
+										'xs'=> 14,
+									),
+									'content_animation_type'=> 'slide',
+									'animation_slide_direction'=>'top',
+									'animation_duration'=> 800,
+									'animation_delay'=> 1000,
+									'animation_slide_from'=> 100,
+									'animation_timing_function'=> 'ease',
+								),
+								array(
+									'btn_content'=>'LEARN MORE',
+									'content_type'=> 'btn_content',
+									'content_color'=>'#fff',
+									'content_animation_type'=> 'slide',
+									'animation_slide_direction'=>'top',
+									'animation_duration'=> 800,
+									'animation_delay'=> 1000,
+									'animation_slide_from'=> 100,
+									'animation_timing_function'=> 'ease',
+								),
+							),
+						),
+						array(
+							'slider_img'=>'https://sppagebuilder.com/addons/js_slideshow/slideshow-default-bg.jpg',
+							'content_alignment'=>'center',
+							'slideshow_inner_items'=>array(
+								array(
+									'title_content_title'=>'THE AMAZING SLIDESHOW ADDON!',
+									'content_type'=> 'title_content',
+									'title_heading_selector'=> 'h2',
+									'content_color'=>'#fff',
+									'content_animation_type'=> 'slide',
+									'animation_slide_direction'=>'top',
+									'animation_duration'=> 800,
+									'animation_delay'=> 1000,
+									'animation_slide_from'=> 100,
+									'animation_timing_function'=> 'ease',
+								),
+								array(
+									'content_text'=>'<br>Want to make your website more attractive? Get a stunning hero <br>section with the Slideshow addon in SP Page Builder Pro. <br>It’s easy, fast, and gorgeous.<br><br>',
+									'content_type'=> 'text_content',
+									'content_color'=>'#fff',
+									'content_fontsize'=>array(
+										'md'=> 20,
+										'sm'=> 16,
+										'xs'=> 14,
+									),
+									'content_animation_type'=> 'slide',
+									'animation_slide_direction'=>'top',
+									'animation_duration'=> 800,
+									'animation_delay'=> 1000,
+									'animation_slide_from'=> 100,
+									'animation_timing_function'=> 'ease',
+								),
+								array(
+									'btn_content'=>'LEARN MORE',
+									'content_type'=> 'btn_content',
+									'content_color'=>'#fff',
+									'content_animation_type'=> 'slide',
+									'animation_slide_direction'=>'top',
+									'animation_duration'=> 800,
+									'animation_delay'=> 1000,
+									'animation_slide_from'=> 100,
+									'animation_timing_function'=> 'ease',
+								),
+							),
+						),
+					),
 					'attr'=>  array(
 						//Admin label
 						'title'=>array(
@@ -77,7 +169,6 @@ SpAddonsConfig::addonConfig(
 							'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_ITEM_BACKGROUND_IMAGE_DESC'),
 							'std'=>'https://sppagebuilder.com/addons/js_slideshow/slideshow-default-bg.jpg',
 						),
-
 						//Slider Inner Item
 						'slideshow_inner_items'=>array(
 							'title'=> JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_CONTENTS'),
@@ -418,7 +509,7 @@ SpAddonsConfig::addonConfig(
 								//Styleing options
 								'content_separator'=>array(
 									'type'=>'separator',
-									'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_CONTENT_STYLE_OPTION'),
+									'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_CONTENT_STYLE_OPTION'),
 									'depends'=>array(
 										array('content_type', '!=', 'btn_content'),
 										array('content_tabs', '=', 'content_style'),
@@ -1141,6 +1232,7 @@ SpAddonsConfig::addonConfig(
 						'dot'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_CONTROLLERS_STYLE_DOT'),
 						'line'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_CONTROLLERS_STYLE_LINE'),
 						'with_image'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_CONTROLLERS_IMAGE_WITH'),
+						'with_text'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_CONTROLLERS_WITH_TEXT'),
 					),
 					'std'=>'dot',
 					'depends'=>array(
@@ -1177,6 +1269,7 @@ SpAddonsConfig::addonConfig(
 					'std'=>'bottom_center',
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 					),
@@ -1187,6 +1280,7 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_DOT_POSITION_FROM_BOTTOM'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controllers_position', '!=', 'vertical_left'),
@@ -1201,6 +1295,7 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_DOT_POSITION_FROM_LEFT'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controllers_position', '!=', 'bottom_center'),
@@ -1216,6 +1311,7 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_DOT_POSITION_FROM_RIGHT'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controllers_position', '!=', 'bottom_center'),
@@ -1243,6 +1339,7 @@ SpAddonsConfig::addonConfig(
 					'tabs' => true,
 					'depends'=> array(
 						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '=', 'dot'),
 					)
 				),
@@ -1251,6 +1348,7 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_DOT_STYLE_OPTION'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1262,6 +1360,7 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_HEIGHT'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1275,6 +1374,7 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_WIDTH'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1288,6 +1388,7 @@ SpAddonsConfig::addonConfig(
 					'std'=>'',
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1301,6 +1402,7 @@ SpAddonsConfig::addonConfig(
 					'max'=>20,
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1313,6 +1415,7 @@ SpAddonsConfig::addonConfig(
 					'std'=>'',
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1325,6 +1428,7 @@ SpAddonsConfig::addonConfig(
 					'desc'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_BORDER_RADIUS_DESC'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1339,6 +1443,7 @@ SpAddonsConfig::addonConfig(
 					'std'=>'',
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_normal'),
@@ -1350,6 +1455,7 @@ SpAddonsConfig::addonConfig(
 					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_DOT_STYLE_OPTION_HOV'),
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_active'),
@@ -1361,6 +1467,7 @@ SpAddonsConfig::addonConfig(
 					'std'=>'',
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('dot_controllers_style', '!=', 'with_image'),
 						array('slider_settings', '=', 'slider_controller'),
@@ -1374,6 +1481,7 @@ SpAddonsConfig::addonConfig(
 					'max'=>100,
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_active'),
@@ -1387,6 +1495,7 @@ SpAddonsConfig::addonConfig(
 					'max'=>100,
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_active'),
@@ -1399,12 +1508,290 @@ SpAddonsConfig::addonConfig(
 					'std'=>'',
 					'depends'=>array(
 						array('dot_controllers', '!=', 0),
+						array('dot_controllers_style', '!=', 'with_text'),
 						array('controllers', '!=', 'arrow'),
 						array('slider_settings', '=', 'slider_controller'),
 						array('dot_controller_style_option', '=', 'dot_active'),
 					)
 				),
+				//Text thumbnail style
+				'text_thumb_ctlr_wrap_width'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_TEXT_THUMB_WIDTH'),
+					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_TEXT_THUMB_WIDTH_DESC'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+					),
+					'max'=> 100,
+					'responsive'=> true,
+				),
+				'text_thumb_ctlr_wrap_bg'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_TEXT_THUMB_BG'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+					),
+				),
+				'text_thumb_ctlr_wrap_padding'=>array(
+					'type'=>'padding',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_TEXT_THUMB_PADDING'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+					),
+					'responsive'=> true,
+				),
+				'text_thumb_ctlr_individual_width'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_TEXT_THUMB_ITEM_WIDTH'),
+					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_TEXT_THUMB_ITEM_WIDTH_DESC'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+					),
+					'max'=> 500,
+					'responsive'=> true,
+				),
 
+				'text_thumb_cont_style'=>array(
+					'type'=>'buttons',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_JS_SLIDER_TEXT_THUMB_CON_STYLE'),
+					'std'=>'thumb_number',
+					'values'=>array(
+						array(
+							'label' => 'Number Text',
+							'value' => 'thumb_number'
+						),
+						array(
+							'label' => 'Title Text',
+							'value' => 'thumb_title'
+						),
+						array(
+							'label' => 'Subtitle Text',
+							'value' => 'thumb_subtitle'
+						),
+					),
+					'tabs' => true,
+					'depends'=> array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+					)
+				),
+				//Text thumb number style
+				'text_thumb_number_color'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_COLOR'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_number'),
+					),
+				),
+				'text_thumb_number_font_size'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_FONT_SIZE'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_number'),
+					),
+					'max'=> 100,
+					'responsive'=> true,
+				),
+				'text_thumb_number_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_FAMILY'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_number'),
+					),
+					'selector' => array(
+						'type' => 'font',
+						'font' => '{{ VALUE }}',
+						'css' => '.sp-slider-text-thumb-number { font-family: "{{ VALUE }}"; }'
+					),
+				),
+				'text_thumb_number_font_weight'=>array(
+					'type'=>'select',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_FONT_WEIGHT'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_number'),
+					),
+					'values'=> array(
+						100 => 100,
+						200 => 200,
+						300 => 300,
+						400 => 400,
+						500 => 500,
+						600 => 600,
+						700 => 700,
+						800 => 800,
+						900 => 900,
+					),
+				),
+				//Text thumb title style
+				'text_thumb_title_color'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_COLOR'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_title'),
+					),
+				),
+				'text_thumb_title_font_size'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_FONT_SIZE'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_title'),
+					),
+					'max'=> 100,
+					'responsive'=> true,
+				),
+				'text_thumb_title_lineheight'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LINE_HEIGHT'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_title'),
+					),
+					'max'=> 100,
+					'responsive'=> true,
+				),
+				'text_thumb_title_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_FAMILY'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_title'),
+					),
+					'selector' => array(
+						'type' => 'font',
+						'font' => '{{ VALUE }}',
+						'css' => '.sp-slider-dot-indecator-text.sp-dot-text-key-1 { font-family: "{{ VALUE }}"; }'
+					),
+				),
+				'text_thumb_title_font_weight'=>array(
+					'type'=>'select',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_FONT_WEIGHT'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_title'),
+					),
+					'values'=> array(
+						100 => 100,
+						200 => 200,
+						300 => 300,
+						400 => 400,
+						500 => 500,
+						600 => 600,
+						700 => 700,
+						800 => 800,
+						900 => 900,
+					),
+				),
+				//Text thumb subtitle style
+				'text_thumb_subtitle_color'=>array(
+					'type'=>'color',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_COLOR'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_subtitle'),
+					),
+				),
+				'text_thumb_subtitle_font_size'=>array(
+					'type'=>'slider',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_FONT_SIZE'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_subtitle'),
+					),
+					'max'=> 100,
+					'responsive'=> true,
+				),
+				'text_thumb_subtitle_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_TITLE_FONT_FAMILY'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_subtitle'),
+					),
+					'selector' => array(
+						'type' => 'font',
+						'font' => '{{ VALUE }}',
+						'css' => '.sp-slider-dot-indecator-text.sp-dot-text-key-2 { font-family: "{{ VALUE }}"; }'
+					),
+				),
+				'text_thumb_subtitle_font_weight'=>array(
+					'type'=>'select',
+					'title'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_FONT_WEIGHT'),
+					'depends'=>array(
+						array('slider_settings', '=', 'slider_controller'),
+						array('dot_controllers', '!=', 0),
+						array('controllers', '!=', 'arrow'),
+						array('dot_controllers_style', '=', 'with_text'),
+						array('text_thumb_cont_style', '=', 'thumb_subtitle'),
+					),
+					'values'=> array(
+						100 => 100,
+						200 => 200,
+						300 => 300,
+						400 => 400,
+						500 => 500,
+						600 => 600,
+						700 => 700,
+						800 => 800,
+						900 => 900,
+					),
+				),
+				
 				//Arrow controllers
 				'arrow_controllers'=>array(
 					'type'=>'checkbox',

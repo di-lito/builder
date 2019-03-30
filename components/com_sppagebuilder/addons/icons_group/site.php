@@ -36,7 +36,7 @@ class SppagebuilderAddonIcons_group extends SppagebuilderAddons {
                 $item_url = ((isset($icon_item->icon_link) && $icon_item->icon_link !== '')) ? $icon_item->icon_link : '#';
 
                 if ($icon_item->icon_link) {
-                    $output .= '<a href="' . $icon_item->icon_link . '" aria-label="'.$title.'"'.(isset($icon_item->link_open_new_window) && $icon_item->link_open_new_window ? ' rel="noopener noreferrer" target="_blank"' : '').'>';
+                    $output .= '<a href="' . $icon_item->icon_link . '" aria-label="'.strip_tags($title).'"'.(isset($icon_item->link_open_new_window) && $icon_item->link_open_new_window ? ' rel="noopener noreferrer" target="_blank"' : '').'>';
                 }
                 if (isset($icon_item->label_position) && $icon_item->show_label !== 0 && $icon_item->label_position == 'top') {
                     $output .= '<span class="sppb-icons-label-text">' . $icon_item->label_text . '</span>';

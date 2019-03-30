@@ -305,4 +305,40 @@ class SppagebuilderControllerPage extends JControllerForm {
 		die($model->deleteAddon($id));
 	}
 
+	public function createNew() {
+		$pageId = 0;
+		$model = $this->getModel('Page');
+		$output = array();
+		$output['status'] = false;
+		$app = JFactory::getApplication();
+		$input = $app->input;
+
+		$user = JFactory::getUser();
+		$authorised = $user->authorise('core.create', 'com_sppagebuilder');
+		
+		if (!$authorised) {
+			$output['message'] = JText::_('JERROR_ALERTNOAUTHOR');
+			die(json_encode($output));
+		}
+
+		$title = trim(htmlspecialchars($input->post->get('title', '', 'STRING')));
+		$extension = htmlspecialchars($input->post->get('extension', '', 'STRING'));
+		$extension_view = htmlspecialchars($input->post->get('extension_view', '', 'STRING'));
+		$view_id = $input->post->get('view_id', 0, 'INT');
+
+		if($view_id && $title) {
+			$id = $model->createBrandNewPage($title, $extension, $extension_view, $view_id);
+			$pageId = $id;
+			$appSite = JApplication::getInstance('site');
+			$router = $appSite->getRouter();
+			$front_link = 'index.php?option=com_sppagebuilder&view=form&tmpl=componenet&layout=edit&extension='. $extension .'&extension_view='. $extension_view .'&id=' . $pageId;
+			$sefURI = str_replace('/administrator', '', $router->build($front_link));
+			$output['status'] = true;
+			$output['url'] = $sefURI;
+			die(json_encode($output));
+		}
+
+		die(json_encode($output));
+	}
+
 }

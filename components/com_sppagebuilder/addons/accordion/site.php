@@ -35,11 +35,11 @@ class SppagebuilderAddonAccordion extends SppagebuilderAddons {
 				$output  .= '<div class="sppb-panel sppb-'. $style .'">';
 				$output  .= '<div class="sppb-panel-heading'. (($key == 0) ? ' active' : '') .' '.($icon_position == 'right' ? 'sppb-accordion-icon-position-right' : '').'" id="sppb-ac-heading-'.$this->addon->id.'-key-'.$key.'" aria-expanded="'. (($key == 0) ? 'true' : 'false') .'" aria-controls="sppb-ac-content-'.$this->addon->id.'-key-'.$key.'">';
 				if(isset($item->icon) && $item->icon != '' && $style == 'panel-custom') {
-					$output  .= '<span class="sppb-accordion-icon-wrap" aria-label="'.trim($item_title).'">';
+					$output  .= '<span class="sppb-accordion-icon-wrap" aria-label="'.trim(strip_tags($item_title)).'">';
 					$output  .= '<i class="fa ' . $item->icon . '" aria-hidden="true"></i> ';
 					$output  .= '</span>';//.sppb-accordion-icon-wrap
 				}
-				$output  .= '<span class="sppb-panel-title" aria-label="'.trim($item_title).'">';
+				$output  .= '<span class="sppb-panel-title" aria-label="'.trim(strip_tags($item_title)).'">';
 				if(isset($item->icon) && $item->icon != '' && $style !== 'panel-custom') {
 					$output  .= '<i class="fa ' . $item->icon . '" aria-hidden="true"></i> ';
 				}

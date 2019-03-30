@@ -25,6 +25,9 @@ class SppagebuilderAddonImage_layouts extends SppagebuilderAddons{
 		$link_apear_in_title = (isset($settings->link_apear_in_title) && $settings->link_apear_in_title) ? $settings->link_apear_in_title : '';
 		$caption = (isset($settings->caption) && $settings->caption) ? $settings->caption : '';
 		$caption_postion = (isset($settings->caption_postion) && $settings->caption_postion) ? $settings->caption_postion : '';
+		$image_container_column = (isset($settings->image_container_column) && $settings->image_container_column) ? (int) $settings->image_container_column : '';
+		$popup_video_on_image = (isset($settings->popup_video_on_image) && $settings->popup_video_on_image) ? $settings->popup_video_on_image : '';
+		$popup_video_src = (isset($settings->popup_video_src) && $settings->popup_video_src) ? $settings->popup_video_src : '';
 
 		$image_link = '';
 		if(strpos($image, "http://") !== false || strpos($image, "https://") !== false){
@@ -138,7 +141,7 @@ class SppagebuilderAddonImage_layouts extends SppagebuilderAddons{
 			$output .= '<div class="sppb-addon-image-layout-wrap'.$image_preset_class.'">';
 			if($image_preset_thumb === 'card' || $image_preset_thumb === 'overlap' || $image_preset_thumb === 'collage'){
 				$output .= '<div class="sppb-row">';
-				$output .= '<div class="sppb-col-sm-6'.$order_class.'">';
+				$output .= '<div class="sppb-col-sm-'.($image_container_column ? $image_container_column : 6).''.$order_class.'">';
 			}
 			$output .= '<div class="sppb-addon-image-layout-image'.$image_strech.''.(($image_preset_thumb !== 'card' && $image_preset_thumb !== 'overlap' && $image_preset_thumb !== 'collage') ? $order_class : '').'">';
 			if($click_url){
@@ -148,10 +151,18 @@ class SppagebuilderAddonImage_layouts extends SppagebuilderAddons{
 			if($click_url){
 				$output .= '</a>';
 			}
+			if($popup_video_on_image && $image_preset_thumb == 'card' && $popup_video_src){
+				$output .= '<a class="sppb-magnific-popup sppb-addon-image-overlay-icon" data-popup_type="iframe" data-mainclass="mfp-no-margins mfp-with-zoom" href="' . $popup_video_src . '">';
+				$output .= '</a>';
+				$output .= '<div class="sppb-addon-image-layouts-card-text-caption">';
+				$output .= '<span class="image-layouts-card-text-caption-icon"><i class="fa fa-play"></i></span>';
+				$output .= '<h4 class="image-layouts-card-text-caption-title">'.strip_tags($title).'</h4>';
+				$output .= '</div>';
+			}
 			$output .= '</div>';//.sppb-addon-image-layout-image
 			if($image_preset_thumb === 'card' || $image_preset_thumb === 'overlap' || $image_preset_thumb === 'collage'){
 				$output .= '</div>';
-				$output .= '<div class="sppb-col-sm-6'.$cont_order_class.''.($image_preset_thumb === 'collage' ? ' collage-content-vertical-'.$content_vertical_align : '').'">';
+				$output .= '<div class="sppb-col-sm-'.($image_container_column ? ($image_container_column == 12 ? 12 : 12-$image_container_column) : 6).''.$cont_order_class.''.($image_preset_thumb === 'collage' ? ' collage-content-vertical-'.$content_vertical_align : '').'">';
 			}
 			$output .= '<div class="sppb-addon-image-layout-content'.(($image_preset_thumb !== 'card' && $image_preset_thumb !== 'overlap' && $image_preset_thumb !== 'collage') ? $cont_order_class : '').''.$content_text_align.''.(($content_desktop_order < $image_desktop_order) && $image_preset_thumb === 'collage' ? ' collage-content-right' : '').''.(($content_tab_order < $image_tab_order) && $image_preset_thumb === 'collage' ? ' collage-content-sm-right' : '').'">';
 			if($title){
@@ -1100,7 +1111,7 @@ class SppagebuilderAddonImage_layouts extends SppagebuilderAddons{
 			<div class="sppb-addon-image-layout-wrap{{image_preset_class}}">
 			<# if(image_preset_thumb === "card" || image_preset_thumb === "overlap" || image_preset_thumb === "collage"){ #>
 				<div class="sppb-row">
-				<div class="sppb-col-sm-6{{order_class}}">
+				<div class="sppb-col-sm-{{(data.image_container_column ? data.image_container_column : 6)}}{{order_class}}">
 			<# } #>
 			
 			<div class="sppb-addon-image-layout-image{{image_strech}}
@@ -1121,6 +1132,14 @@ class SppagebuilderAddonImage_layouts extends SppagebuilderAddons{
 
 			<# if(data.click_url){ #>
 				</a>
+			<# }
+			if(data.popup_video_on_image && data.image_preset_thumb === "card" && data.popup_video_src){
+			#>
+				<a class="sppb-magnific-popup sppb-addon-image-overlay-icon" data-popup_type="iframe" data-mainclass="mfp-no-margins mfp-with-zoom" href="{{data.popup_video_src}}"></a>
+				<div class="sppb-addon-image-layouts-card-text-caption">
+					<span class="image-layouts-card-text-caption-icon"><i class="fa fa-play"></i></span>
+					<h4 class="image-layouts-card-text-caption-title">{{data.title.replace(/<\/?[^>]+(>|$)/g, "")}}</h4>
+				</div>
 			<# } #>
 			</div>
 
@@ -1131,7 +1150,7 @@ class SppagebuilderAddonImage_layouts extends SppagebuilderAddons{
 				}
 			#>
 				</div>
-				<div class="sppb-col-sm-6{{cont_order_class}}{{collage_content_vertical}}">
+				<div class="sppb-col-sm-{{(data.image_container_column ? (data.image_container_column == 12 ? 12 : 12-data.image_container_column) : 6)}}{{cont_order_class}}{{collage_content_vertical}}">
 			<# } #>
 			<# 
 				let collage_content_right = "";

@@ -110,7 +110,7 @@ SpAddonsConfig::addonConfig(
 
 				'dragging' => array(
 					'type'=>'checkbox',
-					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPENSTREETMAP_ENABLE_DRAGGING'),
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_ENABLE_DRAGGING'),
 					'desc'=>JText::_('COM_SPPAGEBUILDER_ADDON_OPENSTREETMAP_ENABLE_DRAGGING_DESC'),
 					'std'=>0,
 				),

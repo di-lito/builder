@@ -121,7 +121,7 @@ SpAddonsConfig::addonConfig(
 				),
 				'person_content_bg'=>array(
 					'type'=>'color',
-					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_PERSON_CONTENT_BG'),
+					'title'=>JText::_('COM_SPPAGEBUILDER_ADDON_CONTENT_BG'),
 					'std'=> '#fff',
 					'depends'=>array(
 						array('person_style_preset', '=', 'layout4'),

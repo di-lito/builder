@@ -16,6 +16,9 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 		$input 		= JFactory::getApplication()->input;
 		$page_id 	= $input->get('id', 0, 'INT');
 		$settings = $this->addon->settings;
+		if(is_array($page_id)){
+			$page_id = $page_id[0];
+		}
 
 		$class = (isset($settings->class) && $settings->class) ? $settings->class : '';
 		$title = (isset($settings->title) && $settings->title) ? $settings->title : '';
@@ -54,6 +57,7 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 		$button_class 		= (isset($settings->button_type) && $settings->button_type) ? ' sppb-btn-' . $settings->button_type : ' sppb-btn-success';
 
 		$button_text 		= (isset($settings->button_text) && $settings->button_text) ? $settings->button_text : '';
+		$button_text_aria 		= (isset($settings->button_text) && $settings->button_text) ? $settings->button_text : '';
 		
 		if($use_custom_button) {
 			$button_class .= (isset($settings->button_size) && $settings->button_size) ? ' sppb-btn-' . $settings->button_size : '';
@@ -88,13 +92,18 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 			$output  .= '</div>';
 			return $output;
 		} elseif($platform == 'acymailing'){
-			$acymailing_helper = rtrim(JPATH_ADMINISTRATOR,'/') . '/components/com_acymailing/helpers/helper.php';
-			if(!file_exists($acymailing_helper)) {
-				// if acymailing isn't installed
+			
+			$acym_version = SpPgaeBuilderBase::getExtensionVersion(array('com_acymailing', 'com_acym'));
+
+			if($acym_version >= 6) {
+				$acymailing_helper = rtrim(JPATH_ADMINISTRATOR,'/') . '/components/com_acym/helpers/helper.php';
+			} else {
+				$acymailing_helper = rtrim(JPATH_ADMINISTRATOR,'/') . '/components/com_acymailing/helpers/helper.php';
+			}
+			if(!file_exists($acymailing_helper)) { // if acymailing isn't installed
 				$output  .= '<div class="sppb-addon sppb-addon-optin-forms sppb-alert sppb-alert-warning">';
 					$output  .= '<p>' . JTEXT::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_ACYMAILING_NOT_INSTALLED') . '</p>';
 				$output  .= '</div>';
-
 				return $output;
 			} else {
 				require_once $acymailing_helper;
@@ -211,13 +220,16 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 						$output .='</div>';
 					}
 
+					if($platform == 'acymailing'){
+						$output .= '<input type="hidden" name="acymversion" value="'. $acym_version .'">';
+					}
 					$output .= '<input type="hidden" name="platform" value="'. $platform .'">';
 					$output .= '<input type="hidden" name="hidename" value="'. $hide_name .'">';
 					$output .= '<input type="hidden" name="pageid" value="'. $page_id .'">';
 					$output .= '<input type="hidden" name="addonId" value="'. $this->addon->id .'">';
 
 					$output .= '<div class="button-wrap ' . $button_position . '">';
-						$output .= '<button type="submit" id="btn-' . $this->addon->id . '" class="sppb-btn' . $button_class . '" aria-label="'. $button_text .'"><i class="fa" aria-hidden="true"></i> '. $button_text .'</button>';
+						$output .= '<button type="submit" id="btn-' . $this->addon->id . '" class="sppb-btn' . $button_class . '" aria-label="'. strip_tags($button_text_aria) .'"><i class="fa" aria-hidden="true"></i> '. $button_text .'</button>';
 					$output .= '</div>'; //.button-wrap
 
 				$output .= '</form>';
@@ -254,6 +266,9 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 			if( $input['name'] == 'platform' ) {
 				$platform		= $input['value'];
 			}
+			if( $input['name'] == 'acymversion' ) {
+				$acymversion	= $input['value'];
+			}
 			if ($input['name'] == 'g-recaptcha-response') {
                 $recaptcha = $input['value'];
                 $showcaptcha = true;
@@ -276,11 +291,11 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 
 		// get addon infos
 		if($view_type == 'module'){
-			$page_info = self::getPageInfoById( $module_id, $view_type );
-			$page_text = json_decode($page_info->params);
+			$page_info 	= self::getPageInfoById( $module_id, $view_type );
+			$page_text 	= json_decode($page_info->params);
 			$addon_info = self::getAddonSettingByPageInfo( $page_text->content , $addonId );
 		} else {
-			$page_info = self::getPageInfoById( $pageid, $view_type );
+			$page_info 	= self::getPageInfoById( $pageid, $view_type );
 			$addon_info = self::getAddonSettingByPageInfo( $page_info->text, $addonId );
 		}
 
@@ -313,7 +328,7 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 
 		if($platform == 'mailchimp') {
 			//mailchimp get crecentials
-			$mcapi 				= (isset($addon_info->mailchimp_api) && $addon_info->mailchimp_api) ? $addon_info->mailchimp_api : '';
+			$mcapi 			= (isset($addon_info->mailchimp_api) && $addon_info->mailchimp_api) ? $addon_info->mailchimp_api : '';
 			$mclistid 		= (isset($addon_info->mailchimp_listid) && $addon_info->mailchimp_listid) ? $addon_info->mailchimp_listid : '';
 			$mcaction 		= (isset($addon_info->mailchimp_action) && $addon_info->mailchimp_action) ? $addon_info->mailchimp_action : '';
 
@@ -324,8 +339,8 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 				'email_address' => $email,
 				'status'        => $mcaction, // "subscribed","unsubscribed","cleaned","pending"
 				'merge_fields'  => [
-				'FNAME'     => $name,
-				'LNAME'     => ''
+					'FNAME'     => $name,
+					'LNAME'     => ''
 				]
 			]);
 
@@ -481,8 +496,8 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 			}
 		} elseif ($platform == 'madmimi') { // if madmimi
 			//madmimi get crecentials
-			$mmuname 			= (isset($addon_info->madmimi_user) && $addon_info->madmimi_user) ? $addon_info->madmimi_user : '';
-			$mmapi 				= (isset($addon_info->madmimi_api) && $addon_info->madmimi_api) ? $addon_info->madmimi_api : '';
+			$mmuname 		= (isset($addon_info->madmimi_user) && $addon_info->madmimi_user) ? $addon_info->madmimi_user : '';
+			$mmapi 			= (isset($addon_info->madmimi_api) && $addon_info->madmimi_api) ? $addon_info->madmimi_api : '';
 			$mmlistname 	= (isset($addon_info->madmimi_listname) && $addon_info->madmimi_listname) ? $addon_info->madmimi_listname : '';
 
 			$user = array('email' => $email, 'firstName' => $name, 'add_list' => $mmlistname);
@@ -534,7 +549,13 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 			}
 		} elseif ($platform == 'acymailing') { // if AcyMailing
 			// if acymailing isn't installed
-			if(!include_once( rtrim(JPATH_ADMINISTRATOR,'/') . '/components/com_acymailing/helpers/helper.php')){
+			if( $acymversion >= 6 ) {
+				$acymailing_helper = rtrim(JPATH_ADMINISTRATOR,'/') . '/components/com_acym/helpers/helper.php';
+			} else {
+				$acymailing_helper = rtrim(JPATH_ADMINISTRATOR,'/') . '/components/com_acymailing/helpers/helper.php';
+			}
+			// include acymailing helper
+			if(!include_once( $acymailing_helper )){
 				$output['status'] = false;
 				$output['content'] = JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_ACYMAILING_NOT_INSTALLED');
 				return json_encode($output);
@@ -545,44 +566,77 @@ class SppagebuilderAddonOptin_form extends SppagebuilderAddons{
 			$user_info = new stdClass();
 			$user_info->email = $email;
 			$user_info->name = $name;
-			$subscriberClass = acymailing_get('class.subscriber');
-			$subid = $subscriberClass->save($user_info); //this function will return you the ID of the user inserted in the AcyMailing table
+			
+			if( $acymversion >= 6 ) { // if version is more than or equal 6
 
-			// if selected all list
-			if ( (is_array($acymailing_listids) && in_array('', $acymailing_listids)) || $acymailing_listids == '') {
-				$acy_list_class = acymailing_get('class.list');
-				$acy_lists = $acy_list_class->getLists();
-
-				$acymailing_listids = array();
-				foreach ($acy_lists as $key => $acy_list) {
-					$acymailing_listids[$key] = $acy_list->listid;
+				$userClass = acym_get('class.user');
+				$userId = $userClass->save($user_info); // this function will return you the ID of the user inserted in the AcyMailing table
+				
+				if( !is_int($userId) ) {
+					return false;
 				}
-			}
 
-			$userClass = acymailing_get('class.subscriber');
-			$new_subscription = array();
-			if(!empty($acymailing_listids)){
-				foreach($acymailing_listids as $listId){
-					$newList = array();
-					$newList['status'] = 1;
-					$new_subscription[$listId] = $newList;
+				// if selected all list
+				if ( (is_array($acymailing_listids) && in_array('', $acymailing_listids)) || $acymailing_listids == '') {
+					$acy_list_class = acym_get('class.list');
+					$acy_lists = $acy_list_class->getAll();
+
+					$acymailing_listids = array();
+					foreach ($acy_lists as $key => $acy_list) {
+						$acymailing_listids[$key] = $acy_list->listid;
+					}
 				}
-			}
-			if(empty($new_subscription) || empty($subid) ) {
-				$output['status'] = false;
-				$output['content'] = JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_EMAIL_ERROR');
-			}
-			if ($userClass->subid($subid)) {
-				$subid = $userClass->subid($subid);
-			}
-			$results = $userClass->saveSubscription($subid, $new_subscription);
+				if(empty($acymailing_listids) || empty($userId) ) {
+					$output['status'] 	= false;
+					$output['content'] 	= JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_EMAIL_ERROR');
+				}
 
-			if ($results) {
-				$output['status'] = true;
-				$output['content'] = JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_EMAIL_CONFIRMED');
+				//$newSubscription = array();
+				if(!empty($acymailing_listids)){
+					$output['status'] = true;
+					$results = $userClass->subscribe($userId, $acymailing_listids);
+				}
+
+			} else { // for version less than or equal 5
+				$subscriberClass = acymailing_get('class.subscriber');
+				$subid = $subscriberClass->save($user_info); //this function will return you the ID of the user inserted in the AcyMailing table
+
+				// if selected all list
+				if ( (is_array($acymailing_listids) && in_array('', $acymailing_listids)) || $acymailing_listids == '') {
+					$acy_list_class = acymailing_get('class.list');
+					$acy_lists = $acy_list_class->getLists();
+
+					$acymailing_listids = array();
+					foreach ($acy_lists as $key => $acy_list) {
+						$acymailing_listids[$key] = $acy_list->listid;
+					}
+				}
+
+				$userClass = acymailing_get('class.subscriber');
+				$new_subscription = array();
+				if(!empty($acymailing_listids)){
+					foreach($acymailing_listids as $listId){
+						$newList = array();
+						$newList['status'] = 1;
+						$new_subscription[$listId] = $newList;
+					}
+				}
+				if(empty($new_subscription) || empty($subid) ) {
+					$output['status'] 	= false;
+					$output['content'] 	= JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_EMAIL_ERROR');
+				}
+				if ($userClass->subid($subid)) {
+					$subid = $userClass->subid($subid);
+				}
+				$results = $userClass->saveSubscription($subid, $new_subscription);
+			}
+
+			if (isset($results) && $results) {
+				$output['status'] 	= true;
+				$output['content'] 	= JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_EMAIL_CONFIRMED');
 			} else {
-				$output['status'] = false;
-				$output['content'] = JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_EMAIL_ERROR');
+				$output['status'] 	= false;
+				$output['content'] 	= JText::_('COM_SPPAGEBUILDER_ADDON_OPTIN_PLATFORM_EMAIL_ERROR');
 			}
 
 		}

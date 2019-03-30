@@ -67,8 +67,8 @@ SpAddonsConfig::addonConfig(
 					'values'=>array(
 						'after'=>JText::_('COM_SPPAGEBUILDER_ADDON_FEATURE_BOX_TITLE_POSITION_BEFORE_TITLE'),
 						'before'=>JText::_('COM_SPPAGEBUILDER_ADDON_FEATURE_BOX_TITLE_POSITION_AFTER_TITLE'),
-						'left'=>JText::_('COM_SPPAGEBUILDER_ADDON_FEATURE_BOX_TITLE_POSITION_LEFT'),
-						'right'=>JText::_('COM_SPPAGEBUILDER_ADDON_FEATURE_BOX_TITLE_POSITION_RIGHT'),
+						'left'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_LEFT'),
+						'right'=>JText::_('COM_SPPAGEBUILDER_GLOBAL_RIGHT'),
 					),
 					'std'=>'after',
 					'depends'=>array(array('title', '!=', '')),
